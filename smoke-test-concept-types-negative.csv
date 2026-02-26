@@ -1,0 +1,6 @@
+name,description,partOfName,partOrder,referenceToName
+Invalid Ref Without PartOf,Reference set without part-of,,1,Capability
+Invalid Unknown Parent,Parent concept does not exist,Does Not Exist,1,
+Invalid Unknown Reference,Reference concept does not exist,Enterprise,1,Does Not Exist
+Invalid PartOrder Without PartOf,Order set without parent,,2,
+Invalid Child With Unknown Parent,Child uses missing parent,Missing Parent,1,Capability

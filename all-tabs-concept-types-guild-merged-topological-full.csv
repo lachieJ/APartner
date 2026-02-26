@@ -1,0 +1,24 @@
+name,description,partOfName,partOrder,referenceToName
+Enterprise,Top-level enterprise concept,,,
+Organisation,Organisation structure and actors,Enterprise,1,
+Capability,Business ability the enterprise performs,Enterprise,2,
+Information,Enterprise information concept,Enterprise,3,
+Value Stream,End-to-end value delivery sequence,Enterprise,4,
+Business Unit,Named organisational unit,Organisation,1,
+Business Unit Type,"Classification of business unit (Enterprise, Business Unit, Partner, Collaborative Team)",Organisation,2,
+Stakeholder,Person or group with interest in outcomes,Organisation,3,
+Business Unit Description,Narrative description of business unit role,Business Unit,1,
+Business Unit Capability,Capability possessed by a business unit,Business Unit,2,Capability
+Stakeholder Type,Classification of stakeholder role or nature,Stakeholder,1,
+Stakeholder Category,Grouping of stakeholders for analysis and communication,Stakeholder,2,
+Stakeholder Description,Narrative description of stakeholder concerns and influence,Stakeholder,3,
+Stakeholder Business Unit,Business unit associated with a stakeholder,Stakeholder,4,Business Unit
+Value Stream Stage,Discrete stage within a value stream,Value Stream,1,
+Owning Enterprise,Owning enterprise for a value stream,Value Stream,2,Enterprise
+Stage Description,Descriptive narrative for a value stream stage,Value Stream Stage,1,
+Value Proposition,Value delivered at this stage,Value Stream Stage,2,
+Entrance Criteria,Condition required to start a stage,Value Stream Stage,3,
+Exit Criteria,Condition required to complete a stage,Value Stream Stage,4,
+Value Item,Primary item produced or advanced by the stage,Value Stream Stage,5,Information
+Stage Stakeholder,Stakeholder engaged in or impacted by the stage,Value Stream Stage,6,Stakeholder
+Stage Capability,Capability used to execute the stage,Value Stream Stage,7,Capability

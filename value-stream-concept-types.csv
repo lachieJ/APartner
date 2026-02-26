@@ -1,0 +1,15 @@
+name,description,partOfName,partOrder,referenceToName
+Enterprise,Top-level enterprise concept,,,
+Capability,Business ability the enterprise performs,Enterprise,1,
+Information Concept,Business information object,Enterprise,2,
+Stakeholder,Person or group with interest in outcomes,Enterprise,3,
+Value Stream,End-to-end value delivery sequence,Enterprise,4,
+Value Stream Stage,Discrete stage within a value stream,Value Stream,1,
+Owning Enterprise,Owning enterprise for a value stream,Value Stream,2,Enterprise
+Stage Description,Descriptive narrative for a value stream stage,Value Stream Stage,1,
+Value Proposition,Value delivered at this stage,Value Stream Stage,2,
+Entrance Criteria,Condition required to start a stage,Value Stream Stage,3,
+Exit Criteria,Condition required to complete a stage,Value Stream Stage,4,
+Value Item,Primary item produced or advanced by the stage,Value Stream Stage,5,Information Concept
+Stage Stakeholder,Stakeholder engaged in or impacted by the stage,Value Stream Stage,6,Stakeholder
+Stage Capability,Capability used to execute the stage,Value Stream Stage,7,Capability

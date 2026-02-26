@@ -1,0 +1,13 @@
+name,description,partOfName,partOrder,referenceToName
+Enterprise,Top-level enterprise concept,,,
+Organisation,Organisation structure and actors,Enterprise,1,
+Capability,Business ability the enterprise performs,Enterprise,2,
+Business Unit,Named organisational unit,Organisation,1,
+Business Unit Type,"Classification of business unit (Enterprise, Business Unit, Partner, Collaborative Team)",Organisation,2,
+Stakeholder,Person or group with interest in outcomes,Organisation,3,
+Business Unit Description,Narrative description of business unit role,Business Unit,1,
+Business Unit Capability,Capability possessed by a business unit,Business Unit,2,Capability
+Stakeholder Type,Classification of stakeholder role or nature,Stakeholder,1,
+Stakeholder Category,Grouping of stakeholders for analysis and communication,Stakeholder,2,
+Stakeholder Description,Narrative description of stakeholder concerns and influence,Stakeholder,3,
+Stakeholder Business Unit,Business unit associated with a stakeholder,Stakeholder,4,Business Unit

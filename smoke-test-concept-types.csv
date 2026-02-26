@@ -1,0 +1,12 @@
+name,description,partOfName,partOrder,referenceToName
+Enterprise,Top-level enterprise concept,,,
+Organisation,Organisation structure and actors,Enterprise,1,
+Capability,Business ability the enterprise performs,Enterprise,2,
+Information,Enterprise information concept,Enterprise,3,
+Stakeholder,Person or group with interest in outcomes,Organisation,1,
+Business Unit,Named organisational unit,Organisation,2,
+Value Stream,End-to-end value delivery sequence,Enterprise,4,
+Value Stream Stage,Discrete stage within a value stream,Value Stream,1,
+Stage Capability,Capability used to execute the stage,Value Stream Stage,1,Capability
+Stage Stakeholder,Stakeholder engaged in or impacted by the stage,Value Stream Stage,2,Stakeholder
+Value Item,Primary item produced or advanced by the stage,Value Stream Stage,3,Information

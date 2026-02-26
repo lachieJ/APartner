@@ -1,0 +1,39 @@
+{
+  "name": "app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "verify": "npm run test:run && npm run lint && npm run build",
+    "lint": "eslint . --max-warnings=0",
+    "preview": "vite preview",
+    "validate:concept-csv": "python3 ../scripts/validate_concept_type_csv.py ../organisation-concept-types-guild.csv ../stakeholder-concept-types-guild.csv ../organisation-stakeholder-concept-types-guild-merged.csv ../organisation-stakeholder-concept-types-guild-merged-topological.csv ../organisation-stakeholder-concept-types-guild-merged-topological-minimal-core.csv ../all-tabs-concept-types-guild-merged-topological-minimal-core.csv ../all-tabs-concept-types-guild-merged-topological-full.csv ../value-stream-concept-types.csv ../value-stream-concept-types-aligned.csv ../smoke-test-concept-types.csv",
+    "validate:concept-csv:all": "python3 ../scripts/validate_concept_type_csv.py ../*.csv"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.97.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "globals": "^15.9.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.0.1",
+    "vite": "^5.4.1",
+    "vitest": "^4.0.18"
+  }
+}
