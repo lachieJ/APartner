@@ -41,7 +41,7 @@
 - **Dev:** local React app + Supabase dev project.
 - **Staging:** Vercel staging deployment + Supabase staging project.
 - **Prod:** Vercel production deployment + Supabase production project.
-- **Client environment variables:** `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` (no service role keys in frontend).
+- **Client environment variables:** `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` (no service role keys in frontend).
 
 ### Deployment Flow
 

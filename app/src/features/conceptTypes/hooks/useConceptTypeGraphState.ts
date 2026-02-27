@@ -8,20 +8,21 @@ import {
   getAffectedConceptTypeIds,
   getDisplayedConceptTypes,
   getRootOptions,
+  type RootFilterMode,
 } from '../utils/conceptTypeGraphDerivations'
 
 type UseConceptTypeGraphStateParams = {
   conceptTypes: ConceptTypeRecord[]
-  topLevelRootsOnly: boolean
+  rootFilterMode: RootFilterMode
   showIssuesOnly: boolean
 }
 
 export function useConceptTypeGraphState({
   conceptTypes,
-  topLevelRootsOnly,
+  rootFilterMode,
   showIssuesOnly,
 }: UseConceptTypeGraphStateParams) {
-  const rootOptions = useMemo(() => getRootOptions(conceptTypes, topLevelRootsOnly), [conceptTypes, topLevelRootsOnly])
+  const rootOptions = useMemo(() => getRootOptions(conceptTypes, rootFilterMode), [conceptTypes, rootFilterMode])
 
   const conceptById = useMemo(() => buildConceptById(conceptTypes), [conceptTypes])
 

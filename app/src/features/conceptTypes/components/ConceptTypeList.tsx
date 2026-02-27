@@ -3,6 +3,7 @@ import type { ConceptTypeRecord } from '../csv/types'
 import { useCopyFeedback } from '../hooks/useCopyFeedback'
 import { useConceptTypeGraphState } from '../hooks/useConceptTypeGraphState'
 import type { ConceptTypeFlatRowActions, ConceptTypeTreeRowActions } from '../types/listActions'
+import type { RootFilterMode } from '../utils/conceptTypeGraphDerivations'
 import { getConceptTypeUsage } from '../utils/conceptTypeRowHelpers'
 import { ConceptTypeIssuesPanel } from './ConceptTypeIssuesPanel'
 import { ConceptTypeFlatRow } from './ConceptTypeFlatRow'
@@ -31,7 +32,7 @@ export function ConceptTypeList({
 }: ConceptTypeListProps) {
   const [viewMode, setViewMode] = useState<'flat' | 'tree'>('flat')
   const [selectedRootId, setSelectedRootId] = useState('')
-  const [topLevelRootsOnly, setTopLevelRootsOnly] = useState(true)
+  const [rootFilterMode, setRootFilterMode] = useState<RootFilterMode>('partof-empty-or-self')
   const [showIssuesOnly, setShowIssuesOnly] = useState(false)
   const [expandedUsageIds, setExpandedUsageIds] = useState<Record<string, boolean>>({})
   const [expandedDescriptionIds, setExpandedDescriptionIds] = useState<Record<string, boolean>>({})
@@ -46,7 +47,7 @@ export function ConceptTypeList({
     displayedConceptTypes,
   } = useConceptTypeGraphState({
     conceptTypes,
-    topLevelRootsOnly,
+    rootFilterMode,
     showIssuesOnly,
   })
 
@@ -119,13 +120,17 @@ export function ConceptTypeList({
 
           {viewMode === 'tree' ? (
             <>
-              <label className="inlineToggle">
-                <input
-                  type="checkbox"
-                  checked={topLevelRootsOnly}
-                  onChange={(event) => setTopLevelRootsOnly(event.target.checked)}
-                />
-                Top-level roots only (PartOf is empty)
+              <label>
+                Root filter
+                <select
+                  value={rootFilterMode}
+                  onChange={(event) => setRootFilterMode(event.target.value as RootFilterMode)}
+                >
+                  <option value="partof-empty">PartOf is empty</option>
+                  <option value="partof-self">PartOf is self</option>
+                  <option value="partof-empty-or-self">PartOf is empty or self</option>
+                  <option value="all">All concept types</option>
+                </select>
               </label>
 
               <label>

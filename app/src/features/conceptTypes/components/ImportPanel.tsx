@@ -41,8 +41,9 @@ export function ImportPanel({
 }: ImportPanelProps) {
   return (
     <>
+      <h3>Concept Type Import & Export</h3>
       <p className="hint">
-        Import CSV columns: name, description, partOfName, partOrder, referenceToName (max file size: 2 MB)
+        CSV format for import/export: name, description, partOfName, partOrder, referenceToName (max file size: 2 MB)
       </p>
       <input type="file" accept=".csv,text/csv" onChange={onImportFileSelected} />
       <p className="fileStatus">{importFileName ? `Selected file: ${importFileName}` : 'No file selected'}</p>

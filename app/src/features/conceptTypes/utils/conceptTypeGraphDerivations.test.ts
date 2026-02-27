@@ -23,18 +23,23 @@ const makeConceptType = (overrides: Partial<ConceptTypeRecord>): ConceptTypeReco
 
 describe('conceptTypeGraphDerivations', () => {
   const root = makeConceptType({ id: 'root', name: 'Root' })
+  const selfPart = makeConceptType({ id: 'self', name: 'Self Part', part_of_concept_type_id: 'self' })
   const childA = makeConceptType({ id: 'a', name: 'A', part_of_concept_type_id: 'root', part_order: 3 })
   const childB = makeConceptType({ id: 'b', name: 'B', part_of_concept_type_id: 'root', part_order: 1 })
   const orphanPart = makeConceptType({ id: 'orph', name: 'Orphan', part_of_concept_type_id: 'missing-parent' })
   const brokenRef = makeConceptType({ id: 'ref', name: 'BrokenRef', reference_to_concept_type_id: 'missing-ref' })
 
-  const conceptTypes = [root, childA, childB, orphanPart, brokenRef]
+  const conceptTypes = [root, selfPart, childA, childB, orphanPart, brokenRef]
 
-  it('filters root options when top-level only is enabled', () => {
-    const topLevelOnly = getRootOptions(conceptTypes, true)
-    const all = getRootOptions(conceptTypes, false)
+  it('filters root options by configured root filter mode', () => {
+    const emptyOnly = getRootOptions(conceptTypes, 'partof-empty')
+    const selfOnly = getRootOptions(conceptTypes, 'partof-self')
+    const emptyOrSelf = getRootOptions(conceptTypes, 'partof-empty-or-self')
+    const all = getRootOptions(conceptTypes, 'all')
 
-    expect(topLevelOnly.map((item) => item.id)).toEqual(['root', 'ref'])
+    expect(emptyOnly.map((item) => item.id)).toEqual(['root', 'ref'])
+    expect(selfOnly.map((item) => item.id)).toEqual(['self'])
+    expect(emptyOrSelf.map((item) => item.id)).toEqual(['root', 'self', 'ref'])
     expect(all).toHaveLength(conceptTypes.length)
   })
 
@@ -61,7 +66,7 @@ describe('conceptTypeGraphDerivations', () => {
     expect(issueSummary.siblingOrderIssueParents.map((item) => item.parentId)).toContain('missing-parent')
 
     const affected = getAffectedConceptTypeIds(issueSummary, childrenByParent)
-    expect(Array.from(affected).sort()).toEqual(['a', 'b', 'orph', 'ref'])
+    expect(Array.from(affected).sort()).toEqual(['a', 'b', 'orph', 'ref', 'self'])
   })
 
   it('filters displayed concept types when issues-only mode is on', () => {

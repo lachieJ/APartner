@@ -1,50 +1,107 @@
-# React + TypeScript + Vite
+# Concept Type Admin (MVP)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite application for managing `ConceptType` records backed by Supabase/Postgres.
 
-Currently, two official plugins are available:
+## What this app does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Authenticate users via Supabase magic-link sign-in.
+- Create, edit, delete, and reorder concept types.
+- Maintain structural relationships:
+  - `PartOfConceptTypeId`
+  - `ReferenceToConceptTypeId`
+  - sibling `part_order`
+- Import/export concept types as CSV.
+- Preview CSV import impact (create/update/unchanged) before commit.
+- Explore concept types in flat list or tree view from a selected root.
+- Run data-quality checks in UI (where used, sibling-order issues, affected-item filtering).
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Node.js 20+
+- npm
+- Supabase project (URL + publishable key)
 
-- Configure the top-level `parserOptions` property like this:
+## Setup
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Install dependencies:
+
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Configure environment variables in `app/.env.local`:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+VITE_SUPABASE_URL=...
+VITE_SUPABASE_PUBLISHABLE_KEY=...
 ```
+
+3. Apply database migrations and optional diagnostics scripts using the setup guide:
+
+- [`../SETUP_CONCEPTTYPE_MVP.md`](../SETUP_CONCEPTTYPE_MVP.md)
+
+## Local development
+
+```bash
+npm run dev
+```
+
+## Quality checks
+
+- Run tests:
+
+```bash
+npm run test:run
+```
+
+- Run lint (zero warnings allowed):
+
+```bash
+npm run lint
+```
+
+- Build production bundle:
+
+```bash
+npm run build
+```
+
+- Run the full gate locally (same as CI):
+
+```bash
+npm run verify
+```
+
+## Project structure (high level)
+
+- `src/features/conceptTypes/components` – UI components (form, list/tree rows, import panel, issues panel)
+- `src/features/conceptTypes/hooks` – state/orchestration hooks
+- `src/features/conceptTypes/data` – Supabase data-access layer and error mapping
+- `src/features/conceptTypes/csv` – CSV parsing/building types and utilities
+- `src/features/conceptTypes/utils` – pure derivation and row helper functions
+
+## Related docs
+
+- Setup and migrations: [`../SETUP_CONCEPTTYPE_MVP.md`](../SETUP_CONCEPTTYPE_MVP.md)
+- Changelog: [`../CHANGELOG.md`](../CHANGELOG.md)
+- Health checks SQL: [`../db/diagnostics/concept_type_health_checks.sql`](../db/diagnostics/concept_type_health_checks.sql)
+- Remediation SQL: [`../db/diagnostics/concept_type_remediation.sql`](../db/diagnostics/concept_type_remediation.sql)
+
+## Troubleshooting
+
+- Magic-link sign-in fails with network/auth errors:
+  - Verify `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` in `app/.env.local`.
+  - Confirm Supabase Auth redirect settings include your local app URL.
+  - Restart dev server after env changes.
+
+- Save fails with `canceling statement due to statement timeout`:
+  - Apply migration `../db/migrations/003_concept_type_cycle_trigger_timeout_fix.sql`.
+  - Retry the update.
+
+- CSV import errors:
+  - Ensure required `name` column is present.
+  - Ensure `partOrder` values are whole numbers greater than 0.
+  - Use the sample template from the UI and run `npm run validate:concept-csv` for pre-checks.
+
+- Sibling order looks inconsistent:
+  - Use `Fix sibling order issues` in the app, or run remediation SQL in `../db/diagnostics/concept_type_remediation.sql`.

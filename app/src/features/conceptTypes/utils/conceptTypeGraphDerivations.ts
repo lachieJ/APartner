@@ -2,12 +2,25 @@ import type { ConceptTypeRecord } from '../csv/types'
 import type { ConceptTypeIssueSummary } from '../types/issues'
 import type { ConceptTypeUsage } from './conceptTypeRowHelpers'
 
-export const getRootOptions = (conceptTypes: ConceptTypeRecord[], topLevelRootsOnly: boolean) => {
-  if (!topLevelRootsOnly) {
+export type RootFilterMode = 'all' | 'partof-empty' | 'partof-self' | 'partof-empty-or-self'
+
+export const getRootOptions = (conceptTypes: ConceptTypeRecord[], rootFilterMode: RootFilterMode) => {
+  if (rootFilterMode === 'all') {
     return conceptTypes
   }
 
-  return conceptTypes.filter((conceptType) => !conceptType.part_of_concept_type_id)
+  if (rootFilterMode === 'partof-empty') {
+    return conceptTypes.filter((conceptType) => !conceptType.part_of_concept_type_id)
+  }
+
+  if (rootFilterMode === 'partof-self') {
+    return conceptTypes.filter((conceptType) => conceptType.part_of_concept_type_id === conceptType.id)
+  }
+
+  return conceptTypes.filter(
+    (conceptType) =>
+      !conceptType.part_of_concept_type_id || conceptType.part_of_concept_type_id === conceptType.id,
+  )
 }
 
 export const buildConceptById = (conceptTypes: ConceptTypeRecord[]) => {
