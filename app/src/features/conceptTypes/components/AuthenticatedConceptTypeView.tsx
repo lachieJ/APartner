@@ -6,6 +6,7 @@ import { ConceptTypeForm } from './ConceptTypeForm'
 import { ImportPanel } from './ImportPanel'
 import { ConceptTypeList } from './ConceptTypeList'
 import { ModelManagementPanel } from './ModelManagementPanel'
+import { ConceptModelPanel } from '../../concepts/components/ConceptModelPanel'
 
 type ConceptTypeOption = {
   id: string
@@ -13,6 +14,7 @@ type ConceptTypeOption = {
 }
 
 type AuthenticatedConceptTypeViewProps = {
+  isAuthenticated: boolean
   editingId: string | null
   name: string
   description: string
@@ -83,6 +85,7 @@ type AuthenticatedConceptTypeViewProps = {
 }
 
 export function AuthenticatedConceptTypeView({
+  isAuthenticated,
   editingId,
   name,
   description,
@@ -147,9 +150,9 @@ export function AuthenticatedConceptTypeView({
   normalizingSiblingOrders,
   onNormalizeSiblingOrders,
 }: AuthenticatedConceptTypeViewProps) {
-  const [activeTab, setActiveTab] = useState<'edit' | 'import' | 'manage'>(() => {
+  const [activeTab, setActiveTab] = useState<'edit' | 'models' | 'import' | 'manage'>(() => {
     const stored = window.localStorage.getItem('conceptType.activeTab')
-    if (stored === 'edit' || stored === 'import' || stored === 'manage') {
+    if (stored === 'edit' || stored === 'models' || stored === 'import' || stored === 'manage') {
       return stored
     }
     return 'edit'
@@ -172,6 +175,13 @@ export function AuthenticatedConceptTypeView({
           </button>
           <button
             type="button"
+            className={activeTab === 'models' ? 'tabButton active' : 'tabButton'}
+            onClick={() => setActiveTab('models')}
+          >
+            Models
+          </button>
+          <button
+            type="button"
             className={activeTab === 'import' ? 'tabButton active' : 'tabButton'}
             onClick={() => setActiveTab('import')}
           >
@@ -188,6 +198,8 @@ export function AuthenticatedConceptTypeView({
         <p className="hint">
           {activeTab === 'edit'
             ? 'Create, update, and inspect concept types.'
+            : activeTab === 'models'
+              ? 'Create concept models as instances constrained by ConceptType semantics.'
             : activeTab === 'import'
               ? 'Run CSV preview/import with safety checks and impact summary.'
               : 'Run high-impact operations (reset, structure delete, purge) with confirmations.'}
@@ -260,6 +272,10 @@ export function AuthenticatedConceptTypeView({
             clearFileStatus={clearFileStatus}
           />
         </section>
+      ) : null}
+
+      {activeTab === 'models' ? (
+        <ConceptModelPanel isAuthenticated={isAuthenticated} conceptTypes={conceptTypes} />
       ) : null}
 
       {activeTab === 'manage' ? (

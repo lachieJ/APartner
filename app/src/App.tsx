@@ -147,7 +147,7 @@ function App() {
   return (
     <main className="page">
       <header className="header">
-        <h1>ConceptType Admin (MVP)</h1>
+        <h1>ConceptType + Concept Model Admin</h1>
         {session ? (
           <div className="sessionBar">
             <span>{session.user.email}</span>
@@ -160,6 +160,7 @@ function App() {
         <SignInPanel email={email} setEmail={setEmail} onSubmit={sendMagicLink} />
       ) : (
         <AuthenticatedConceptTypeView
+          isAuthenticated={Boolean(session)}
           editingId={editingId}
           name={name}
           description={description}

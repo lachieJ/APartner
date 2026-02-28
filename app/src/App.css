@@ -343,3 +343,30 @@ details > summary::-webkit-details-marker {
   background: #fff1f0;
   border: 1px solid #ffccc7;
 }
+
+.maintainInlineForm {
+  margin-top: 8px;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+  display: grid;
+  gap: 8px;
+}
+
+.maintainInlineForm textarea {
+  min-height: 60px;
+}
+
+.maintainChildForms {
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.maintainNodeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
