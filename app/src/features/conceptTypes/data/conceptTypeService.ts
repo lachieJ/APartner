@@ -28,6 +28,14 @@ export const friendlyConceptTypeError = (raw: string, code?: string, details?: s
   }
 
   if (code === '23503') {
+    if (
+      merged.includes('is still referenced') ||
+      merged.includes('still referenced from table') ||
+      merged.includes('concept_type_part_of_concept_type_id_fkey') ||
+      merged.includes('concept_type_reference_to_concept_type_id_fkey')
+    ) {
+      return 'Cannot delete this ConceptType because other ConceptTypes still reference it via PartOf or ReferenceTo. Remove those links first.'
+    }
     if (merged.includes('part_of_concept_type_id')) {
       return 'PartOfConceptTypeId does not exist.'
     }
@@ -103,20 +111,87 @@ export const updateConceptTypePartOrder = async (id: string, partOrder: number |
 }
 
 export const deleteConceptType = async (id: string): Promise<string | null> => {
+  const { data: blockers, error: blockersError } = await supabase
+    .from('concept_type')
+    .select('id,name,part_of_concept_type_id,reference_to_concept_type_id')
+    .or(`part_of_concept_type_id.eq.${id},reference_to_concept_type_id.eq.${id}`)
+    .order('name', { ascending: true })
+
+  if (blockersError) {
+    return fromDbError(blockersError)
+  }
+
+  if (blockers && blockers.length > 0) {
+    const usedAsPartOfBy = blockers
+      .filter((item) => item.part_of_concept_type_id === id)
+      .map((item) => item.name)
+    const usedAsReferenceToBy = blockers
+      .filter((item) => item.reference_to_concept_type_id === id)
+      .map((item) => item.name)
+
+    const formatNames = (names: string[]) => {
+      if (names.length === 0) return ''
+      const shown = names.slice(0, 3).join(', ')
+      const extra = names.length > 3 ? ` (+${names.length - 3} more)` : ''
+      return `${shown}${extra}`
+    }
+
+    const segments: string[] = []
+    if (usedAsPartOfBy.length > 0) {
+      segments.push(`PartOf by: ${formatNames(usedAsPartOfBy)}`)
+    }
+    if (usedAsReferenceToBy.length > 0) {
+      segments.push(`ReferenceTo by: ${formatNames(usedAsReferenceToBy)}`)
+    }
+
+    return `Cannot delete this ConceptType because it is still referenced. ${segments.join(' | ')}. Remove these links first.`
+  }
+
   const { error } = await supabase.from('concept_type').delete().eq('id', id)
+  return error ? fromDbError(error) : null
+}
+
+export const deleteConceptTypesBulk = async (ids: string[]): Promise<string | null> => {
+  if (ids.length === 0) {
+    return null
+  }
+
+  const { error } = await supabase.from('concept_type').delete().in('id', ids)
+  return error ? fromDbError(error) : null
+}
+
+export const deleteAllConceptTypes = async (): Promise<string | null> => {
+  const { error } = await supabase.from('concept_type').delete().not('id', 'is', null)
+  return error ? fromDbError(error) : null
+}
+
+export const clearReferenceToLinksForTargets = async (targetIds: string[]): Promise<string | null> => {
+  if (targetIds.length === 0) {
+    return null
+  }
+
+  const { error } = await supabase
+    .from('concept_type')
+    .update({ reference_to_concept_type_id: null })
+    .in('reference_to_concept_type_id', targetIds)
+
   return error ? fromDbError(error) : null
 }
 
 export const importConceptTypeRows = async (
   rows: ImportRow[],
   existingConceptTypes: ConceptTypeRecord[],
+  options?: { importMode?: 'upsert-only' | 'full-sync'; allowDeletes?: boolean },
 ): Promise<{ summary: ImportSummary; fatalError: string | null }> => {
+  const importMode = options?.importMode ?? 'upsert-only'
+  const allowDeletes = options?.allowDeletes ?? false
   const existingByName = new Map(existingConceptTypes.map((item) => [item.name.trim().toLowerCase(), item]))
   const existingNamesBefore = new Set(existingByName.keys())
   const createMap = new Map<string, { name: string; description: string | null }>()
   const failures: ImportFailure[] = []
   let created = 0
   let updated = 0
+  let deleted = 0
   let failed = 0
 
   for (const row of rows) {
@@ -137,6 +212,7 @@ export const importConceptTypeRows = async (
           total: rows.length,
           created: 0,
           updated: 0,
+          deleted: 0,
           failed: rows.length,
           failures: rows.map((row) => ({
             rowNumber: row.rowNumber,
@@ -165,6 +241,7 @@ export const importConceptTypeRows = async (
         total: rows.length,
         created,
         updated: 0,
+        deleted: 0,
         failed: rows.length,
         failures: rows.map((row) => ({
           rowNumber: row.rowNumber,
@@ -287,12 +364,49 @@ export const importConceptTypeRows = async (
     }
   }
 
+  if (importMode === 'full-sync' && allowDeletes) {
+    const importNames = new Set(rows.map((row) => row.name.trim().toLowerCase()))
+    const deleteIds = existingConceptTypes
+      .filter((item) => !importNames.has(item.name.trim().toLowerCase()))
+      .map((item) => item.id)
+
+    if (deleteIds.length > 0) {
+      const { error: deleteError } = await supabase.from('concept_type').delete().in('id', deleteIds)
+      if (deleteError) {
+        return {
+          fatalError: fromDbError(deleteError),
+          summary: {
+            total: rows.length,
+            created,
+            updated,
+            deleted,
+            failed: failed + deleteIds.length,
+            failures: [
+              ...failures,
+              ...deleteIds.map((id) => ({
+                rowNumber: 0,
+                name: id,
+                description: null,
+                partOfName: null,
+                partOrder: null,
+                referenceToName: null,
+                error: fromDbError(deleteError),
+              })),
+            ],
+          },
+        }
+      }
+      deleted = deleteIds.length
+    }
+  }
+
   return {
     fatalError: null,
     summary: {
       total: rows.length,
       created,
       updated,
+      deleted,
       failed,
       failures,
     },

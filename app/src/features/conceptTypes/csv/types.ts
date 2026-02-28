@@ -32,13 +32,18 @@ export type ImportSummary = {
   total: number
   created: number
   updated: number
+  deleted: number
   failed: number
   failures: ImportFailure[]
 }
 
 export type ImportPreviewSummary = {
+  importMode: 'upsert-only' | 'full-sync'
   total: number
   toCreate: number
   toUpdate: number
+  toDelete: number
   unchanged: number
+  deleteCandidates: string[]
+  warnings: string[]
 }

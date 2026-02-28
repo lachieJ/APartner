@@ -6,13 +6,15 @@
 2. Open SQL Editor and run `db/migrations/001_concept_type.sql`.
 3. Run `db/migrations/002_concept_type_part_order.sql` (adds sibling ordering support).
 4. Run `db/migrations/003_concept_type_cycle_trigger_timeout_fix.sql` (prevents recursive cycle checks from timing out on updates).
-5. Optional health check: run `db/diagnostics/concept_type_health_checks.sql` to detect existing graph/order anomalies before imports or large edits.
-6. Optional remediation helpers: run `db/diagnostics/concept_type_remediation.sql` for sibling-order normalization and guided cycle cleanup candidates.
-4. In Authentication settings, enable Email (magic link).
-5. In URL configuration, set:
+5. Optional draft for future model import rollback/versioning: run `db/migrations/004_model_versioning_v1_draft.sql` (creates schema but remains disabled by feature flag).
+6. Optional draft follow-up: run `db/migrations/005_model_versioning_v1_functions.sql` (adds feature-flagged commit/rollback RPC functions).
+7. Optional health check: run `db/diagnostics/concept_type_health_checks.sql` to detect existing graph/order anomalies before imports or large edits.
+8. Optional remediation helpers: run `db/diagnostics/concept_type_remediation.sql` for sibling-order normalization and guided cycle cleanup candidates.
+9. In Authentication settings, enable Email (magic link).
+10. In URL configuration, set:
    - Site URL: `http://localhost:5173`
    - Additional redirect URL: `http://localhost:5173`
-6. Copy:
+11. Copy:
    - Project URL
    - Publishable key (preferred)
 
@@ -24,7 +26,10 @@
 ```bash
 VITE_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
 VITE_SUPABASE_PUBLISHABLE_KEY=YOUR_SUPABASE_PUBLISHABLE_KEY
+VITE_MODEL_WORKSPACE_ID=00000000-0000-0000-0000-000000000001
 ```
+
+`VITE_MODEL_WORKSPACE_ID` is used by snapshot-backed model management actions (reset/delete-structure with version capture).
 
 ## 3) Node version (recommended)
 

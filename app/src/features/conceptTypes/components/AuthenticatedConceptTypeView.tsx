@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import type { ConceptTypeRecord, ImportPreviewSummary, ImportSummary } from '../csv/types'
 import type { ConceptTypeFormErrorField, ConceptTypeFormErrors } from '../types/form'
 import { ConceptTypeForm } from './ConceptTypeForm'
 import { ImportPanel } from './ImportPanel'
 import { ConceptTypeList } from './ConceptTypeList'
+import { ModelManagementPanel } from './ModelManagementPanel'
 
 type ConceptTypeOption = {
   id: string
@@ -34,6 +36,12 @@ type AuthenticatedConceptTypeViewProps = {
   importing: boolean
   loading: boolean
   conceptTypes: ConceptTypeRecord[]
+  importMode: 'upsert-only' | 'full-sync'
+  setImportMode: (value: 'upsert-only' | 'full-sync') => void
+  allowDeletes: boolean
+  setAllowDeletes: (value: boolean) => void
+  confirmHighImpact: boolean
+  setConfirmHighImpact: (value: boolean) => void
   importPreviewSummary: ImportPreviewSummary | null
   importSummary: ImportSummary | null
   onImportFileSelected: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -44,6 +52,28 @@ type AuthenticatedConceptTypeViewProps = {
   onClearImportFields: () => void
   onDownloadImportErrorsCsv: () => void
   clearFileStatus: () => void
+  actionInProgress: 'reset' | 'structure' | 'purge' | null
+  managementReason: string
+  setManagementReason: (value: string) => void
+  managementConfirmText: string
+  setManagementConfirmText: (value: string) => void
+  structureRootId: string
+  setStructureRootId: (value: string) => void
+  structureRootOptions: { id: string; name: string }[]
+  structurePreview: {
+    subtreeSize: number
+    externalPartOfBlockers: { id: string; name: string }[]
+    externalReferenceBlockers: { id: string; name: string }[]
+  }
+  structureExternalReferencePolicy: 'block' | 'null-reference-to'
+  setStructureExternalReferencePolicy: (value: 'block' | 'null-reference-to') => void
+  createVersionOnReset: boolean
+  setCreateVersionOnReset: (value: boolean) => void
+  createVersionOnStructureDelete: boolean
+  setCreateVersionOnStructureDelete: (value: boolean) => void
+  onResetModel: () => void
+  onDeleteStructure: () => void
+  onPurgeModel: () => void
   onEditConceptType: (conceptType: ConceptTypeRecord) => void
   onDeleteConceptType: (id: string) => void
   movingConceptTypeId: string | null
@@ -76,6 +106,12 @@ export function AuthenticatedConceptTypeView({
   importing,
   loading,
   conceptTypes,
+  importMode,
+  setImportMode,
+  allowDeletes,
+  setAllowDeletes,
+  confirmHighImpact,
+  setConfirmHighImpact,
   importPreviewSummary,
   importSummary,
   onImportFileSelected,
@@ -86,6 +122,24 @@ export function AuthenticatedConceptTypeView({
   onClearImportFields,
   onDownloadImportErrorsCsv,
   clearFileStatus,
+  actionInProgress,
+  managementReason,
+  setManagementReason,
+  managementConfirmText,
+  setManagementConfirmText,
+  structureRootId,
+  setStructureRootId,
+  structureRootOptions,
+  structurePreview,
+  structureExternalReferencePolicy,
+  setStructureExternalReferencePolicy,
+  createVersionOnReset,
+  setCreateVersionOnReset,
+  createVersionOnStructureDelete,
+  setCreateVersionOnStructureDelete,
+  onResetModel,
+  onDeleteStructure,
+  onPurgeModel,
   onEditConceptType,
   onDeleteConceptType,
   movingConceptTypeId,
@@ -93,60 +147,144 @@ export function AuthenticatedConceptTypeView({
   normalizingSiblingOrders,
   onNormalizeSiblingOrders,
 }: AuthenticatedConceptTypeViewProps) {
+  const [activeTab, setActiveTab] = useState<'edit' | 'import' | 'manage'>(() => {
+    const stored = window.localStorage.getItem('conceptType.activeTab')
+    if (stored === 'edit' || stored === 'import' || stored === 'manage') {
+      return stored
+    }
+    return 'edit'
+  })
+
+  useEffect(() => {
+    window.localStorage.setItem('conceptType.activeTab', activeTab)
+  }, [activeTab])
+
   return (
     <>
-      <ConceptTypeForm
-        editingId={editingId}
-        name={name}
-        description={description}
-        partOfConceptTypeId={partOfConceptTypeId}
-        partOrder={partOrder}
-        referenceToConceptTypeId={referenceToConceptTypeId}
-        formErrors={formErrors}
-        conceptTypeOptions={conceptTypeOptions}
-        setName={setName}
-        setDescription={setDescription}
-        setPartOfConceptTypeId={setPartOfConceptTypeId}
-        setPartOrder={setPartOrder}
-        setReferenceToConceptTypeId={setReferenceToConceptTypeId}
-        clearFieldError={clearFieldError}
-        onSubmit={onSubmitConceptType}
-        onCancel={onCancelConceptType}
-      />
+      <div className="stickyToolbar">
+        <div className="tabRow" role="tablist" aria-label="Workspace sections">
+          <button
+            type="button"
+            className={activeTab === 'edit' ? 'tabButton active' : 'tabButton'}
+            onClick={() => setActiveTab('edit')}
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            className={activeTab === 'import' ? 'tabButton active' : 'tabButton'}
+            onClick={() => setActiveTab('import')}
+          >
+            Import
+          </button>
+          <button
+            type="button"
+            className={activeTab === 'manage' ? 'tabButton active' : 'tabButton'}
+            onClick={() => setActiveTab('manage')}
+          >
+            Model Management
+          </button>
+        </div>
+        <p className="hint">
+          {activeTab === 'edit'
+            ? 'Create, update, and inspect concept types.'
+            : activeTab === 'import'
+              ? 'Run CSV preview/import with safety checks and impact summary.'
+              : 'Run high-impact operations (reset, structure delete, purge) with confirmations.'}
+        </p>
+      </div>
 
-      <section className="card">
-        <h2>Concept Types</h2>
-        <ImportPanel
-          importCsvText={importCsvText}
-          setImportCsvText={setImportCsvText}
-          importFileName={importFileName}
-          importFileError={importFileError}
-          importing={importing}
-          loading={loading}
-          hasConceptTypes={conceptTypes.length > 0}
-          importPreviewSummary={importPreviewSummary}
-          importSummary={importSummary}
-          onImportFileSelected={onImportFileSelected}
-          onPreview={onPreviewImportConceptTypes}
-          onImport={onImportConceptTypes}
-          onDownloadSampleCsv={onDownloadSampleCsv}
-          onExportCsv={onExportConceptTypes}
-          onClear={onClearImportFields}
-          onDownloadImportErrorsCsv={onDownloadImportErrorsCsv}
-          clearFileStatus={clearFileStatus}
-        />
+      {activeTab === 'edit' ? (
+        <>
+          <ConceptTypeForm
+            editingId={editingId}
+            name={name}
+            description={description}
+            partOfConceptTypeId={partOfConceptTypeId}
+            partOrder={partOrder}
+            referenceToConceptTypeId={referenceToConceptTypeId}
+            formErrors={formErrors}
+            conceptTypeOptions={conceptTypeOptions}
+            setName={setName}
+            setDescription={setDescription}
+            setPartOfConceptTypeId={setPartOfConceptTypeId}
+            setPartOrder={setPartOrder}
+            setReferenceToConceptTypeId={setReferenceToConceptTypeId}
+            clearFieldError={clearFieldError}
+            onSubmit={onSubmitConceptType}
+            onCancel={onCancelConceptType}
+          />
 
-        <ConceptTypeList
-          conceptTypes={conceptTypes}
-          loading={loading}
-          onEdit={onEditConceptType}
-          onDelete={onDeleteConceptType}
-          movingConceptTypeId={movingConceptTypeId}
-          onMoveConceptType={onMoveConceptType}
-          normalizingSiblingOrders={normalizingSiblingOrders}
-          onNormalizeSiblingOrders={onNormalizeSiblingOrders}
+          <section className="card">
+            <h2>Concept Types</h2>
+            <ConceptTypeList
+              conceptTypes={conceptTypes}
+              loading={loading}
+              onEdit={onEditConceptType}
+              onDelete={onDeleteConceptType}
+              movingConceptTypeId={movingConceptTypeId}
+              onMoveConceptType={onMoveConceptType}
+              normalizingSiblingOrders={normalizingSiblingOrders}
+              onNormalizeSiblingOrders={onNormalizeSiblingOrders}
+            />
+          </section>
+        </>
+      ) : null}
+
+      {activeTab === 'import' ? (
+        <section className="card">
+          <h2>Import & Export</h2>
+          <ImportPanel
+            importCsvText={importCsvText}
+            setImportCsvText={setImportCsvText}
+            importFileName={importFileName}
+            importFileError={importFileError}
+            importing={importing}
+            loading={loading}
+            hasConceptTypes={conceptTypes.length > 0}
+            importMode={importMode}
+            setImportMode={setImportMode}
+            allowDeletes={allowDeletes}
+            setAllowDeletes={setAllowDeletes}
+            confirmHighImpact={confirmHighImpact}
+            setConfirmHighImpact={setConfirmHighImpact}
+            importPreviewSummary={importPreviewSummary}
+            importSummary={importSummary}
+            onImportFileSelected={onImportFileSelected}
+            onPreview={onPreviewImportConceptTypes}
+            onImport={onImportConceptTypes}
+            onDownloadSampleCsv={onDownloadSampleCsv}
+            onExportCsv={onExportConceptTypes}
+            onClear={onClearImportFields}
+            onDownloadImportErrorsCsv={onDownloadImportErrorsCsv}
+            clearFileStatus={clearFileStatus}
+          />
+        </section>
+      ) : null}
+
+      {activeTab === 'manage' ? (
+        <ModelManagementPanel
+          conceptTypeCount={conceptTypes.length}
+          actionInProgress={actionInProgress}
+          managementReason={managementReason}
+          setManagementReason={setManagementReason}
+          managementConfirmText={managementConfirmText}
+          setManagementConfirmText={setManagementConfirmText}
+          structureRootId={structureRootId}
+          setStructureRootId={setStructureRootId}
+          structureRootOptions={structureRootOptions}
+          structurePreview={structurePreview}
+          structureExternalReferencePolicy={structureExternalReferencePolicy}
+          setStructureExternalReferencePolicy={setStructureExternalReferencePolicy}
+          createVersionOnReset={createVersionOnReset}
+          setCreateVersionOnReset={setCreateVersionOnReset}
+          createVersionOnStructureDelete={createVersionOnStructureDelete}
+          setCreateVersionOnStructureDelete={setCreateVersionOnStructureDelete}
+          onResetModel={onResetModel}
+          onDeleteStructure={onDeleteStructure}
+          onPurgeModel={onPurgeModel}
         />
-      </section>
+      ) : null}
     </>
   )
 }

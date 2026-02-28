@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   MAX_IMPORT_FILE_SIZE_BYTES,
   SAMPLE_CONCEPT_TYPES_CSV,
@@ -26,14 +26,30 @@ export function useConceptTypeImport({
   const [importing, setImporting] = useState(false)
   const [importSummary, setImportSummary] = useState<ImportSummary | null>(null)
   const [importPreviewSummary, setImportPreviewSummary] = useState<ImportPreviewSummary | null>(null)
+  const [importMode, setImportMode] = useState<'upsert-only' | 'full-sync'>(() => {
+    const stored = window.localStorage.getItem('conceptType.importMode')
+    if (stored === 'upsert-only' || stored === 'full-sync') {
+      return stored
+    }
+    return 'upsert-only'
+  })
+  const [allowDeletes, setAllowDeletes] = useState(false)
+  const [confirmHighImpact, setConfirmHighImpact] = useState(false)
   const [importFileName, setImportFileName] = useState<string | null>(null)
   const [importFileError, setImportFileError] = useState<string | null>(null)
+  const DELETE_CONFIRMATION_THRESHOLD_PERCENT = 20
+
+  useEffect(() => {
+    window.localStorage.setItem('conceptType.importMode', importMode)
+  }, [importMode])
 
   const clearImportFields = () => {
     setImportCsvText('')
     setImportPreviewSummary(null)
     setImportFileName(null)
     setImportFileError(null)
+    setAllowDeletes(false)
+    setConfirmHighImpact(false)
   }
 
   const clearFileStatus = () => {
@@ -132,10 +148,33 @@ export function useConceptTypeImport({
       return
     }
 
+    const importNames = new Set(rows.map((row) => row.name.trim().toLowerCase()))
+    const toDelete = conceptTypes.filter((item) => !importNames.has(item.name.trim().toLowerCase())).length
+    const deletePercent = conceptTypes.length > 0 ? Number(((toDelete / conceptTypes.length) * 100).toFixed(2)) : 0
+
+    if (importMode === 'upsert-only' && toDelete > 0) {
+      setMessage(`Upsert-only mode: ${toDelete} missing row(s) will not be deleted.`)
+    }
+
+    if (importMode === 'full-sync' && toDelete > 0 && !allowDeletes) {
+      setError('Full-sync mode found delete candidates. Tick "Allow deletes" to proceed.')
+      return
+    }
+
+    if (importMode === 'full-sync' && toDelete > 0 && deletePercent > DELETE_CONFIRMATION_THRESHOLD_PERCENT && !confirmHighImpact) {
+      setError(
+        `High-impact delete threshold exceeded (${deletePercent}% > ${DELETE_CONFIRMATION_THRESHOLD_PERCENT}%). Tick "Confirm high-impact delete" to proceed.`,
+      )
+      return
+    }
+
     setImporting(true)
 
     try {
-      const { summary, fatalError } = await importConceptTypeRows(rows, conceptTypes)
+      const { summary, fatalError } = await importConceptTypeRows(rows, conceptTypes, {
+        importMode,
+        allowDeletes,
+      })
       await reloadConceptTypes()
 
       setImportSummary(summary)
@@ -144,7 +183,9 @@ export function useConceptTypeImport({
       } else if (summary.failed > 0) {
         setError(`Import completed with ${summary.failed} row error(s). See import summary.`)
       } else {
-        setMessage(`Import completed. Created: ${summary.created}, Updated: ${summary.updated}, Failed: 0.`)
+        setMessage(
+          `Import completed. Created: ${summary.created}, Updated: ${summary.updated}, Deleted: ${summary.deleted}, Failed: 0.`,
+        )
       }
 
       setImportCsvText('')
@@ -175,6 +216,7 @@ export function useConceptTypeImport({
 
     const existingByName = new Map(conceptTypes.map((item) => [item.name.trim().toLowerCase(), item]))
     const idToName = new Map(conceptTypes.map((item) => [item.id, item.name]))
+    const importNames = new Set(rows.map((row) => row.name.trim().toLowerCase()))
 
     let toCreate = 0
     let toUpdate = 0
@@ -212,14 +254,46 @@ export function useConceptTypeImport({
     }
 
     const preview: ImportPreviewSummary = {
+      importMode,
       total: rows.length,
       toCreate,
       toUpdate,
+      toDelete: importMode === 'full-sync' ? conceptTypes.filter((item) => !importNames.has(item.name.trim().toLowerCase())).length : 0,
       unchanged,
+      deleteCandidates:
+        importMode === 'full-sync'
+          ? conceptTypes
+              .filter((item) => !importNames.has(item.name.trim().toLowerCase()))
+              .map((item) => item.name)
+              .sort((left, right) => left.localeCompare(right))
+          : [],
+      warnings:
+        importMode === 'upsert-only'
+          ? conceptTypes.filter((item) => !importNames.has(item.name.trim().toLowerCase())).length > 0
+            ? [
+                `Upsert-only mode: ${conceptTypes.filter((item) => !importNames.has(item.name.trim().toLowerCase())).length} missing row(s) will not be deleted.`,
+              ]
+            : []
+          : [],
+    }
+
+    if (importMode === 'full-sync') {
+      const deletePercent =
+        conceptTypes.length > 0 ? Number(((preview.toDelete / conceptTypes.length) * 100).toFixed(2)) : 0
+      if (preview.toDelete > 0) {
+        preview.warnings.push(`Full-sync mode: ${preview.toDelete} delete candidate(s) detected.`)
+      }
+      if (deletePercent > DELETE_CONFIRMATION_THRESHOLD_PERCENT) {
+        preview.warnings.push(
+          `High-impact delete threshold exceeded (${deletePercent}% > ${DELETE_CONFIRMATION_THRESHOLD_PERCENT}%).`,
+        )
+      }
     }
 
     setImportPreviewSummary(preview)
-    setMessage(`Preview ready. Create: ${toCreate}, Update: ${toUpdate}, Unchanged: ${unchanged}.`)
+    setMessage(
+      `Preview ready. Create: ${preview.toCreate}, Update: ${preview.toUpdate}, Delete: ${preview.toDelete}, Unchanged: ${preview.unchanged}.`,
+    )
   }
 
   const exportConceptTypes = () => {
@@ -275,6 +349,12 @@ export function useConceptTypeImport({
     importing,
     importSummary,
     importPreviewSummary,
+    importMode,
+    setImportMode,
+    allowDeletes,
+    setAllowDeletes,
+    confirmHighImpact,
+    setConfirmHighImpact,
     importFileName,
     importFileError,
     onImportFileSelected,
