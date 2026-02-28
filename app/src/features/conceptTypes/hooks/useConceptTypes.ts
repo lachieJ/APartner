@@ -8,6 +8,7 @@ import {
   updateConceptTypePartOrder,
   updateConceptType,
 } from '../data/conceptTypeService'
+import { groupSiblingsByParent, reorderSiblingList } from '../../shared/utils/siblingOrdering'
 
 type UseConceptTypesParams = {
   isAuthenticated: boolean
@@ -180,31 +181,11 @@ export function useConceptTypes({
       return
     }
 
-    const siblings = conceptTypes
-      .filter((item) => item.part_of_concept_type_id === conceptType.part_of_concept_type_id)
-      .sort((left, right) => {
-        const leftOrder = left.part_order ?? Number.MAX_SAFE_INTEGER
-        const rightOrder = right.part_order ?? Number.MAX_SAFE_INTEGER
-        if (leftOrder !== rightOrder) {
-          return leftOrder - rightOrder
-        }
-
-        return left.name.localeCompare(right.name)
-      })
-
-    const currentIndex = siblings.findIndex((item) => item.id === id)
-    if (currentIndex < 0) {
+    const siblings = conceptTypes.filter((item) => item.part_of_concept_type_id === conceptType.part_of_concept_type_id)
+    const reorderedSiblings = reorderSiblingList(siblings, id, direction)
+    if (!reorderedSiblings) {
       return
     }
-
-    const swapIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1
-    if (swapIndex < 0 || swapIndex >= siblings.length) {
-      return
-    }
-
-    const reorderedSiblings = [...siblings]
-    const [movedSibling] = reorderedSiblings.splice(currentIndex, 1)
-    reorderedSiblings.splice(swapIndex, 0, movedSibling)
 
     setMovingConceptTypeId(id)
     try {
@@ -233,17 +214,7 @@ export function useConceptTypes({
     setMessage(null)
     setError(null)
 
-    const siblingsByParentId = new Map<string, ConceptTypeRecord[]>()
-
-    for (const conceptType of conceptTypes) {
-      if (!conceptType.part_of_concept_type_id) {
-        continue
-      }
-
-      const siblings = siblingsByParentId.get(conceptType.part_of_concept_type_id) ?? []
-      siblings.push(conceptType)
-      siblingsByParentId.set(conceptType.part_of_concept_type_id, siblings)
-    }
+    const siblingsByParentId = groupSiblingsByParent(conceptTypes, (conceptType) => conceptType.part_of_concept_type_id)
 
     if (siblingsByParentId.size === 0) {
       setMessage('No sibling groups found to normalize.')
@@ -255,18 +226,8 @@ export function useConceptTypes({
     setNormalizingSiblingOrders(true)
     try {
       for (const siblings of siblingsByParentId.values()) {
-        const sortedSiblings = [...siblings].sort((left, right) => {
-          const leftOrder = left.part_order ?? Number.MAX_SAFE_INTEGER
-          const rightOrder = right.part_order ?? Number.MAX_SAFE_INTEGER
-          if (leftOrder !== rightOrder) {
-            return leftOrder - rightOrder
-          }
-
-          return left.name.localeCompare(right.name)
-        })
-
-        for (let index = 0; index < sortedSiblings.length; index += 1) {
-          const sibling = sortedSiblings[index]
+        for (let index = 0; index < siblings.length; index += 1) {
+          const sibling = siblings[index]
           const normalizedOrder = index + 1
 
           if (sibling.part_order === normalizedOrder) {

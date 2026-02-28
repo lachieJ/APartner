@@ -30,6 +30,91 @@
 - **Third-party APIs/services: N/A  
 - **Hosting/deployment target: Vercel (recommended) with Supabase backend  
 
+## Current Module Map (As-Built Feb 2026)
+
+### App Composition
+
+- `app/src/App.tsx`: top-level auth/app composition and feature wiring.
+- `app/src/features/conceptTypes/hooks/useAuthenticatedConceptTypeWorkspace.ts`: assembles the authenticated workspace contract for ConceptType views.
+- `app/src/features/conceptTypes/types/workspace.ts`: shared workspace typing contract used by the ConceptType view layer.
+
+### ConceptType Domain
+
+- `app/src/features/conceptTypes/hooks/useConceptTypes.ts`: ConceptType CRUD, validation feedback, sibling ordering operations.
+- `app/src/features/conceptTypes/components/AuthenticatedConceptTypeView.tsx`: tabbed ConceptType workspace shell.
+- `app/src/features/conceptTypes/utils/conceptTypeGraphDerivations.ts`: pure graph derivations for diagnostics/view shaping.
+
+### Concept Domain (Modeling)
+
+- `app/src/features/concepts/hooks/useConcepts.ts`: primary Concept CRUD orchestration and submit/edit lifecycle.
+- `app/src/features/concepts/hooks/useConceptRemediation.ts`: Concept remediation writes + remediation audit persistence.
+- `app/src/features/concepts/hooks/useConceptModelViewState.ts`: concept model view state and derived datasets for flat/tree/issue modes.
+- `app/src/features/concepts/hooks/useConceptRemediationActions.ts`: UI remediation action flows (confirm/prompt + refresh sequencing).
+
+### Concept Modeling UI Decomposition
+
+- `app/src/features/concepts/components/ConceptModelPanel.tsx`: orchestration shell for builder, editor, import/export, models, and audits.
+- `app/src/features/concepts/components/ConceptEditorSection.tsx`: create/edit concept form section.
+- `app/src/features/concepts/components/ConceptModelsSection.tsx`: composition layer for diagnostics, controls, flat list, and tree.
+- `app/src/features/concepts/components/ConceptModelViewControlsStatus.tsx`: view selector + normalize action + loading/empty/filter messaging.
+- `app/src/features/concepts/components/ConceptListRow.tsx`: flat list row rendering and row actions.
+- `app/src/features/concepts/components/ConceptTreeView.tsx` + `ConceptTreeNode.tsx`: recursive tree rendering.
+
+### Shared Utilities
+
+- `app/src/features/shared/utils/siblingOrdering.ts`: canonical sibling sort/group/reorder helpers used by ConceptType and Concept flows.
+- `app/src/features/concepts/utils/remediationPrompts.ts`: centralized remediation confirm/prompt text/behavior.
+- `app/src/features/concepts/utils/conceptModelViewDerivations.ts`: pure derivations extracted from view-state hook.
+
+### Data Integrity and Ordering
+
+- `db/migrations/008_concept_part_order.sql`: Concept `part_order` column, constraints (`>=1`, requires `part_of_concept_id`), and index (`part_of_concept_id, part_order`).
+
+### Current Automated Verification Coverage
+
+- Existing: CSV parsing/round-trip tests for ConceptType and Concept imports.
+- Existing: ConceptType graph derivation and row helper tests.
+- Added in this refactor cycle: `app/src/features/concepts/utils/conceptModelViewDerivations.test.ts` for concept view derivation behavior.
+
+### Next Refactor Guardrails
+
+- Preserve hook-to-component responsibility split:
+	- Hooks own derived state, action sequencing, and side effects.
+	- Components remain presentational/compositional wherever practical.
+- Keep ordering semantics centralized in `app/src/features/shared/utils/siblingOrdering.ts`; avoid re-implementing sibling sort/reorder logic in feature hooks/components.
+- Treat remediation audit logging as mandatory for remediation flows; any new remediation action should record audit context consistently.
+- Keep confirm/prompt copy centralized in `app/src/features/concepts/utils/remediationPrompts.ts` to prevent UX drift.
+- Prefer adding tests for pure derivation/util modules before introducing new hook/component-level test dependencies.
+- Maintain API and UX stability for:
+	- Concept create/edit form behavior.
+	- Diagnostics safe auto-fix flow and bulk clear actions.
+	- Flat/tree view parity and ordering output.
+
+### PR Change Checklist (Template)
+
+Use this checklist in each refactor/feature PR touching modeling flows.
+
+- Scope and boundaries
+	- [ ] Change is limited to intended module(s); no incidental cross-domain coupling added.
+	- [ ] Hook/component responsibility split remains clear (logic in hooks, rendering in components).
+
+- Behavior safety
+	- [ ] Existing user-visible flows are preserved (create/edit, diagnostics actions, flat/tree views).
+	- [ ] Ordering behavior remains consistent with shared sibling ordering helpers.
+	- [ ] Remediation changes still create audit records with meaningful action context.
+
+- Reuse and consistency
+	- [ ] No duplicate sorting/reordering/prompt logic introduced where shared utilities exist.
+	- [ ] New utility extraction is pure and reusable (where practical), with clear naming.
+
+- Verification
+	- [ ] Added/updated targeted tests for changed pure utilities or derivations.
+	- [ ] `npm run verify` passes locally (tests, lint, build).
+
+- Documentation
+	- [ ] `Current Module Map` is updated if module boundaries changed.
+	- [ ] Guardrails/checklist remain accurate for newly introduced patterns.
+
 ## React Hosting Approach (Metamodel Component)
 
 - **Recommended platform: Vercel** for static React hosting, global CDN delivery, and preview deployments per pull request.

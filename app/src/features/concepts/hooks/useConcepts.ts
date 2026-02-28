@@ -1,18 +1,14 @@
 import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import {
-  clearConceptLinksBulk,
-  clearConceptPartOfLink,
-  clearConceptPartOfLinksBulk,
-  clearConceptReferenceToLink,
-  clearConceptReferenceToLinksBulk,
   createConcept,
   deleteConcept,
-  insertConceptRemediationAudit,
   listConcepts,
   updateConceptPartOrder,
   updateConcept,
 } from '../data/conceptService'
 import type { ConceptPayload, ConceptRecord } from '../types'
+import { groupSiblingsByParent, reorderSiblingList } from '../../shared/utils/siblingOrdering'
+import { useConceptRemediation } from './useConceptRemediation'
 
 type UseConceptsParams = {
   isAuthenticated: boolean
@@ -166,31 +162,11 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
       return
     }
 
-    const siblings = concepts
-      .filter((item) => item.part_of_concept_id === concept.part_of_concept_id)
-      .sort((left, right) => {
-        const leftOrder = left.part_order ?? Number.MAX_SAFE_INTEGER
-        const rightOrder = right.part_order ?? Number.MAX_SAFE_INTEGER
-        if (leftOrder !== rightOrder) {
-          return leftOrder - rightOrder
-        }
-
-        return left.name.localeCompare(right.name)
-      })
-
-    const currentIndex = siblings.findIndex((item) => item.id === id)
-    if (currentIndex < 0) {
+    const siblings = concepts.filter((item) => item.part_of_concept_id === concept.part_of_concept_id)
+    const reorderedSiblings = reorderSiblingList(siblings, id, direction)
+    if (!reorderedSiblings) {
       return
     }
-
-    const swapIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1
-    if (swapIndex < 0 || swapIndex >= siblings.length) {
-      return
-    }
-
-    const reorderedSiblings = [...siblings]
-    const [movedSibling] = reorderedSiblings.splice(currentIndex, 1)
-    reorderedSiblings.splice(swapIndex, 0, movedSibling)
 
     setMovingConceptId(id)
     try {
@@ -219,17 +195,7 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     setMessage(null)
     setError(null)
 
-    const siblingsByParentId = new Map<string, ConceptRecord[]>()
-
-    for (const concept of concepts) {
-      if (!concept.part_of_concept_id) {
-        continue
-      }
-
-      const siblings = siblingsByParentId.get(concept.part_of_concept_id) ?? []
-      siblings.push(concept)
-      siblingsByParentId.set(concept.part_of_concept_id, siblings)
-    }
+    const siblingsByParentId = groupSiblingsByParent(concepts, (concept) => concept.part_of_concept_id)
 
     if (siblingsByParentId.size === 0) {
       setMessage('No concept sibling groups found to normalize.')
@@ -241,18 +207,8 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     setNormalizingSiblingOrders(true)
     try {
       for (const siblings of siblingsByParentId.values()) {
-        const sortedSiblings = [...siblings].sort((left, right) => {
-          const leftOrder = left.part_order ?? Number.MAX_SAFE_INTEGER
-          const rightOrder = right.part_order ?? Number.MAX_SAFE_INTEGER
-          if (leftOrder !== rightOrder) {
-            return leftOrder - rightOrder
-          }
-
-          return left.name.localeCompare(right.name)
-        })
-
-        for (let index = 0; index < sortedSiblings.length; index += 1) {
-          const sibling = sortedSiblings[index]
+        for (let index = 0; index < siblings.length; index += 1) {
+          const sibling = siblings[index]
           const normalizedOrder = index + 1
 
           if (sibling.part_order === normalizedOrder) {
@@ -281,6 +237,18 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     }
   }
 
+  const {
+    clearPartOfForConcept,
+    clearReferenceToForConcept,
+    clearPartOfForConceptsBulk,
+    clearReferenceToForConceptsBulk,
+    runSafeAutoFix,
+  } = useConceptRemediation({
+    reloadConcepts,
+    setMessage,
+    setError,
+  })
+
   const removeConcept = async (id: string) => {
     setMessage(null)
     setError(null)
@@ -296,121 +264,6 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     }
 
     setMessage('Concept deleted.')
-    await reloadConcepts()
-  }
-
-  const recordRemediationAudit = async (
-    actionKind: string,
-    partOfIds: string[],
-    referenceToIds: string[],
-    reason: string | null,
-  ) => {
-    const affectedConceptIds = Array.from(new Set([...partOfIds, ...referenceToIds]))
-    const auditError = await insertConceptRemediationAudit({
-      actionKind,
-      reason,
-      partOfClearedCount: partOfIds.length,
-      referenceToClearedCount: referenceToIds.length,
-      affectedConceptIds,
-    })
-
-    if (auditError) {
-      setError(`Remediation applied, but audit logging failed: ${auditError}`)
-    }
-  }
-
-  const clearPartOfForConcept = async (id: string) => {
-    setMessage(null)
-    setError(null)
-
-    const updateError = await clearConceptPartOfLink(id)
-    if (updateError) {
-      setError(updateError)
-      return
-    }
-
-    setMessage('Cleared PartOf link.')
-    await recordRemediationAudit('clear-partof-single', [id], [], 'Single PartOf link cleared from diagnostics.')
-    await reloadConcepts()
-  }
-
-  const clearReferenceToForConcept = async (id: string) => {
-    setMessage(null)
-    setError(null)
-
-    const updateError = await clearConceptReferenceToLink(id)
-    if (updateError) {
-      setError(updateError)
-      return
-    }
-
-    setMessage('Cleared ReferenceTo link.')
-    await recordRemediationAudit(
-      'clear-referenceto-single',
-      [],
-      [id],
-      'Single ReferenceTo link cleared from diagnostics.',
-    )
-    await reloadConcepts()
-  }
-
-  const clearPartOfForConceptsBulk = async (ids: string[]) => {
-    setMessage(null)
-    setError(null)
-
-    const updateError = await clearConceptPartOfLinksBulk(ids)
-    if (updateError) {
-      setError(updateError)
-      return
-    }
-
-    setMessage(`Cleared PartOf links for ${ids.length} concept(s).`)
-    await recordRemediationAudit('clear-partof-bulk', ids, [], 'Bulk PartOf link clear from diagnostics.')
-    await reloadConcepts()
-  }
-
-  const clearReferenceToForConceptsBulk = async (ids: string[]) => {
-    setMessage(null)
-    setError(null)
-
-    const updateError = await clearConceptReferenceToLinksBulk(ids)
-    if (updateError) {
-      setError(updateError)
-      return
-    }
-
-    setMessage(`Cleared ReferenceTo links for ${ids.length} concept(s).`)
-    await recordRemediationAudit('clear-referenceto-bulk', [], ids, 'Bulk ReferenceTo link clear from diagnostics.')
-    await reloadConcepts()
-  }
-
-  const runSafeAutoFix = async (partOfIds: string[], referenceToIds: string[], reason?: string) => {
-    setMessage(null)
-    setError(null)
-
-    const uniquePartOfIds = Array.from(new Set(partOfIds))
-    const uniqueReferenceToIds = Array.from(new Set(referenceToIds))
-
-    if (uniquePartOfIds.length === 0 && uniqueReferenceToIds.length === 0) {
-      setMessage('No safe auto-fix actions were required.')
-      return
-    }
-
-    const updateError = await clearConceptLinksBulk(uniquePartOfIds, uniqueReferenceToIds)
-    if (updateError) {
-      setError(updateError)
-      return
-    }
-
-    setMessage(
-      `Safe auto-fix applied. Cleared PartOf: ${uniquePartOfIds.length}, Cleared ReferenceTo: ${uniqueReferenceToIds.length}.`,
-    )
-    await recordRemediationAudit(
-      'safe-auto-fix',
-      uniquePartOfIds,
-      uniqueReferenceToIds,
-      reason?.trim() ? reason.trim() : 'Safe auto-fix from diagnostics.',
-    )
     await reloadConcepts()
   }
 

@@ -6,10 +6,11 @@ import { useConceptTypeImport } from './features/conceptTypes/hooks/useConceptTy
 import { useModelManagement } from './features/conceptTypes/hooks/useModelManagement'
 import { useConceptTypeUiHandlers } from './features/conceptTypes/hooks/useConceptTypeUiHandlers'
 import { useConceptTypes } from './features/conceptTypes/hooks/useConceptTypes'
+import { useAuthenticatedConceptTypeWorkspace } from './features/conceptTypes/hooks/useAuthenticatedConceptTypeWorkspace'
 import { useStatusMessage } from './features/conceptTypes/hooks/useStatusMessage'
 import { AuthenticatedConceptTypeView } from './features/conceptTypes/components/AuthenticatedConceptTypeView'
 import { SignInPanel } from './features/conceptTypes/components/SignInPanel'
-import type { ConceptTypeFormErrorField, ConceptTypeFormErrors } from './features/conceptTypes/types/form'
+import type { ConceptTypeFormErrors } from './features/conceptTypes/types/form'
 import './App.css'
 
 function App() {
@@ -19,18 +20,6 @@ function App() {
   const [formErrors, setFormErrors] = useState<ConceptTypeFormErrors>({})
 
   const clearFormErrors = () => setFormErrors({})
-
-  const clearFieldError = (field: ConceptTypeFormErrorField) => {
-    setFormErrors((current) => {
-      if (!current[field]) {
-        return current
-      }
-
-      const next = { ...current }
-      delete next[field]
-      return next
-    })
-  }
 
   const {
     editingId,
@@ -144,6 +133,73 @@ function App() {
     startEdit,
   })
 
+  const workspace = useAuthenticatedConceptTypeWorkspace({
+    formErrors,
+    setFormErrors,
+    clearFormErrors,
+    handleFormCancel,
+    handleEditConceptType,
+    editingId,
+    name,
+    description,
+    partOfConceptTypeId,
+    partOrder,
+    referenceToConceptTypeId,
+    conceptTypeOptions,
+    setName,
+    setDescription,
+    setPartOfConceptTypeId,
+    setPartOrder,
+    setReferenceToConceptTypeId,
+    onSubmitConceptType: submitConceptType,
+    importCsvText,
+    setImportCsvText,
+    importFileName,
+    importFileError,
+    importing,
+    loading,
+    conceptTypes,
+    importMode,
+    setImportMode,
+    allowDeletes,
+    setAllowDeletes,
+    confirmHighImpact,
+    setConfirmHighImpact,
+    importPreviewSummary,
+    importSummary,
+    onImportFileSelected,
+    onPreviewImportConceptTypes: previewImportConceptTypes,
+    onImportConceptTypes: importConceptTypes,
+    onDownloadSampleCsv: downloadSampleCsv,
+    onExportConceptTypes: exportConceptTypes,
+    onClearImportFields: clearImportFields,
+    onDownloadImportErrorsCsv: downloadImportErrorsCsv,
+    clearFileStatus,
+    actionInProgress,
+    managementReason,
+    setManagementReason,
+    managementConfirmText,
+    setManagementConfirmText,
+    structureRootId,
+    setStructureRootId,
+    structureRootOptions,
+    structurePreview,
+    structureExternalReferencePolicy,
+    setStructureExternalReferencePolicy,
+    createVersionOnReset,
+    setCreateVersionOnReset,
+    createVersionOnStructureDelete,
+    setCreateVersionOnStructureDelete,
+    onResetModel: resetModel,
+    onDeleteStructure: deleteStructure,
+    onPurgeModel: purgeModel,
+    onDeleteConceptType: removeConceptType,
+    movingConceptTypeId,
+    onMoveConceptType: moveConceptTypeWithinParent,
+    normalizingSiblingOrders,
+    onNormalizeSiblingOrders: normalizeSiblingOrders,
+  })
+
   return (
     <main className="page">
       <header className="header">
@@ -159,78 +215,7 @@ function App() {
       {!session ? (
         <SignInPanel email={email} setEmail={setEmail} onSubmit={sendMagicLink} />
       ) : (
-        <AuthenticatedConceptTypeView
-          isAuthenticated={Boolean(session)}
-          editingId={editingId}
-          name={name}
-          description={description}
-          partOfConceptTypeId={partOfConceptTypeId}
-          partOrder={partOrder}
-          referenceToConceptTypeId={referenceToConceptTypeId}
-          formErrors={formErrors}
-          conceptTypeOptions={conceptTypeOptions}
-          setName={setName}
-          setDescription={setDescription}
-          setPartOfConceptTypeId={setPartOfConceptTypeId}
-          setPartOrder={setPartOrder}
-          setReferenceToConceptTypeId={setReferenceToConceptTypeId}
-          clearFieldError={clearFieldError}
-          onSubmitConceptType={submitConceptType}
-          onCancelConceptType={() => {
-            clearFormErrors()
-            handleFormCancel()
-          }}
-          importCsvText={importCsvText}
-          setImportCsvText={setImportCsvText}
-          importFileName={importFileName}
-          importFileError={importFileError}
-          importing={importing}
-          loading={loading}
-          conceptTypes={conceptTypes}
-          importMode={importMode}
-          setImportMode={setImportMode}
-          allowDeletes={allowDeletes}
-          setAllowDeletes={setAllowDeletes}
-          confirmHighImpact={confirmHighImpact}
-          setConfirmHighImpact={setConfirmHighImpact}
-          importPreviewSummary={importPreviewSummary}
-          importSummary={importSummary}
-          onImportFileSelected={onImportFileSelected}
-          onPreviewImportConceptTypes={previewImportConceptTypes}
-          onImportConceptTypes={importConceptTypes}
-          onDownloadSampleCsv={downloadSampleCsv}
-          onExportConceptTypes={exportConceptTypes}
-          onClearImportFields={clearImportFields}
-          onDownloadImportErrorsCsv={downloadImportErrorsCsv}
-          clearFileStatus={clearFileStatus}
-          actionInProgress={actionInProgress}
-          managementReason={managementReason}
-          setManagementReason={setManagementReason}
-          managementConfirmText={managementConfirmText}
-          setManagementConfirmText={setManagementConfirmText}
-          structureRootId={structureRootId}
-          setStructureRootId={setStructureRootId}
-          structureRootOptions={structureRootOptions}
-          structurePreview={structurePreview}
-          structureExternalReferencePolicy={structureExternalReferencePolicy}
-          setStructureExternalReferencePolicy={setStructureExternalReferencePolicy}
-          createVersionOnReset={createVersionOnReset}
-          setCreateVersionOnReset={setCreateVersionOnReset}
-          createVersionOnStructureDelete={createVersionOnStructureDelete}
-          setCreateVersionOnStructureDelete={setCreateVersionOnStructureDelete}
-          onResetModel={resetModel}
-          onDeleteStructure={deleteStructure}
-          onPurgeModel={purgeModel}
-          onEditConceptType={(conceptType) => {
-            clearFormErrors()
-            handleEditConceptType(conceptType)
-          }}
-          onDeleteConceptType={removeConceptType}
-          movingConceptTypeId={movingConceptTypeId}
-          onMoveConceptType={moveConceptTypeWithinParent}
-          normalizingSiblingOrders={normalizingSiblingOrders}
-          onNormalizeSiblingOrders={normalizeSiblingOrders}
-        />
+        <AuthenticatedConceptTypeView isAuthenticated={Boolean(session)} workspace={workspace} />
       )}
 
       {message ? <p className="message ok">{message}</p> : null}
