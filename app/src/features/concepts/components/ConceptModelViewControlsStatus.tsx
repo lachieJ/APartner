@@ -27,6 +27,7 @@ export function ConceptModelViewControlsStatus({
           <select value={viewMode} onChange={(event) => onSetViewMode(event.target.value as ConceptModelViewMode)}>
             <option value="flat">Flat list</option>
             <option value="tree">Tree by PartOf</option>
+            <option value="compact">Compact tree</option>
           </select>
         </label>
         <div className="actions">

@@ -6,6 +6,7 @@ type ConceptTreeNodeProps = {
   childrenByParentId: Map<string, ConceptRecord[]>
   conceptTypeNameById: Map<string, string>
   visited: Set<string>
+  onMoveConceptWithinParent: (id: string, direction: 'up' | 'down') => Promise<void>
   onEdit: (concept: ConceptRecord) => void
   onDelete: (id: string) => void
 }
@@ -16,6 +17,7 @@ export function ConceptTreeNode({
   childrenByParentId,
   conceptTypeNameById,
   visited,
+  onMoveConceptWithinParent,
   onEdit,
   onDelete,
 }: ConceptTreeNodeProps) {
@@ -51,6 +53,20 @@ export function ConceptTreeNode({
           </p>
         </div>
         <div className="actions">
+          <button
+            type="button"
+            onClick={() => void onMoveConceptWithinParent(concept.id, 'up')}
+            disabled={!concept.part_of_concept_id}
+          >
+            ↑
+          </button>
+          <button
+            type="button"
+            onClick={() => void onMoveConceptWithinParent(concept.id, 'down')}
+            disabled={!concept.part_of_concept_id}
+          >
+            ↓
+          </button>
           <button type="button" onClick={() => onEdit(concept)}>
             Edit
           </button>
@@ -70,6 +86,7 @@ export function ConceptTreeNode({
               childrenByParentId={childrenByParentId}
               conceptTypeNameById={conceptTypeNameById}
               visited={nextVisited}
+              onMoveConceptWithinParent={onMoveConceptWithinParent}
               onEdit={onEdit}
               onDelete={onDelete}
             />

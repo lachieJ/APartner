@@ -102,14 +102,14 @@ export function AuthenticatedConceptTypeView({
             className={activeTab === 'edit' ? 'tabButton active' : 'tabButton'}
             onClick={() => setActiveTab('edit')}
           >
-            Edit
+            Edit MetaModel
           </button>
           <button
             type="button"
             className={activeTab === 'models' ? 'tabButton active' : 'tabButton'}
             onClick={() => setActiveTab('models')}
           >
-            Models
+            Edit Concepts
           </button>
           <button
             type="button"
@@ -128,9 +128,9 @@ export function AuthenticatedConceptTypeView({
         </div>
         <p className="hint">
           {activeTab === 'edit'
-            ? 'Create, update, and inspect concept types.'
+            ? 'Create, update, and inspect metamodel concept types.'
             : activeTab === 'models'
-              ? 'Create concept models as instances constrained by ConceptType semantics.'
+              ? 'Create and maintain concept instances constrained by metamodel semantics.'
             : activeTab === 'import'
               ? 'Run CSV preview/import with safety checks and impact summary.'
               : 'Run high-impact operations (reset, structure delete, purge) with confirmations.'}

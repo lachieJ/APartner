@@ -39,6 +39,7 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
     setError,
     setMessage,
     createConceptFromPayload,
+    updateConceptFromPayload,
     submitConcept,
     editConcept,
     removeConcept,
@@ -161,6 +162,8 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
         concepts={concepts}
         conceptTypes={conceptTypes}
         loading={loading}
+        onCreateConcept={(payload) => createConceptFromPayload(payload, 'Concept created via compact view.')}
+        onUpdateConcept={(id, payload) => updateConceptFromPayload(id, payload, 'Concept updated via compact view.')}
         onEditConcept={editConcept}
         onDeleteConcept={handleDeleteConcept}
         onMoveConceptWithinParent={moveConceptWithinParent}

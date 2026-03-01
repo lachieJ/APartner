@@ -53,8 +53,8 @@ export function ModelManagementPanel({
       </p>
 
       <div className="issuesPanel">
-        <p className="issuesTitle">Reset Model (delete all concept types)</p>
-        <p className="hint">Deletes all {conceptTypeCount} concept type(s). Recommended for sandbox resets.</p>
+        <p className="issuesTitle">Reset Model (delete all metamodel types)</p>
+        <p className="hint">Deletes all {conceptTypeCount} metamodel type(s). Recommended for sandbox resets.</p>
         <label className="inlineToggle">
           <input
             type="checkbox"
@@ -75,7 +75,7 @@ export function ModelManagementPanel({
         <label>
           Structure root
           <select value={structureRootId} onChange={(event) => setStructureRootId(event.target.value)}>
-            <option value="">Select root ConceptType</option>
+            <option value="">Select root metamodel type</option>
             {structureRootOptions.map((option) => (
               <option key={option.id} value={option.id}>
                 {option.name}
@@ -125,7 +125,7 @@ export function ModelManagementPanel({
 
       <details className="issuesPanel">
         <summary className="issuesTitle">Danger Zone: Emergency Purge (no version snapshot)</summary>
-        <p className="hint">Deletes all concept types without creating a version. Use only for clean-start recovery.</p>
+        <p className="hint">Deletes all metamodel types without creating a version. Use only for clean-start recovery.</p>
         <div className="actions">
           <button type="button" onClick={onPurgeModel} disabled={actionInProgress !== null}>
             {actionInProgress === 'purge' ? 'Purging...' : 'Purge Model'}

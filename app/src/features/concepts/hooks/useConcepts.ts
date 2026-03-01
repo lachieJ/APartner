@@ -86,7 +86,7 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     }
 
     if (!conceptTypeId) {
-      setError('ConceptType is required.')
+      setError('MetaModel type is required.')
       return
     }
 
@@ -137,6 +137,21 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     }
 
     setMessage(successMessage ?? 'Concept created.')
+    await reloadConcepts()
+    return true
+  }
+
+  const updateConceptFromPayload = async (id: string, payload: ConceptPayload, successMessage?: string) => {
+    setMessage(null)
+    setError(null)
+
+    const updateError = await updateConcept(id, payload)
+    if (updateError) {
+      setError(updateError)
+      return false
+    }
+
+    setMessage(successMessage ?? 'Concept updated.')
     await reloadConcepts()
     return true
   }
@@ -293,6 +308,7 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     setError,
     setMessage,
     createConceptFromPayload,
+    updateConceptFromPayload,
     submitConcept,
     editConcept,
     removeConcept,

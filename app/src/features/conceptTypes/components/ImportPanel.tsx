@@ -80,7 +80,7 @@ export function ImportPanel({
 
   return (
     <>
-      <h3>Concept Type Import & Export</h3>
+      <h3>MetaModel Type Import & Export</h3>
       <p className="hint">
         CSV format for import/export: name, description, partOfName, partOrder, referenceToName (max file size: 2 MB)
       </p>

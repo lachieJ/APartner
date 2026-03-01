@@ -146,7 +146,7 @@ button:disabled {
 }
 
 .row {
-  border: 1px solid #ececec;
+  border: 1px solid #d1d5db;
   border-radius: 8px;
   padding: 12px;
   margin-top: 10px;
@@ -290,13 +290,53 @@ details > summary::-webkit-details-marker {
 
 .treeList {
   list-style: none;
-  margin: 8px 0 0 0;
-  padding-left: 14px;
-  border-left: 1px solid #e5e7eb;
+  margin: 4px 0 0 0;
+  padding-left: 20px;
 }
 
 .treeNode {
-  margin-top: 8px;
+  margin-top: 4px;
+}
+
+.treeNode > .row {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0;
+}
+
+.treeNode .actions {
+  justify-content: flex-start;
+}
+
+.treeCompactRow {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #cfd4dc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.treeCompactRow p {
+  margin: 0;
+}
+
+.treeCompactRow .actions {
+  justify-content: flex-end;
+}
+
+.treeTypeRow {
+  border-color: #bfc7d3;
+  background: #f9fafb;
+}
+
+.treeTypeRow p {
+  font-weight: 600;
+  color: #111827;
 }
 
 .issuesPanel {

@@ -106,7 +106,7 @@ export function ConceptTypeList({
   return (
     <>
       {loading ? <p>Loading...</p> : null}
-      {!loading && conceptTypes.length === 0 ? <p>No concept types yet.</p> : null}
+      {!loading && conceptTypes.length === 0 ? <p>No metamodel types yet.</p> : null}
 
       {!loading && conceptTypes.length > 0 ? (
         <div className="viewControls">
@@ -129,12 +129,12 @@ export function ConceptTypeList({
                   <option value="partof-empty">PartOf is empty</option>
                   <option value="partof-self">PartOf is self</option>
                   <option value="partof-empty-or-self">PartOf is empty or self</option>
-                  <option value="all">All concept types</option>
+                  <option value="all">All metamodel types</option>
                 </select>
               </label>
 
               <label>
-                Root ConceptType
+                Root MetaModel Type
                 <select value={selectedRootId} onChange={(event) => setSelectedRootId(event.target.value)}>
                   {rootOptions.map((conceptType) => (
                     <option key={conceptType.id} value={conceptType.id}>

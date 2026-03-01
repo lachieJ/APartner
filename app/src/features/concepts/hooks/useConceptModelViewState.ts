@@ -16,7 +16,7 @@ type UseConceptModelViewStateParams = {
   conceptTypes: ConceptTypeRecord[]
 }
 
-export type ConceptModelViewMode = 'flat' | 'tree'
+export type ConceptModelViewMode = 'flat' | 'tree' | 'compact'
 
 export function useConceptModelViewState({ concepts, conceptTypes }: UseConceptModelViewStateParams) {
   const [viewMode, setViewMode] = useState<ConceptModelViewMode>('flat')

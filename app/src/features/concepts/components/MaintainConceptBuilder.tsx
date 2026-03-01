@@ -2,6 +2,8 @@ import { type ChangeEvent, useMemo, useState } from 'react'
 import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
 import type { ConceptPayload, ConceptRecord } from '../types'
 import { MaintainConceptNode } from './MaintainConceptNode'
+import { MaintainConceptTypeNode, type TypeNodeDraft } from './MaintainConceptTypeNode'
+import { orderSiblings } from '../../shared/utils/siblingOrdering'
 
 type DraftValue = {
   name: string
@@ -52,6 +54,8 @@ type QueueImportReport = {
 export function MaintainConceptBuilder({ conceptTypes, concepts, onCreateConcept }: MaintainConceptBuilderProps) {
   const [selectedStartTypeId, setSelectedStartTypeId] = useState('')
   const [draftByKey, setDraftByKey] = useState<Record<string, DraftValue>>({})
+  const [typeNodeDraftByTypeId, setTypeNodeDraftByTypeId] = useState<Record<string, TypeNodeDraft>>({})
+  const [expandedTypeIds, setExpandedTypeIds] = useState<Set<string>>(new Set())
   const [stagedConcepts, setStagedConcepts] = useState<StagedConcept[]>([])
   const [committing, setCommitting] = useState(false)
   const [queueStatus, setQueueStatus] = useState<string | null>(null)
@@ -60,12 +64,12 @@ export function MaintainConceptBuilder({ conceptTypes, concepts, onCreateConcept
 
   const startTypeOptions = useMemo(
     () =>
-      conceptTypes
-        .filter(
+      orderSiblings(
+        conceptTypes.filter(
           (conceptType) =>
             !conceptType.part_of_concept_type_id || conceptType.part_of_concept_type_id === conceptType.id,
-        )
-        .sort((left, right) => left.name.localeCompare(right.name)),
+        ),
+      ),
     [conceptTypes],
   )
 
@@ -90,8 +94,7 @@ export function MaintainConceptBuilder({ conceptTypes, concepts, onCreateConcept
     }
 
     for (const [parentTypeId, values] of children) {
-      values.sort((left, right) => left.name.localeCompare(right.name))
-      children.set(parentTypeId, values)
+      children.set(parentTypeId, orderSiblings(values))
     }
 
     return children
@@ -153,6 +156,40 @@ export function MaintainConceptBuilder({ conceptTypes, concepts, onCreateConcept
 
       const next = { ...previous }
       delete next[rootDraftKey]
+      return next
+    })
+  }
+
+  const setTypeNodeDraft = (conceptTypeId: string, next: Partial<TypeNodeDraft>) => {
+    setTypeNodeDraftByTypeId((previous) => ({
+      ...previous,
+      [conceptTypeId]: {
+        ...(previous[conceptTypeId] ?? { name: '', description: '', parentConceptId: '' }),
+        ...next,
+      },
+    }))
+  }
+
+  const toggleTypeExpanded = (conceptTypeId: string) => {
+    setExpandedTypeIds((previous) => {
+      const next = new Set(previous)
+      if (next.has(conceptTypeId)) {
+        next.delete(conceptTypeId)
+      } else {
+        next.add(conceptTypeId)
+      }
+      return next
+    })
+  }
+
+  const ensureTypeExpanded = (conceptTypeId: string) => {
+    setExpandedTypeIds((previous) => {
+      if (previous.has(conceptTypeId)) {
+        return previous
+      }
+
+      const next = new Set(previous)
+      next.add(conceptTypeId)
       return next
     })
   }
@@ -695,7 +732,11 @@ export function MaintainConceptBuilder({ conceptTypes, concepts, onCreateConcept
           <select
             value={selectedStartTypeId}
             onChange={(event) => {
-              setSelectedStartTypeId(event.target.value)
+              const nextStartTypeId = event.target.value
+              setSelectedStartTypeId(nextStartTypeId)
+              if (nextStartTypeId) {
+                ensureTypeExpanded(nextStartTypeId)
+              }
             }}
           >
             <option value="">(select)</option>
@@ -707,6 +748,27 @@ export function MaintainConceptBuilder({ conceptTypes, concepts, onCreateConcept
           </select>
         </label>
       </div>
+
+      {selectedStartType ? (
+        <div className="maintainInlineForm">
+          <p className="meta">ConceptType tree quick add</p>
+          <p className="hint">Add instances directly from relevant ConceptType nodes.</p>
+          <ul className="treeList">
+            <MaintainConceptTypeNode
+              conceptType={selectedStartType}
+              childConceptTypesByParentTypeId={childConceptTypesByParentTypeId}
+              concepts={concepts}
+              draftByTypeId={typeNodeDraftByTypeId}
+              onDraftChange={setTypeNodeDraft}
+              onAddInstance={onCreateConcept}
+              expandedTypeIds={expandedTypeIds}
+              onToggleExpanded={toggleTypeExpanded}
+              onEnsureExpanded={ensureTypeExpanded}
+              visited={new Set()}
+            />
+          </ul>
+        </div>
+      ) : null}
 
       {selectedStartType ? (
         <div className="maintainInlineForm">

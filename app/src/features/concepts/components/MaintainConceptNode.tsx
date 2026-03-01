@@ -270,7 +270,7 @@ export function MaintainConceptNode({
               })}
             </div>
           ) : expanded ? (
-            <p className="hint">No child ConceptTypes are defined for this concept type.</p>
+            <p className="hint">No child metamodel types are defined for this metamodel type.</p>
           ) : null}
         </div>
       </article>

@@ -34,7 +34,7 @@ export const friendlyConceptTypeError = (raw: string, code?: string, details?: s
       merged.includes('concept_type_part_of_concept_type_id_fkey') ||
       merged.includes('concept_type_reference_to_concept_type_id_fkey')
     ) {
-      return 'Cannot delete this ConceptType because other ConceptTypes still reference it via PartOf or ReferenceTo. Remove those links first.'
+      return 'Cannot delete this MetaModel type because other MetaModel types still reference it via PartOf or ReferenceTo. Remove those links first.'
     }
     if (merged.includes('part_of_concept_type_id')) {
       return 'PartOfConceptTypeId does not exist.'
@@ -42,7 +42,7 @@ export const friendlyConceptTypeError = (raw: string, code?: string, details?: s
     if (merged.includes('reference_to_concept_type_id')) {
       return 'ReferenceToConceptTypeId does not exist.'
     }
-    return 'A referenced concept type does not exist.'
+    return 'A referenced metamodel type does not exist.'
   }
 
   if (code === '23514') {

@@ -4,7 +4,6 @@ type ConceptListRowProps = {
   concept: ConceptRecord
   conceptTypeNameById: Map<string, string>
   conceptById: Map<string, ConceptRecord>
-  onMoveConceptWithinParent: (id: string, direction: 'up' | 'down') => Promise<void>
   onEditConcept: (concept: ConceptRecord) => void
   onDeleteConcept: (id: string) => void
 }
@@ -13,7 +12,6 @@ export function ConceptListRow({
   concept,
   conceptTypeNameById,
   conceptById,
-  onMoveConceptWithinParent,
   onEditConcept,
   onDeleteConcept,
 }: ConceptListRowProps) {
@@ -34,20 +32,6 @@ export function ConceptListRow({
         </p>
       </div>
       <div className="actions">
-        <button
-          type="button"
-          onClick={() => void onMoveConceptWithinParent(concept.id, 'up')}
-          disabled={!concept.part_of_concept_id}
-        >
-          ↑
-        </button>
-        <button
-          type="button"
-          onClick={() => void onMoveConceptWithinParent(concept.id, 'down')}
-          disabled={!concept.part_of_concept_id}
-        >
-          ↓
-        </button>
         <button type="button" onClick={() => onEditConcept(concept)}>
           Edit
         </button>

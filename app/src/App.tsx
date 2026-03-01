@@ -203,7 +203,7 @@ function App() {
   return (
     <main className="page">
       <header className="header">
-        <h1>ConceptType + Concept Model Admin</h1>
+        <h1>MetaModel and ConceptModel Management</h1>
         {session ? (
           <div className="sessionBar">
             <span>{session.user.email}</span>

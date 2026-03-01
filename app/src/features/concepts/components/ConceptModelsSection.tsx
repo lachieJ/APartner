@@ -1,7 +1,8 @@
 import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
-import type { ConceptRecord } from '../types'
+import type { ConceptPayload, ConceptRecord } from '../types'
 import { ConceptListRow } from './ConceptListRow'
 import { ConceptModelViewControlsStatus } from './ConceptModelViewControlsStatus'
+import { ConceptCompactView } from './ConceptCompactView'
 import { ConceptIssuesPanel } from './ConceptIssuesPanel'
 import { ConceptTreeView } from './ConceptTreeView'
 import { useConceptModelViewState } from '../hooks/useConceptModelViewState'
@@ -11,6 +12,8 @@ type ConceptModelsSectionProps = {
   concepts: ConceptRecord[]
   conceptTypes: ConceptTypeRecord[]
   loading: boolean
+  onCreateConcept: (payload: ConceptPayload) => Promise<boolean>
+  onUpdateConcept: (id: string, payload: ConceptPayload) => Promise<boolean>
   onEditConcept: (concept: ConceptRecord) => void
   onDeleteConcept: (id: string) => void
   onMoveConceptWithinParent: (id: string, direction: 'up' | 'down') => Promise<void>
@@ -27,6 +30,8 @@ export function ConceptModelsSection({
   concepts,
   conceptTypes,
   loading,
+  onCreateConcept,
+  onUpdateConcept,
   onEditConcept,
   onDeleteConcept,
   onMoveConceptWithinParent,
@@ -102,7 +107,6 @@ export function ConceptModelsSection({
               concept={concept}
               conceptTypeNameById={conceptTypeNameById}
               conceptById={conceptById}
-              onMoveConceptWithinParent={onMoveConceptWithinParent}
               onEditConcept={onEditConcept}
               onDeleteConcept={onDeleteConcept}
             />
@@ -115,8 +119,20 @@ export function ConceptModelsSection({
           conceptById={conceptById}
           childrenByParentId={childrenByParentId}
           conceptTypeNameById={conceptTypeNameById}
+          onMoveConceptWithinParent={onMoveConceptWithinParent}
           onEditConcept={onEditConcept}
           onDeleteConcept={onDeleteConcept}
+        />
+      ) : null}
+
+      {viewMode === 'compact' ? (
+        <ConceptCompactView
+          concepts={displayedConcepts}
+          conceptTypes={conceptTypes}
+          conceptTypeById={conceptTypeById}
+          conceptById={conceptById}
+          onCreateConcept={onCreateConcept}
+          onUpdateConcept={onUpdateConcept}
         />
       ) : null}
     </section>

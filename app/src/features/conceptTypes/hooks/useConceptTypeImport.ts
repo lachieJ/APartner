@@ -307,7 +307,7 @@ export function useConceptTypeImport({
     anchor.click()
     document.body.removeChild(anchor)
     URL.revokeObjectURL(url)
-    setMessage(`Exported ${conceptTypes.length} concept type rows.`)
+    setMessage(`Exported ${conceptTypes.length} metamodel type rows.`)
     setError(null)
   }
 

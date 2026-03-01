@@ -200,7 +200,7 @@ export function useModelManagement({ conceptTypes, reloadConceptTypes, setMessag
       }
 
       await reloadConceptTypes()
-      setMessage(`Model reset complete. Deleted ${conceptTypes.length} concept type(s).`)
+      setMessage(`Model reset complete. Deleted ${conceptTypes.length} metamodel type(s).`)
       clearManagementInputs()
     } finally {
       setActionInProgress(null)
@@ -212,7 +212,7 @@ export function useModelManagement({ conceptTypes, reloadConceptTypes, setMessag
     setError(null)
 
     if (!structureRootId) {
-      setError('Select a root concept type for structure delete.')
+      setError('Select a root metamodel type for structure delete.')
       return
     }
 
@@ -288,7 +288,7 @@ export function useModelManagement({ conceptTypes, reloadConceptTypes, setMessag
 
       await reloadConceptTypes()
       setMessage(
-        `Structure delete complete. Deleted ${subtreeIds.length} concept type(s)${
+        `Structure delete complete. Deleted ${subtreeIds.length} metamodel type(s)${
           nullifiedReferenceCount > 0 ? ` and cleared ${nullifiedReferenceCount} external ReferenceTo link(s)` : ''
         }.`,
       )
@@ -321,7 +321,7 @@ export function useModelManagement({ conceptTypes, reloadConceptTypes, setMessag
       }
 
       await reloadConceptTypes()
-      setMessage(`Emergency purge complete. Deleted ${conceptTypes.length} concept type(s) without version snapshot.`)
+  setMessage(`Emergency purge complete. Deleted ${conceptTypes.length} metamodel type(s) without version snapshot.`)
       clearManagementInputs()
     } finally {
       setActionInProgress(null)

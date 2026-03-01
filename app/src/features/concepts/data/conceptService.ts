@@ -33,12 +33,12 @@ const friendlyConceptError = (raw: string, code?: string, details?: string, hint
   const merged = [raw, details ?? '', hint ?? ''].join(' | ')
 
   if (code === '23505' || merged.includes('uq_concept_name_ci_per_type')) {
-    return 'Name must be unique within the selected ConceptType (case-insensitive).'
+    return 'Name must be unique within the selected MetaModel type (case-insensitive).'
   }
 
   if (code === '23503') {
     if (merged.includes('concept_type_id')) {
-      return 'ConceptType does not exist.'
+      return 'MetaModel type does not exist.'
     }
     if (merged.includes('part_of_concept_id')) {
       return 'PartOf concept does not exist.'

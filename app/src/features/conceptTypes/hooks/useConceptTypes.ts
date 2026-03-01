@@ -247,7 +247,7 @@ export function useConceptTypes({
       if (updatedCount === 0) {
         setMessage('Sibling orders are already normalized.')
       } else {
-        setMessage(`Normalized sibling order for ${updatedCount} concept type(s).`)
+        setMessage(`Normalized sibling order for ${updatedCount} metamodel type(s).`)
       }
 
       await reloadConceptTypes()
