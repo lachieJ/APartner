@@ -1,4 +1,4 @@
-import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
+import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import type { ConceptPayload, ConceptRecord } from '../types'
 import { ConceptListRow } from './ConceptListRow'
 import { ConceptModelViewControlsStatus } from './ConceptModelViewControlsStatus'
@@ -16,8 +16,10 @@ type ConceptModelsSectionProps = {
   onUpdateConcept: (id: string, payload: ConceptPayload) => Promise<boolean>
   onEditConcept: (concept: ConceptRecord) => void
   onDeleteConcept: (id: string) => void
+  movingConceptId: string | null
   onMoveConceptWithinParent: (id: string, direction: 'up' | 'down') => Promise<void>
   onNormalizeConceptSiblingOrders: () => Promise<void>
+  normalizingSiblingOrders: boolean
   onClearPartOfForConcept: (id: string) => Promise<void>
   onClearReferenceToForConcept: (id: string) => Promise<void>
   onClearPartOfForConceptsBulk: (ids: string[]) => Promise<void>
@@ -34,8 +36,10 @@ export function ConceptModelsSection({
   onUpdateConcept,
   onEditConcept,
   onDeleteConcept,
+  movingConceptId,
   onMoveConceptWithinParent,
   onNormalizeConceptSiblingOrders,
+  normalizingSiblingOrders,
   onClearPartOfForConcept,
   onClearReferenceToForConcept,
   onClearPartOfForConceptsBulk,
@@ -133,6 +137,10 @@ export function ConceptModelsSection({
           conceptById={conceptById}
           onCreateConcept={onCreateConcept}
           onUpdateConcept={onUpdateConcept}
+          movingConceptId={movingConceptId}
+          onMoveConceptWithinParent={onMoveConceptWithinParent}
+          onNormalizeSiblingOrders={onNormalizeConceptSiblingOrders}
+          disableNormalizeSiblingOrders={loading || normalizingSiblingOrders}
         />
       ) : null}
     </section>

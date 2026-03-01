@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
+import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import { listConceptRemediationAudits, type ConceptRemediationAuditRecord } from '../data/conceptService'
 import { ConceptAuditPanel } from './ConceptAuditPanel'
 import { ConceptEditorSection } from './ConceptEditorSection'
@@ -48,8 +48,10 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
     clearPartOfForConceptsBulk,
     clearReferenceToForConceptsBulk,
     runSafeAutoFix,
+    movingConceptId,
     moveConceptWithinParent,
     normalizeConceptSiblingOrders,
+    normalizingSiblingOrders,
     resetForm,
   } = useConcepts({ isAuthenticated })
 
@@ -166,8 +168,10 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
         onUpdateConcept={(id, payload) => updateConceptFromPayload(id, payload, 'Concept updated via compact view.')}
         onEditConcept={editConcept}
         onDeleteConcept={handleDeleteConcept}
+        movingConceptId={movingConceptId}
         onMoveConceptWithinParent={moveConceptWithinParent}
         onNormalizeConceptSiblingOrders={normalizeConceptSiblingOrders}
+        normalizingSiblingOrders={normalizingSiblingOrders}
         onClearPartOfForConcept={clearPartOfForConcept}
         onClearReferenceToForConcept={clearReferenceToForConcept}
         onClearPartOfForConceptsBulk={clearPartOfForConceptsBulk}

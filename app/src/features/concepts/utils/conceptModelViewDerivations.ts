@@ -1,4 +1,4 @@
-import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
+import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import type { ConceptRecord } from '../types'
 import { groupSiblingsByParent, orderSiblings } from '../../shared/utils/siblingOrdering'
 

@@ -1,5 +1,5 @@
 import type { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react'
-import type { ConceptTypeRecord } from '../csv/types'
+import type { ConceptTypeRecord } from '../types/domain'
 import type { ConceptTypeFormErrorField, ConceptTypeFormErrors } from '../types/form'
 import type { AuthenticatedConceptTypeWorkspace, ConceptTypeOption } from '../types/workspace'
 

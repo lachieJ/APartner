@@ -1,6 +1,7 @@
 import { type Dispatch, type SetStateAction, useMemo, useState } from 'react'
-import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
+import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import type { ConceptPayload, ConceptRecord } from '../types'
+import { getCompactDraftKey } from '../utils/conceptConventions'
 
 type DraftValue = {
   name: string
@@ -51,8 +52,7 @@ export function MaintainConceptNode({
     })
   }, [childrenByParentConceptId, concept.id])
 
-  const getDraftKey = (parentConceptId: string, childConceptTypeId: string) =>
-    `${parentConceptId}::${childConceptTypeId}`
+  const getDraftKey = getCompactDraftKey
 
   const updateDraft = (parentConceptId: string, childConceptTypeId: string, next: Partial<DraftValue>) => {
     const key = getDraftKey(parentConceptId, childConceptTypeId)

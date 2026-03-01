@@ -1,5 +1,5 @@
 import { MAX_IMPORT_FILE_SIZE_BYTES as MAX_BASE_FILE_SIZE, parseCsvLine, toCsvCell } from '../../conceptTypes/csv/csvUtils'
-import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
+import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import type { ConceptRecord } from '../types'
 import type { ConceptImportFailure, ConceptImportRow } from './types'
 

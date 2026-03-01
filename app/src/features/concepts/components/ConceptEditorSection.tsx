@@ -1,5 +1,5 @@
 import type { FormEvent } from 'react'
-import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
+import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 
 type ConceptOption = {
   id: string

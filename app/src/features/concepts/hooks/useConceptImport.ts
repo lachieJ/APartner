@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
+import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import { importConceptRows } from '../data/conceptService'
 import type { ConceptRecord } from '../types'
 import {

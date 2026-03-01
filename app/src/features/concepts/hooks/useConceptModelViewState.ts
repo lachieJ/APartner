@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
+import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import { buildConceptIssueSummary, getAffectedConceptIds } from '../utils/conceptDiagnostics'
 import {
   buildChildrenByParentId,

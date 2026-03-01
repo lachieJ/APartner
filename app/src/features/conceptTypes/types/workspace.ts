@@ -1,5 +1,6 @@
 import type { FormEvent } from 'react'
-import type { ConceptTypeRecord, ImportPreviewSummary, ImportSummary } from '../csv/types'
+import type { ImportPreviewSummary, ImportSummary } from '../csv/types'
+import type { ConceptTypeRecord } from './domain'
 import type { ConceptTypeFormErrorField, ConceptTypeFormErrors } from './form'
 
 export type ConceptTypeOption = {

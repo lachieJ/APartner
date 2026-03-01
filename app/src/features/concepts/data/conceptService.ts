@@ -1,7 +1,8 @@
 import { supabase } from '../../../supabaseClient'
-import type { ConceptTypeRecord } from '../../conceptTypes/csv/types'
+import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import type { ConceptImportFailure, ConceptImportRow, ConceptImportSummary } from '../csv/types'
 import type { ConceptPayload, ConceptRecord } from '../types'
+import { getConceptTypeAndNameKey, normalizeConceptLookupValue } from '../utils/conceptConventions'
 
 type DbErrorShape = {
   message: string
@@ -211,9 +212,11 @@ export const importConceptRows = async (
   conceptTypes: ConceptTypeRecord[],
   existingConcepts: ConceptRecord[],
 ): Promise<{ summary: ConceptImportSummary; fatalError: string | null }> => {
-  const conceptTypeByName = new Map(conceptTypes.map((conceptType) => [conceptType.name.trim().toLowerCase(), conceptType]))
+  const conceptTypeByName = new Map(
+    conceptTypes.map((conceptType) => [normalizeConceptLookupValue(conceptType.name), conceptType]),
+  )
   const conceptsByTypeAndName = new Map(
-    existingConcepts.map((concept) => [`${concept.concept_type_id}::${concept.name.trim().toLowerCase()}`, concept]),
+    existingConcepts.map((concept) => [getConceptTypeAndNameKey(concept.concept_type_id, concept.name), concept]),
   )
 
   const failures: ConceptImportFailure[] = []
@@ -222,7 +225,7 @@ export const importConceptRows = async (
   let updated = 0
 
   for (const row of rows) {
-    const conceptType = conceptTypeByName.get(row.conceptTypeName.trim().toLowerCase())
+    const conceptType = conceptTypeByName.get(normalizeConceptLookupValue(row.conceptTypeName))
     if (!conceptType) {
       failures.push({
         rowNumber: row.rowNumber,
@@ -236,7 +239,7 @@ export const importConceptRows = async (
       continue
     }
 
-    const key = `${conceptType.id}::${row.name.trim().toLowerCase()}`
+    const key = getConceptTypeAndNameKey(conceptType.id, row.name)
     if (!conceptsByTypeAndName.has(key) && !seenCreateKeys.has(key)) {
       createPayload.push({
         name: row.name.trim(),
@@ -299,16 +302,16 @@ export const importConceptRows = async (
   }
 
   const allByTypeAndName = new Map(
-    (allConcepts ?? []).map((concept) => [`${concept.concept_type_id}::${concept.name.trim().toLowerCase()}`, concept]),
+    (allConcepts ?? []).map((concept) => [getConceptTypeAndNameKey(concept.concept_type_id, concept.name), concept]),
   )
 
   for (const row of rows) {
-    const conceptType = conceptTypeByName.get(row.conceptTypeName.trim().toLowerCase())
+    const conceptType = conceptTypeByName.get(normalizeConceptLookupValue(row.conceptTypeName))
     if (!conceptType) {
       continue
     }
 
-    const key = `${conceptType.id}::${row.name.trim().toLowerCase()}`
+    const key = getConceptTypeAndNameKey(conceptType.id, row.name)
     const target = allByTypeAndName.get(key)
     if (!target) {
       failures.push({
@@ -339,7 +342,7 @@ export const importConceptRows = async (
         continue
       }
 
-      const parent = allByTypeAndName.get(`${expectedParentTypeId}::${row.partOfName.trim().toLowerCase()}`)
+      const parent = allByTypeAndName.get(getConceptTypeAndNameKey(expectedParentTypeId, row.partOfName))
       if (!parent) {
         failures.push({
           rowNumber: row.rowNumber,
@@ -372,7 +375,7 @@ export const importConceptRows = async (
         continue
       }
 
-      const reference = allByTypeAndName.get(`${expectedReferenceTypeId}::${row.referenceToName.trim().toLowerCase()}`)
+      const reference = allByTypeAndName.get(getConceptTypeAndNameKey(expectedReferenceTypeId, row.referenceToName))
       if (!reference) {
         failures.push({
           rowNumber: row.rowNumber,

@@ -3,12 +3,12 @@ import {
   createConcept,
   deleteConcept,
   listConcepts,
-  updateConceptPartOrder,
   updateConcept,
 } from '../data/conceptService'
 import type { ConceptPayload, ConceptRecord } from '../types'
-import { groupSiblingsByParent, reorderSiblingList } from '../../shared/utils/siblingOrdering'
 import { useConceptRemediation } from './useConceptRemediation'
+import { useConceptFormState } from './useConceptFormState'
+import { useConceptOrderingActions } from './useConceptOrderingActions'
 
 type UseConceptsParams = {
   isAuthenticated: boolean
@@ -18,27 +18,26 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
   const [concepts, setConcepts] = useState<ConceptRecord[]>([])
   const [loading, setLoading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
-  const [editingId, setEditingId] = useState<string | null>(null)
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
-  const [conceptTypeId, setConceptTypeId] = useState('')
-  const [partOfConceptId, setPartOfConceptId] = useState('')
-  const [partOrder, setPartOrder] = useState('')
-  const [referenceToConceptId, setReferenceToConceptId] = useState('')
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [movingConceptId, setMovingConceptId] = useState<string | null>(null)
-  const [normalizingSiblingOrders, setNormalizingSiblingOrders] = useState(false)
 
-  const resetForm = useCallback(() => {
-    setEditingId(null)
-    setName('')
-    setDescription('')
-    setConceptTypeId('')
-    setPartOfConceptId('')
-    setPartOrder('')
-    setReferenceToConceptId('')
-  }, [])
+  const {
+    editingId,
+    name,
+    description,
+    conceptTypeId,
+    partOfConceptId,
+    partOrder,
+    referenceToConceptId,
+    setName,
+    setDescription,
+    setConceptTypeId,
+    setPartOfConceptId,
+    setPartOrder,
+    setReferenceToConceptId,
+    resetForm,
+    populateFromConcept,
+  } = useConceptFormState()
 
   const reloadConcepts = useCallback(async () => {
     setLoading(true)
@@ -64,6 +63,18 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
 
     void reloadConcepts()
   }, [isAuthenticated, reloadConcepts, resetForm])
+
+  const {
+    movingConceptId,
+    normalizingSiblingOrders,
+    moveConceptWithinParent,
+    normalizeConceptSiblingOrders,
+  } = useConceptOrderingActions({
+    concepts,
+    reloadConcepts,
+    setMessage,
+    setError,
+  })
 
   const conceptOptions = useMemo(
     () =>
@@ -159,97 +170,7 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
   const editConcept = (concept: ConceptRecord) => {
     setMessage(null)
     setError(null)
-    setEditingId(concept.id)
-    setName(concept.name)
-    setDescription(concept.description ?? '')
-    setConceptTypeId(concept.concept_type_id)
-    setPartOfConceptId(concept.part_of_concept_id ?? '')
-    setPartOrder(concept.part_order !== null ? String(concept.part_order) : '')
-    setReferenceToConceptId(concept.reference_to_concept_id ?? '')
-  }
-
-  const moveConceptWithinParent = async (id: string, direction: 'up' | 'down') => {
-    setMessage(null)
-    setError(null)
-
-    const concept = concepts.find((item) => item.id === id)
-    if (!concept || !concept.part_of_concept_id) {
-      return
-    }
-
-    const siblings = concepts.filter((item) => item.part_of_concept_id === concept.part_of_concept_id)
-    const reorderedSiblings = reorderSiblingList(siblings, id, direction)
-    if (!reorderedSiblings) {
-      return
-    }
-
-    setMovingConceptId(id)
-    try {
-      for (let index = 0; index < reorderedSiblings.length; index += 1) {
-        const sibling = reorderedSiblings[index]
-        const nextOrder = index + 1
-        if (sibling.part_order === nextOrder) {
-          continue
-        }
-
-        const updateError = await updateConceptPartOrder(sibling.id, nextOrder)
-        if (updateError) {
-          setError(updateError)
-          return
-        }
-      }
-
-      setMessage(`Moved '${concept.name}' ${direction}.`)
-      await reloadConcepts()
-    } finally {
-      setMovingConceptId(null)
-    }
-  }
-
-  const normalizeConceptSiblingOrders = async () => {
-    setMessage(null)
-    setError(null)
-
-    const siblingsByParentId = groupSiblingsByParent(concepts, (concept) => concept.part_of_concept_id)
-
-    if (siblingsByParentId.size === 0) {
-      setMessage('No concept sibling groups found to normalize.')
-      return
-    }
-
-    let updatedCount = 0
-
-    setNormalizingSiblingOrders(true)
-    try {
-      for (const siblings of siblingsByParentId.values()) {
-        for (let index = 0; index < siblings.length; index += 1) {
-          const sibling = siblings[index]
-          const normalizedOrder = index + 1
-
-          if (sibling.part_order === normalizedOrder) {
-            continue
-          }
-
-          const updateError = await updateConceptPartOrder(sibling.id, normalizedOrder)
-          if (updateError) {
-            setError(updateError)
-            return
-          }
-
-          updatedCount += 1
-        }
-      }
-
-      if (updatedCount === 0) {
-        setMessage('Concept sibling orders are already normalized.')
-      } else {
-        setMessage(`Normalized concept sibling order for ${updatedCount} concept(s).`)
-      }
-
-      await reloadConcepts()
-    } finally {
-      setNormalizingSiblingOrders(false)
-    }
+    populateFromConcept(concept)
   }
 
   const {
