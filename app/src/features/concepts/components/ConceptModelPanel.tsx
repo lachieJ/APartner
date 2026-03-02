@@ -3,7 +3,6 @@ import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import { listConceptRemediationAudits, type ConceptRemediationAuditRecord } from '../data/conceptService'
 import { ConceptAuditPanel } from './ConceptAuditPanel'
 import { ConceptEditorSection } from './ConceptEditorSection'
-import { MaintainConceptBuilder } from './MaintainConceptBuilder'
 import { useConceptImport } from '../hooks/useConceptImport'
 import { ConceptImportPanel } from './ConceptImportPanel'
 import { ConceptModelsSection } from './ConceptModelsSection'
@@ -110,14 +109,6 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
 
   return (
     <>
-      <MaintainConceptBuilder
-        conceptTypes={conceptTypes}
-        concepts={concepts}
-        onCreateConcept={async (payload) => {
-          return createConceptFromPayload(payload, 'Concept created via guided builder.')
-        }}
-      />
-
       <ConceptEditorSection
         editingId={editingId}
         submitting={submitting}

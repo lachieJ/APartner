@@ -31,6 +31,7 @@ export type BranchUiContract = {
   quickReferenceCreatePanelByKey: Record<string, boolean>
   quickReferenceCreateDraftByKey: CompactQuickReferenceDraftByKey
   movingConceptId: string | null
+  maxTreeDepth: number | null
 }
 
 export type BranchDraftActionsContract = {
@@ -75,11 +76,13 @@ export type ConceptCompactBranchContract = {
 type ConceptCompactBranchProps = {
   concept: ConceptRecord
   visited: Set<string>
+  currentDepth?: number
 }
 
 export function ConceptCompactBranch({
   concept,
   visited,
+  currentDepth = 0,
 }: ConceptCompactBranchProps): JSX.Element {
   const { data, ui, draftActions, actions } = useConceptCompactBranchContract()
   const { concepts, conceptTypeById, conceptById, childTypesByParentTypeId, childrenByParentConceptId } = data
@@ -92,6 +95,7 @@ export function ConceptCompactBranch({
     quickReferenceCreatePanelByKey,
     quickReferenceCreateDraftByKey,
     movingConceptId,
+    maxTreeDepth,
   } = ui
   const {
     getDraftKey,
@@ -161,6 +165,7 @@ export function ConceptCompactBranch({
   const canMoveUp = Boolean(concept.part_of_concept_id) && siblingIndex > 0
   const canMoveDown = Boolean(concept.part_of_concept_id) && siblingIndex >= 0 && siblingIndex < siblingConcepts.length - 1
   const isMoveInProgress = Boolean(movingConceptId)
+  const canRenderChildrenByDepth = maxTreeDepth === null || currentDepth < maxTreeDepth
 
   return (
     <li key={concept.id} className="treeNode">
@@ -229,7 +234,7 @@ export function ConceptCompactBranch({
         </p>
       ) : null}
 
-      {childTypes.length > 0 ? (
+      {canRenderChildrenByDepth && childTypes.length > 0 ? (
         <ul className="treeList">
           {childTypes.map((childType) => {
             const {
@@ -261,6 +266,7 @@ export function ConceptCompactBranch({
                 key={childConcept.id}
                 concept={childConcept}
                 visited={nextVisited}
+                currentDepth={currentDepth + 1}
               />
             ))
 

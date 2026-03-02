@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import type { ConceptPayload, ConceptRecord } from '../types'
 import {
@@ -41,6 +41,8 @@ export function ConceptCompactView({
   onNormalizeSiblingOrders,
   disableNormalizeSiblingOrders,
 }: ConceptCompactViewProps) {
+  const [maxTreeDepth, setMaxTreeDepth] = useState<number | null>(null)
+
   const compactViewController: ConceptCompactViewControllerContract = useConceptCompactController({
     concepts,
     conceptTypes,
@@ -110,6 +112,7 @@ export function ConceptCompactView({
       quickReferenceCreatePanelByKey,
       quickReferenceCreateDraftByKey,
       movingConceptId,
+      maxTreeDepth,
     }),
     [
       showEditControls,
@@ -120,6 +123,7 @@ export function ConceptCompactView({
       quickReferenceCreatePanelByKey,
       quickReferenceCreateDraftByKey,
       movingConceptId,
+      maxTreeDepth,
     ],
   )
 
@@ -189,8 +193,10 @@ export function ConceptCompactView({
         rootOrDecomposableTypes={rootOrDecomposableTypes}
         rootConceptOptions={rootConceptOptions}
         selectedRootType={selectedRootType}
+        maxTreeDepth={maxTreeDepth}
         onSetSelectedRootTypeId={setSelectedRootTypeId}
         onSetSelectedRootConceptId={setSelectedRootConceptId}
+        onSetMaxTreeDepth={setMaxTreeDepth}
         onSetShowEditControls={setShowEditControlsWithReset}
         onSetRootCreateDraft={setRootCreateDraft}
         onAddRootInstance={handleAddRootInstance}
@@ -209,6 +215,7 @@ export function ConceptCompactView({
                 <ConceptCompactBranch
                   concept={selectedRootConcept}
                   visited={new Set()}
+                  currentDepth={0}
                 />
               </ul>
             </li>

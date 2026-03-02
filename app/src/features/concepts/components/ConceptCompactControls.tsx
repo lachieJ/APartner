@@ -14,8 +14,10 @@ type ConceptCompactControlsProps = {
   rootOrDecomposableTypes: ConceptTypeRecord[]
   rootConceptOptions: ConceptRecord[]
   selectedRootType: ConceptTypeRecord | null
+  maxTreeDepth: number | null
   onSetSelectedRootTypeId: (value: string) => void
   onSetSelectedRootConceptId: (value: string) => void
+  onSetMaxTreeDepth: (value: number | null) => void
   onSetShowEditControls: (value: boolean) => void
   onSetRootCreateDraft: (value: RootCreateDraft | ((previous: RootCreateDraft) => RootCreateDraft)) => void
   onAddRootInstance: () => Promise<void>
@@ -31,14 +33,18 @@ export function ConceptCompactControls({
   rootOrDecomposableTypes,
   rootConceptOptions,
   selectedRootType,
+  maxTreeDepth,
   onSetSelectedRootTypeId,
   onSetSelectedRootConceptId,
+  onSetMaxTreeDepth,
   onSetShowEditControls,
   onSetRootCreateDraft,
   onAddRootInstance,
   onNormalizeSiblingOrders,
   disableNormalizeSiblingOrders,
 }: ConceptCompactControlsProps) {
+  const depthSelectValue = maxTreeDepth === null ? 'all' : String(maxTreeDepth)
+
   return (
     <>
       <p className="meta">Compact PartOf view</p>
@@ -70,6 +76,31 @@ export function ConceptCompactControls({
                 {concept.name} ({concept.id})
               </option>
             ))}
+          </select>
+        </label>
+
+        <label>
+          Tree depth
+          <select
+            value={depthSelectValue}
+            onChange={(event) => {
+              const nextValue = event.target.value
+              if (nextValue === 'all') {
+                onSetMaxTreeDepth(null)
+                return
+              }
+
+              onSetMaxTreeDepth(Number.parseInt(nextValue, 10))
+            }}
+          >
+            <option value="all">All</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
           </select>
         </label>
 
