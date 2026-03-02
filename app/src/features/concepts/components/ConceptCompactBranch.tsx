@@ -1,4 +1,3 @@
-import { createContext, type ReactNode, useContext } from 'react'
 import type { ConceptTypeRecord } from '../../conceptTypes/types/domain'
 import type { ConceptRecord } from '../types'
 import { useConceptCompactBranchEditState } from '../hooks/useConceptCompactBranchEditState'
@@ -13,8 +12,9 @@ import type {
 import { ConceptCompactChildTypeNode } from './ConceptCompactChildTypeNode'
 import { ConceptCompactEditPanel } from './ConceptCompactInlinePanels'
 import { deriveChildTypeNodeState } from '../utils/conceptCompactBranchHelpers'
+import { useConceptCompactBranchContract } from '../hooks/useConceptCompactBranchContext'
 
-export type BranchDataProps = {
+export type BranchDataContract = {
   concepts: ConceptRecord[]
   conceptTypeById: Map<string, ConceptTypeRecord>
   conceptById: Map<string, ConceptRecord>
@@ -22,7 +22,7 @@ export type BranchDataProps = {
   childrenByParentConceptId: Map<string, ConceptRecord[]>
 }
 
-export type BranchUiProps = {
+export type BranchUiContract = {
   showEditControls: boolean
   addPanelByParentTypeKey: Record<string, boolean>
   createDraftByParentTypeKey: CompactCreateDraftByParentTypeKey
@@ -33,7 +33,7 @@ export type BranchUiProps = {
   movingConceptId: string | null
 }
 
-export type BranchDraftActions = {
+export type BranchDraftActionsContract = {
   getDraftKey: (parentConceptId: string, childConceptTypeId: string) => string
   getReferenceCreateKeyForEdit: (conceptId: string) => string
   getReferenceCreateKeyForAdd: (parentConceptId: string, childConceptTypeId: string) => string
@@ -57,7 +57,7 @@ export type BranchDraftActions = {
   closeQuickReferenceCreatePanel: (panelKey: string) => void
 }
 
-export type BranchActions = {
+export type BranchActionsContract = {
   getReferenceCreationParentOptions: (referenceConceptTypeId: string) => CompactReferenceCreationOptions
   handleCreateReferenceConcept: (referenceConceptTypeId: string, panelKey: string) => Promise<void>
   handleSaveConceptEdit: (concept: ConceptRecord) => Promise<void>
@@ -66,31 +66,10 @@ export type BranchActions = {
 }
 
 export type ConceptCompactBranchContract = {
-  data: BranchDataProps
-  ui: BranchUiProps
-  draftActions: BranchDraftActions
-  actions: BranchActions
-}
-
-const ConceptCompactBranchContext = createContext<ConceptCompactBranchContract | null>(null)
-
-export function ConceptCompactBranchProvider({
-  value,
-  children,
-}: {
-  value: ConceptCompactBranchContract
-  children: ReactNode
-}) {
-  return <ConceptCompactBranchContext.Provider value={value}>{children}</ConceptCompactBranchContext.Provider>
-}
-
-function useConceptCompactBranchContract() {
-  const contract = useContext(ConceptCompactBranchContext)
-  if (!contract) {
-    throw new Error('ConceptCompactBranch must be used within ConceptCompactBranchProvider')
-  }
-
-  return contract
+  data: BranchDataContract
+  ui: BranchUiContract
+  draftActions: BranchDraftActionsContract
+  actions: BranchActionsContract
 }
 
 type ConceptCompactBranchProps = {

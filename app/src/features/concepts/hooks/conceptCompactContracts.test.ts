@@ -4,10 +4,10 @@ import type {
   ConceptCompactViewControllerContract,
 } from './useConceptCompactController'
 import type {
-  BranchActions,
-  BranchDataProps,
-  BranchDraftActions,
-  BranchUiProps,
+  BranchActionsContract,
+  BranchDataContract,
+  BranchDraftActionsContract,
+  BranchUiContract,
   ConceptCompactBranchContract,
 } from '../components/ConceptCompactBranch'
 
@@ -18,10 +18,10 @@ describe('concept compact contracts', () => {
 
   it('keeps the branch contract aligned with grouped branch prop contracts', () => {
     expectTypeOf<ConceptCompactBranchContract>().toMatchTypeOf<{
-      data: BranchDataProps
-      ui: BranchUiProps
-      draftActions: BranchDraftActions
-      actions: BranchActions
+      data: BranchDataContract
+      ui: BranchUiContract
+      draftActions: BranchDraftActionsContract
+      actions: BranchActionsContract
     }>()
   })
 })

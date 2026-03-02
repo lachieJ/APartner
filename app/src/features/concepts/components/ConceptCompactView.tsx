@@ -7,13 +7,13 @@ import {
 } from '../hooks/useConceptCompactController'
 import {
   ConceptCompactBranch,
-  ConceptCompactBranchProvider,
-  type BranchActions,
+  type BranchActionsContract,
   type ConceptCompactBranchContract,
-  type BranchDataProps,
-  type BranchDraftActions,
-  type BranchUiProps,
+  type BranchDataContract,
+  type BranchDraftActionsContract,
+  type BranchUiContract,
 } from './ConceptCompactBranch'
+import { ConceptCompactBranchProvider } from './ConceptCompactBranchProvider'
 import { ConceptCompactControls } from './ConceptCompactControls'
 
 type ConceptCompactViewProps = {
@@ -89,7 +89,7 @@ export function ConceptCompactView({
     handleSaveConceptEdit,
   } = compactViewController
 
-  const branchData = useMemo<BranchDataProps>(
+  const branchData = useMemo<BranchDataContract>(
     () => ({
       concepts,
       conceptTypeById,
@@ -100,7 +100,7 @@ export function ConceptCompactView({
     [concepts, conceptTypeById, conceptById, childTypesByParentTypeId, childrenByParentConceptId],
   )
 
-  const branchUi = useMemo<BranchUiProps>(
+  const branchUi = useMemo<BranchUiContract>(
     () => ({
       showEditControls,
       addPanelByParentTypeKey,
@@ -123,7 +123,7 @@ export function ConceptCompactView({
     ],
   )
 
-  const branchDraftActions = useMemo<BranchDraftActions>(
+  const branchDraftActions = useMemo<BranchDraftActionsContract>(
     () => ({
       getDraftKey,
       getReferenceCreateKeyForEdit,
@@ -152,7 +152,7 @@ export function ConceptCompactView({
     ],
   )
 
-  const branchActions = useMemo<BranchActions>(
+  const branchActions = useMemo<BranchActionsContract>(
     () => ({
       getReferenceCreationParentOptions,
       handleCreateReferenceConcept,
