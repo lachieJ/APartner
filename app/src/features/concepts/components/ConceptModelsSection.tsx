@@ -16,6 +16,7 @@ type ConceptModelsSectionProps = {
   onUpdateConcept: (id: string, payload: ConceptPayload) => Promise<boolean>
   onEditConcept: (concept: ConceptRecord) => void
   onDeleteConcept: (id: string) => void
+  onCopyConceptModelFromRoot: (rootConceptId: string) => Promise<void>
   movingConceptId: string | null
   onMoveConceptWithinParent: (id: string, direction: 'up' | 'down') => Promise<void>
   onNormalizeConceptSiblingOrders: () => Promise<void>
@@ -36,6 +37,7 @@ export function ConceptModelsSection({
   onUpdateConcept,
   onEditConcept,
   onDeleteConcept,
+  onCopyConceptModelFromRoot,
   movingConceptId,
   onMoveConceptWithinParent,
   onNormalizeConceptSiblingOrders,
@@ -138,10 +140,12 @@ export function ConceptModelsSection({
           onCreateConcept={onCreateConcept}
           onUpdateConcept={onUpdateConcept}
           onDeleteConcept={onDeleteConcept}
+          onCopyConceptModelFromRoot={onCopyConceptModelFromRoot}
           movingConceptId={movingConceptId}
           onMoveConceptWithinParent={onMoveConceptWithinParent}
           onNormalizeSiblingOrders={onNormalizeConceptSiblingOrders}
           disableNormalizeSiblingOrders={loading || normalizingSiblingOrders}
+          disableCopyConceptModel={loading || normalizingSiblingOrders || Boolean(movingConceptId)}
         />
       ) : null}
     </section>

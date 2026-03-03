@@ -27,6 +27,7 @@ type UseConceptCompactControllerParams = {
   conceptById: Map<string, ConceptRecord>
   onCreateConcept: (payload: ConceptPayload) => Promise<boolean>
   onUpdateConcept: (id: string, payload: ConceptPayload) => Promise<boolean>
+  onCopyConceptModelFromRoot: (rootConceptId: string) => Promise<void>
 }
 
 export type ConceptCompactControllerContract = {
@@ -73,9 +74,11 @@ export type ConceptCompactControllerContract = {
   rootConceptOptions: ConceptRecord[]
   selectedRootType: ConceptTypeRecord | null
   selectedRootConcept: ConceptRecord | null
+  canCopyConceptModelFromRoot: boolean
   getReferenceCreationParentOptions: (referenceConceptTypeId: string) => CompactReferenceCreationOptions
   handleCreateReferenceConcept: (referenceConceptTypeId: string, panelKey: string) => Promise<void>
   handleAddRootInstance: () => Promise<void>
+  handleCopyConceptModelFromRoot: () => Promise<void>
   handleAddChildInstance: (parentConceptId: string, childConceptTypeId: string) => Promise<void>
   handleSaveConceptEdit: (concept: ConceptRecord) => Promise<void>
 }
@@ -113,9 +116,11 @@ export type ConceptCompactViewControllerContract = Pick<
   | 'rootConceptOptions'
   | 'selectedRootType'
   | 'selectedRootConcept'
+  | 'canCopyConceptModelFromRoot'
   | 'getReferenceCreationParentOptions'
   | 'handleCreateReferenceConcept'
   | 'handleAddRootInstance'
+  | 'handleCopyConceptModelFromRoot'
   | 'handleAddChildInstance'
   | 'handleSaveConceptEdit'
 >
@@ -127,6 +132,7 @@ export function useConceptCompactController({
   conceptById,
   onCreateConcept,
   onUpdateConcept,
+  onCopyConceptModelFromRoot,
 }: UseConceptCompactControllerParams): ConceptCompactControllerContract {
   const uiState = useConceptCompactUiState()
 
@@ -191,6 +197,13 @@ export function useConceptCompactController({
     ? conceptById.get(uiState.selectedRootConceptId) ?? null
     : null
 
+  const canCopyConceptModelFromRoot = Boolean(
+    selectedRootType &&
+      selectedRootConcept &&
+      !selectedRootType.part_of_concept_type_id &&
+      !selectedRootConcept.part_of_concept_id,
+  )
+
   const { handleAddRootInstance } = useConceptCompactRootSelection({
     concepts,
     selectedRootTypeId: uiState.selectedRootTypeId,
@@ -227,6 +240,14 @@ export function useConceptCompactController({
     onUpdateConcept,
   })
 
+  const handleCopyConceptModelFromRoot = async () => {
+    if (!canCopyConceptModelFromRoot || !selectedRootConcept) {
+      return
+    }
+
+    await onCopyConceptModelFromRoot(selectedRootConcept.id)
+  }
+
   const controller: ConceptCompactControllerContract = {
     ...uiState,
     rootOrDecomposableTypes,
@@ -235,9 +256,11 @@ export function useConceptCompactController({
     rootConceptOptions,
     selectedRootType,
     selectedRootConcept,
+    canCopyConceptModelFromRoot,
     getReferenceCreationParentOptions,
     handleCreateReferenceConcept,
     handleAddRootInstance,
+    handleCopyConceptModelFromRoot,
     handleAddChildInstance,
     handleSaveConceptEdit,
   }

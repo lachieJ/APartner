@@ -42,6 +42,7 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
     submitConcept,
     editConcept,
     removeConcept,
+    copyConceptModelFromRoot,
     clearPartOfForConcept,
     clearReferenceToForConcept,
     clearPartOfForConceptsBulk,
@@ -231,6 +232,7 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
           onUpdateConcept={(id, payload) => updateConceptFromPayload(id, payload, 'Concept updated via compact view.')}
           onEditConcept={handleEditConcept}
           onDeleteConcept={handleDeleteConcept}
+          onCopyConceptModelFromRoot={copyConceptModelFromRoot}
           movingConceptId={movingConceptId}
           onMoveConceptWithinParent={moveConceptWithinParent}
           onNormalizeConceptSiblingOrders={normalizeConceptSiblingOrders}

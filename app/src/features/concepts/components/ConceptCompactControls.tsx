@@ -15,14 +15,17 @@ type ConceptCompactControlsProps = {
   rootConceptOptions: ConceptRecord[]
   selectedRootType: ConceptTypeRecord | null
   maxTreeDepth: number | null
+  canCopyConceptModelFromRoot: boolean
   onSetSelectedRootTypeId: (value: string) => void
   onSetSelectedRootConceptId: (value: string) => void
   onSetMaxTreeDepth: (value: number | null) => void
   onSetShowEditControls: (value: boolean) => void
   onSetRootCreateDraft: (value: RootCreateDraft | ((previous: RootCreateDraft) => RootCreateDraft)) => void
   onAddRootInstance: () => Promise<void>
+  onCopyConceptModelFromRoot: () => Promise<void>
   onNormalizeSiblingOrders: () => Promise<void>
   disableNormalizeSiblingOrders: boolean
+  disableCopyConceptModel: boolean
 }
 
 export function ConceptCompactControls({
@@ -34,14 +37,17 @@ export function ConceptCompactControls({
   rootConceptOptions,
   selectedRootType,
   maxTreeDepth,
+  canCopyConceptModelFromRoot,
   onSetSelectedRootTypeId,
   onSetSelectedRootConceptId,
   onSetMaxTreeDepth,
   onSetShowEditControls,
   onSetRootCreateDraft,
   onAddRootInstance,
+  onCopyConceptModelFromRoot,
   onNormalizeSiblingOrders,
   disableNormalizeSiblingOrders,
+  disableCopyConceptModel,
 }: ConceptCompactControlsProps) {
   const depthSelectValue = maxTreeDepth === null ? 'all' : String(maxTreeDepth)
 
@@ -120,6 +126,9 @@ export function ConceptCompactControls({
       {selectedRootType && rootConceptOptions.length === 0 ? (
         <p className="hint">No concept instances exist for the selected ConceptType.</p>
       ) : null}
+      {selectedRootType && selectedRootConceptId && !canCopyConceptModelFromRoot ? (
+        <p className="hint">Copy model is currently limited to concepts selected from true root ConceptTypes.</p>
+      ) : null}
 
       {showEditControls && selectedRootType && !selectedRootConceptId ? (
         <div className="maintainInlineForm">
@@ -149,8 +158,15 @@ export function ConceptCompactControls({
             </button>
           </div>
         </div>
-      ) : showEditControls ? (
+      ) : showEditControls && selectedRootType ? (
         <div className="actions">
+          <button
+            type="button"
+            onClick={() => void onCopyConceptModelFromRoot()}
+            disabled={!canCopyConceptModelFromRoot || disableCopyConceptModel}
+          >
+            Copy model from root
+          </button>
           <button
             type="button"
             onClick={() => void onNormalizeSiblingOrders()}

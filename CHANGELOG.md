@@ -7,6 +7,10 @@
   - New **Compact maintenance tree** view with inline root/child create, inline edit, per-node delete, and sibling up/down controls.
   - Added compact tree depth filtering (`All`, `0..6`) and edit-controls toggle for focused maintenance workflows.
   - Added contract tests to lock compact metamodel callback/type alignment.
+- Root-scoped concept model copy in Compact Concepts view:
+  - Added **Copy model from root** action for duplicating a selected root concept subtree.
+  - Copy now preserves original concept names under root-scoped uniqueness.
+  - Initial scope intentionally excludes decomposable-root selections.
 
 ### Changed
 - Clarified MetaModel/Concept workspace navigation labels for stronger separation of metamodel vs concept-instance maintenance.

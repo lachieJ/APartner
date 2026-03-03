@@ -84,7 +84,7 @@ const fromDbError = (error: DbErrorShape) => friendlyConceptError(error.message,
 export const listConcepts = async (): Promise<{ data: ConceptRecord[]; error: string | null }> => {
   const { data, error } = await supabase
     .from('concept')
-    .select('id,name,description,concept_type_id,part_of_concept_id,part_order,reference_to_concept_id,created_at,updated_at')
+    .select('id,name,description,concept_type_id,root_concept_id,part_of_concept_id,part_order,reference_to_concept_id,created_at,updated_at')
     .order('part_of_concept_id', { ascending: true, nullsFirst: true })
     .order('part_order', { ascending: true, nullsFirst: true })
     .order('name', { ascending: true })
@@ -99,6 +99,22 @@ export const listConcepts = async (): Promise<{ data: ConceptRecord[]; error: st
 export const createConcept = async (payload: ConceptPayload): Promise<string | null> => {
   const { error } = await supabase.from('concept').insert(payload)
   return error ? fromDbError(error) : null
+}
+
+export const createConceptWithRecord = async (
+  payload: ConceptPayload,
+): Promise<{ data: ConceptRecord | null; error: string | null }> => {
+  const { data, error } = await supabase
+    .from('concept')
+    .insert(payload)
+    .select('id,name,description,concept_type_id,root_concept_id,part_of_concept_id,part_order,reference_to_concept_id,created_at,updated_at')
+    .single()
+
+  if (error) {
+    return { data: null, error: fromDbError(error) }
+  }
+
+  return { data: data ?? null, error: null }
 }
 
 export const updateConcept = async (id: string, payload: ConceptPayload): Promise<string | null> => {
@@ -212,6 +228,42 @@ export const importConceptRows = async (
   conceptTypes: ConceptTypeRecord[],
   existingConcepts: ConceptRecord[],
 ): Promise<{ summary: ConceptImportSummary; fatalError: string | null }> => {
+  const detectAmbiguousTypeNameKeys = (values: ConceptRecord[]) => {
+    const keyCounts = new Map<string, number>()
+
+    for (const concept of values) {
+      const key = getConceptTypeAndNameKey(concept.concept_type_id, concept.name)
+      keyCounts.set(key, (keyCounts.get(key) ?? 0) + 1)
+    }
+
+    return Array.from(keyCounts.entries())
+      .filter(([, count]) => count > 1)
+      .map(([key]) => key)
+  }
+
+  const ambiguousExistingKeys = detectAmbiguousTypeNameKeys(existingConcepts)
+  if (ambiguousExistingKeys.length > 0) {
+    return {
+      fatalError:
+        'Concept import by conceptTypeName+name is ambiguous because duplicate names exist across root trees. Add root-scoped import keys before running import.',
+      summary: {
+        total: rows.length,
+        created: 0,
+        updated: 0,
+        failed: rows.length,
+        failures: rows.map((row) => ({
+          rowNumber: row.rowNumber,
+          name: row.name,
+          conceptTypeName: row.conceptTypeName,
+          partOfName: row.partOfName,
+          partOrder: row.partOrder,
+          referenceToName: row.referenceToName,
+          error: 'Ambiguous import context: duplicate conceptTypeName+name exists across root trees.',
+        })),
+      },
+    }
+  }
+
   const conceptTypeByName = new Map(
     conceptTypes.map((conceptType) => [normalizeConceptLookupValue(conceptType.name), conceptType]),
   )
@@ -277,7 +329,7 @@ export const importConceptRows = async (
 
   const { data: allConcepts, error: queryError } = await supabase
     .from('concept')
-    .select('id,name,description,concept_type_id,part_of_concept_id,part_order,reference_to_concept_id,created_at,updated_at')
+    .select('id,name,description,concept_type_id,root_concept_id,part_of_concept_id,part_order,reference_to_concept_id,created_at,updated_at')
 
   if (queryError) {
     const importError = fromDbError(queryError)
@@ -304,6 +356,29 @@ export const importConceptRows = async (
   const allByTypeAndName = new Map(
     (allConcepts ?? []).map((concept) => [getConceptTypeAndNameKey(concept.concept_type_id, concept.name), concept]),
   )
+
+  const ambiguousAllKeys = detectAmbiguousTypeNameKeys(allConcepts ?? [])
+  if (ambiguousAllKeys.length > 0) {
+    return {
+      fatalError:
+        'Concept import by conceptTypeName+name is ambiguous after refresh because duplicate names exist across root trees. Add root-scoped import keys before running import.',
+      summary: {
+        total: rows.length,
+        created: createPayload.length,
+        updated: 0,
+        failed: rows.length,
+        failures: rows.map((row) => ({
+          rowNumber: row.rowNumber,
+          name: row.name,
+          conceptTypeName: row.conceptTypeName,
+          partOfName: row.partOfName,
+          partOrder: row.partOrder,
+          referenceToName: row.referenceToName,
+          error: 'Ambiguous import context after refresh: duplicate conceptTypeName+name exists across root trees.',
+        })),
+      },
+    }
+  }
 
   for (const row of rows) {
     const conceptType = conceptTypeByName.get(normalizeConceptLookupValue(row.conceptTypeName))

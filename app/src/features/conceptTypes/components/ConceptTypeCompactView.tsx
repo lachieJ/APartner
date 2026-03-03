@@ -380,7 +380,7 @@ export function ConceptTypeCompactView({
         Show edit controls
       </label>
 
-      {showEditControls ? (
+      {showEditControls && !selectedRoot ? (
         <div className="maintainInlineForm">
           <p className="meta">Add root MetaModel type</p>
           <input
@@ -399,6 +399,10 @@ export function ConceptTypeCompactView({
             </button>
           </div>
         </div>
+      ) : null}
+
+      {showEditControls && selectedRoot ? (
+        <p className="hint">Root creation is available in the MetaModel Type form above. Compact mode is scoped to the selected root tree.</p>
       ) : null}
 
       {selectedRoot ? (

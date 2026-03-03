@@ -25,6 +25,7 @@ const makeConcept = (overrides: Partial<ConceptRecord>): ConceptRecord => ({
   name: overrides.name ?? 'Unnamed Concept',
   description: overrides.description ?? null,
   concept_type_id: overrides.concept_type_id ?? 'type-default',
+  root_concept_id: overrides.root_concept_id ?? overrides.id ?? crypto.randomUUID(),
   part_of_concept_id: overrides.part_of_concept_id ?? null,
   part_order: overrides.part_order ?? null,
   reference_to_concept_id: overrides.reference_to_concept_id ?? null,

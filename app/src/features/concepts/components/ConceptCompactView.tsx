@@ -24,10 +24,12 @@ type ConceptCompactViewProps = {
   onCreateConcept: (payload: ConceptPayload) => Promise<boolean>
   onUpdateConcept: (id: string, payload: ConceptPayload) => Promise<boolean>
   onDeleteConcept: (id: string) => void
+  onCopyConceptModelFromRoot: (rootConceptId: string) => Promise<void>
   movingConceptId: string | null
   onMoveConceptWithinParent: (id: string, direction: 'up' | 'down') => Promise<void>
   onNormalizeSiblingOrders: () => Promise<void>
   disableNormalizeSiblingOrders: boolean
+  disableCopyConceptModel: boolean
 }
 
 export function ConceptCompactView({
@@ -38,10 +40,12 @@ export function ConceptCompactView({
   onCreateConcept,
   onUpdateConcept,
   onDeleteConcept,
+  onCopyConceptModelFromRoot,
   movingConceptId,
   onMoveConceptWithinParent,
   onNormalizeSiblingOrders,
   disableNormalizeSiblingOrders,
+  disableCopyConceptModel,
 }: ConceptCompactViewProps) {
   const [maxTreeDepth, setMaxTreeDepth] = useState<number | null>(null)
 
@@ -52,6 +56,7 @@ export function ConceptCompactView({
     conceptById,
     onCreateConcept,
     onUpdateConcept,
+    onCopyConceptModelFromRoot,
   })
 
   const {
@@ -86,9 +91,11 @@ export function ConceptCompactView({
     rootConceptOptions,
     selectedRootType,
     selectedRootConcept,
+    canCopyConceptModelFromRoot,
     getReferenceCreationParentOptions,
     handleCreateReferenceConcept,
     handleAddRootInstance,
+    handleCopyConceptModelFromRoot,
     handleAddChildInstance,
     handleSaveConceptEdit,
   } = compactViewController
@@ -198,14 +205,17 @@ export function ConceptCompactView({
         rootConceptOptions={rootConceptOptions}
         selectedRootType={selectedRootType}
         maxTreeDepth={maxTreeDepth}
+        canCopyConceptModelFromRoot={canCopyConceptModelFromRoot}
         onSetSelectedRootTypeId={setSelectedRootTypeId}
         onSetSelectedRootConceptId={setSelectedRootConceptId}
         onSetMaxTreeDepth={setMaxTreeDepth}
         onSetShowEditControls={setShowEditControlsWithReset}
         onSetRootCreateDraft={setRootCreateDraft}
         onAddRootInstance={handleAddRootInstance}
+        onCopyConceptModelFromRoot={handleCopyConceptModelFromRoot}
         onNormalizeSiblingOrders={onNormalizeSiblingOrders}
         disableNormalizeSiblingOrders={disableNormalizeSiblingOrders}
+        disableCopyConceptModel={disableCopyConceptModel}
       />
 
       {selectedRootType && selectedRootConcept ? (

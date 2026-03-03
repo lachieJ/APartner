@@ -3,6 +3,7 @@ export type ConceptRecord = {
   name: string
   description: string | null
   concept_type_id: string
+  root_concept_id: string
   part_of_concept_id: string | null
   part_order: number | null
   reference_to_concept_id: string | null

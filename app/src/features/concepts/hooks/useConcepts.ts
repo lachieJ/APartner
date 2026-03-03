@@ -1,6 +1,7 @@
 import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import {
   createConcept,
+  createConceptWithRecord,
   deleteConcept,
   listConcepts,
   updateConcept,
@@ -203,6 +204,92 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     await reloadConcepts()
   }
 
+  const copyConceptModelFromRoot = async (rootConceptId: string) => {
+    setMessage(null)
+    setError(null)
+
+    const sourceRoot = concepts.find((concept) => concept.id === rootConceptId) ?? null
+    if (!sourceRoot) {
+      setError('Selected root concept was not found.')
+      return
+    }
+
+    if (sourceRoot.part_of_concept_id) {
+      setError('Copy is only supported for concepts that start at a root.')
+      return
+    }
+
+    const conceptById = new Map(concepts.map((concept) => [concept.id, concept]))
+    const childrenByParentId = new Map<string, ConceptRecord[]>()
+
+    for (const concept of concepts) {
+      if (!concept.part_of_concept_id) {
+        continue
+      }
+
+      const siblings = childrenByParentId.get(concept.part_of_concept_id) ?? []
+      siblings.push(concept)
+      childrenByParentId.set(concept.part_of_concept_id, siblings)
+    }
+
+    for (const [parentId, siblings] of childrenByParentId) {
+      siblings.sort((left, right) => {
+        const leftOrder = left.part_order ?? Number.MAX_SAFE_INTEGER
+        const rightOrder = right.part_order ?? Number.MAX_SAFE_INTEGER
+        if (leftOrder !== rightOrder) {
+          return leftOrder - rightOrder
+        }
+
+        return left.name.localeCompare(right.name)
+      })
+      childrenByParentId.set(parentId, siblings)
+    }
+
+    const copiedBySourceId = new Map<string, ConceptRecord>()
+    let copiedCount = 0
+
+    const cloneNode = async (sourceId: string, copiedParentId: string | null): Promise<void> => {
+      const source = conceptById.get(sourceId)
+      if (!source) {
+        return
+      }
+
+      const mappedReferenceId = source.reference_to_concept_id
+        ? copiedBySourceId.get(source.reference_to_concept_id)?.id ?? null
+        : null
+
+      const payload: ConceptPayload = {
+        name: source.name,
+        description: source.description,
+        concept_type_id: source.concept_type_id,
+        part_of_concept_id: copiedParentId,
+        part_order: copiedParentId ? source.part_order : null,
+        reference_to_concept_id: mappedReferenceId,
+      }
+
+      const createResult = await createConceptWithRecord(payload)
+      if (createResult.error || !createResult.data) {
+        throw new Error(createResult.error ?? 'Failed to copy concept node.')
+      }
+
+      copiedBySourceId.set(source.id, createResult.data)
+      copiedCount += 1
+
+      const children = childrenByParentId.get(source.id) ?? []
+      for (const child of children) {
+        await cloneNode(child.id, createResult.data.id)
+      }
+    }
+
+    try {
+      await cloneNode(sourceRoot.id, null)
+      setMessage(`Copied model from root '${sourceRoot.name}' (${copiedCount} concept(s)).`)
+      await reloadConcepts()
+    } catch (caughtError) {
+      setError(caughtError instanceof Error ? caughtError.message : String(caughtError))
+    }
+  }
+
   return {
     concepts,
     conceptOptions,
@@ -233,6 +320,7 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     submitConcept,
     editConcept,
     removeConcept,
+    copyConceptModelFromRoot,
     clearPartOfForConcept,
     clearReferenceToForConcept,
     clearPartOfForConceptsBulk,

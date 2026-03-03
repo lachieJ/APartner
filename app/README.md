@@ -120,6 +120,22 @@ Notes:
 - `ReferenceTo` follows metamodel constraints (`ReferenceTo` requires `PartOf`).
 - Self-reference is not offered in compact edit `ReferenceTo` options.
 
+## Compact Concept Maintenance
+
+In **Concept Models** with **Compact** view selected, maintenance now includes root-scoped model copying.
+
+Key capabilities:
+
+- Per-node edit/delete/move controls (when edit controls are enabled).
+- `Tree depth` filter (`All`, `0..6`).
+- **Copy model from root** action.
+
+Copy model behavior:
+
+- Copy is limited to concepts that start from a true root (non-decomposable root ConceptType + root concept instance).
+- Decomposable-root selections are intentionally excluded in this first implementation.
+- Copy duplicates the selected root subtree while preserving original names and PartOf structure/order.
+
 ## Related docs
 
 - Setup and migrations: [`../SETUP_CONCEPTTYPE_MVP.md`](../SETUP_CONCEPTTYPE_MVP.md)
