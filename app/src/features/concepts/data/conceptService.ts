@@ -228,77 +228,112 @@ export const importConceptRows = async (
   conceptTypes: ConceptTypeRecord[],
   existingConcepts: ConceptRecord[],
 ): Promise<{ summary: ConceptImportSummary; fatalError: string | null }> => {
-  const detectAmbiguousTypeNameKeys = (values: ConceptRecord[]) => {
-    const keyCounts = new Map<string, number>()
-
-    for (const concept of values) {
-      const key = getConceptTypeAndNameKey(concept.concept_type_id, concept.name)
-      keyCounts.set(key, (keyCounts.get(key) ?? 0) + 1)
-    }
-
-    return Array.from(keyCounts.entries())
-      .filter(([, count]) => count > 1)
-      .map(([key]) => key)
-  }
-
-  const ambiguousExistingKeys = detectAmbiguousTypeNameKeys(existingConcepts)
-  if (ambiguousExistingKeys.length > 0) {
-    return {
-      fatalError:
-        'Concept import by conceptTypeName+name is ambiguous because duplicate names exist across root trees. Add root-scoped import keys before running import.',
-      summary: {
-        total: rows.length,
-        created: 0,
-        updated: 0,
-        failed: rows.length,
-        failures: rows.map((row) => ({
-          rowNumber: row.rowNumber,
-          name: row.name,
-          conceptTypeName: row.conceptTypeName,
-          partOfName: row.partOfName,
-          partOrder: row.partOrder,
-          referenceToName: row.referenceToName,
-          error: 'Ambiguous import context: duplicate conceptTypeName+name exists across root trees.',
-        })),
-      },
-    }
-  }
-
   const conceptTypeByName = new Map(
     conceptTypes.map((conceptType) => [normalizeConceptLookupValue(conceptType.name), conceptType]),
   )
-  const conceptsByTypeAndName = new Map(
-    existingConcepts.map((concept) => [getConceptTypeAndNameKey(concept.concept_type_id, concept.name), concept]),
-  )
+
+  const buildFailure = (row: ConceptImportRow, error: string): ConceptImportFailure => ({
+    rowNumber: row.rowNumber,
+    conceptId: row.conceptId,
+    name: row.name,
+    conceptTypeName: row.conceptTypeName,
+    rootConceptId: row.rootConceptId,
+    partOfConceptId: row.partOfConceptId,
+    partOfName: row.partOfName,
+    partOrder: row.partOrder,
+    referenceToConceptId: row.referenceToConceptId,
+    referenceToName: row.referenceToName,
+    error,
+  })
+
+  const indexByTypeAndName = (concepts: ConceptRecord[]) => {
+    const index = new Map<string, ConceptRecord[]>()
+
+    for (const concept of concepts) {
+      const key = getConceptTypeAndNameKey(concept.concept_type_id, concept.name)
+      const values = index.get(key) ?? []
+      values.push(concept)
+      index.set(key, values)
+    }
+
+    return index
+  }
+
+  const getScopedCandidates = (
+    byTypeAndName: Map<string, ConceptRecord[]>,
+    conceptTypeId: string,
+    name: string,
+    rootConceptId: string | null,
+  ): ConceptRecord[] => {
+    const key = getConceptTypeAndNameKey(conceptTypeId, name)
+    const candidates = byTypeAndName.get(key) ?? []
+    if (!rootConceptId) {
+      return candidates
+    }
+
+    return candidates.filter((candidate) => candidate.root_concept_id === rootConceptId)
+  }
+
+  const existingByTypeAndName = indexByTypeAndName(existingConcepts)
+  const existingById = new Map(existingConcepts.map((concept) => [concept.id, concept]))
 
   const failures: ConceptImportFailure[] = []
-  const createPayload: Array<{ name: string; description: string | null; concept_type_id: string }> = []
+  const failedRowNumbers = new Set<number>()
+  const createPayload: Array<{ id?: string; name: string; description: string | null; concept_type_id: string }> = []
   const seenCreateKeys = new Set<string>()
   let updated = 0
 
   for (const row of rows) {
     const conceptType = conceptTypeByName.get(normalizeConceptLookupValue(row.conceptTypeName))
     if (!conceptType) {
-      failures.push({
-        rowNumber: row.rowNumber,
-        name: row.name,
-        conceptTypeName: row.conceptTypeName,
-        partOfName: row.partOfName,
-        partOrder: row.partOrder,
-        referenceToName: row.referenceToName,
-        error: `Unknown conceptTypeName: ${row.conceptTypeName}`,
-      })
+      failures.push(buildFailure(row, `Unknown conceptTypeName: ${row.conceptTypeName}`))
+      failedRowNumbers.add(row.rowNumber)
       continue
     }
 
-    const key = getConceptTypeAndNameKey(conceptType.id, row.name)
-    if (!conceptsByTypeAndName.has(key) && !seenCreateKeys.has(key)) {
+    if (row.conceptId) {
+      if (existingById.has(row.conceptId)) {
+        continue
+      }
+
+      if (seenCreateKeys.has(`id::${row.conceptId}`)) {
+        continue
+      }
+
+      createPayload.push({
+        id: row.conceptId,
+        name: row.name.trim(),
+        description: row.description,
+        concept_type_id: conceptType.id,
+      })
+      seenCreateKeys.add(`id::${row.conceptId}`)
+      continue
+    }
+
+    const candidates = getScopedCandidates(existingByTypeAndName, conceptType.id, row.name, row.rootConceptId)
+    if (candidates.length > 1) {
+      failures.push(
+        buildFailure(
+          row,
+          'Ambiguous concept target for conceptTypeName+name in current scope. Provide conceptId or rootConceptId.',
+        ),
+      )
+      failedRowNumbers.add(row.rowNumber)
+      continue
+    }
+
+    if (candidates.length === 0) {
+      const createKey = `${conceptType.id}::${normalizeConceptLookupValue(row.name)}::${row.rootConceptId ?? ''}`
+      if (seenCreateKeys.has(createKey)) {
+        continue
+      }
+
       createPayload.push({
         name: row.name.trim(),
         description: row.description,
         concept_type_id: conceptType.id,
       })
-      seenCreateKeys.add(key)
+      seenCreateKeys.add(createKey)
     }
   }
 
@@ -313,15 +348,7 @@ export const importConceptRows = async (
           created: 0,
           updated: 0,
           failed: rows.length,
-          failures: rows.map((row) => ({
-            rowNumber: row.rowNumber,
-            name: row.name,
-            conceptTypeName: row.conceptTypeName,
-            partOfName: row.partOfName,
-            partOrder: row.partOrder,
-            referenceToName: row.referenceToName,
-            error: importError,
-          })),
+          failures: rows.map((row) => buildFailure(row, importError)),
         },
       }
     }
@@ -340,94 +367,100 @@ export const importConceptRows = async (
         created: createPayload.length,
         updated: 0,
         failed: rows.length,
-        failures: rows.map((row) => ({
-          rowNumber: row.rowNumber,
-          name: row.name,
-          conceptTypeName: row.conceptTypeName,
-          partOfName: row.partOfName,
-          partOrder: row.partOrder,
-          referenceToName: row.referenceToName,
-          error: importError,
-        })),
+        failures: rows.map((row) => buildFailure(row, importError)),
       },
     }
   }
 
-  const allByTypeAndName = new Map(
-    (allConcepts ?? []).map((concept) => [getConceptTypeAndNameKey(concept.concept_type_id, concept.name), concept]),
-  )
-
-  const ambiguousAllKeys = detectAmbiguousTypeNameKeys(allConcepts ?? [])
-  if (ambiguousAllKeys.length > 0) {
-    return {
-      fatalError:
-        'Concept import by conceptTypeName+name is ambiguous after refresh because duplicate names exist across root trees. Add root-scoped import keys before running import.',
-      summary: {
-        total: rows.length,
-        created: createPayload.length,
-        updated: 0,
-        failed: rows.length,
-        failures: rows.map((row) => ({
-          rowNumber: row.rowNumber,
-          name: row.name,
-          conceptTypeName: row.conceptTypeName,
-          partOfName: row.partOfName,
-          partOrder: row.partOrder,
-          referenceToName: row.referenceToName,
-          error: 'Ambiguous import context after refresh: duplicate conceptTypeName+name exists across root trees.',
-        })),
-      },
-    }
-  }
+  const allValues = allConcepts ?? []
+  const allById = new Map(allValues.map((concept) => [concept.id, concept]))
+  const allByTypeAndName = indexByTypeAndName(allValues)
 
   for (const row of rows) {
+    if (failedRowNumbers.has(row.rowNumber)) {
+      continue
+    }
+
     const conceptType = conceptTypeByName.get(normalizeConceptLookupValue(row.conceptTypeName))
     if (!conceptType) {
       continue
     }
 
-    const key = getConceptTypeAndNameKey(conceptType.id, row.name)
-    const target = allByTypeAndName.get(key)
-    if (!target) {
-      failures.push({
-        rowNumber: row.rowNumber,
-        name: row.name,
-        conceptTypeName: row.conceptTypeName,
-        partOfName: row.partOfName,
-        partOrder: row.partOrder,
-        referenceToName: row.referenceToName,
-        error: 'Concept not found after create pass.',
-      })
-      continue
-    }
-
-    let partOfConceptId: string | null = null
-    if (row.partOfName) {
-      const expectedParentTypeId = conceptType.part_of_concept_type_id
-      if (!expectedParentTypeId) {
-        failures.push({
-          rowNumber: row.rowNumber,
-          name: row.name,
-          conceptTypeName: row.conceptTypeName,
-          partOfName: row.partOfName,
-          partOrder: row.partOrder,
-          referenceToName: row.referenceToName,
-          error: `ConceptType ${conceptType.name} does not allow PartOf relationships.`,
-        })
+    let target: ConceptRecord | null = null
+    if (row.conceptId) {
+      target = allById.get(row.conceptId) ?? null
+      if (!target) {
+        failures.push(buildFailure(row, `Concept id '${row.conceptId}' was not found after create pass.`))
         continue
       }
 
-      const parent = allByTypeAndName.get(getConceptTypeAndNameKey(expectedParentTypeId, row.partOfName))
+      if (target.concept_type_id !== conceptType.id) {
+        failures.push(buildFailure(row, `Concept id '${row.conceptId}' is not in ConceptType '${row.conceptTypeName}'.`))
+        continue
+      }
+    } else {
+      const targetCandidates = getScopedCandidates(allByTypeAndName, conceptType.id, row.name, row.rootConceptId)
+      if (targetCandidates.length > 1) {
+        failures.push(
+          buildFailure(
+            row,
+            'Ambiguous concept target for conceptTypeName+name in current scope. Provide conceptId or rootConceptId.',
+          ),
+        )
+        continue
+      }
+
+      target = targetCandidates[0] ?? null
+    }
+
+    if (!target) {
+      failures.push(buildFailure(row, 'Concept not found after create pass.'))
+      continue
+    }
+
+    const scopedRootId = row.rootConceptId ?? target.root_concept_id
+
+    let partOfConceptId: string | null = null
+    if (row.partOfConceptId) {
+      const parentById = allById.get(row.partOfConceptId) ?? null
+      if (!parentById) {
+        failures.push(buildFailure(row, `PartOf concept id '${row.partOfConceptId}' not found.`))
+        continue
+      }
+
+      const expectedParentTypeId = conceptType.part_of_concept_type_id
+      if (!expectedParentTypeId) {
+        failures.push(buildFailure(row, `ConceptType ${conceptType.name} does not allow PartOf relationships.`))
+        continue
+      }
+
+      if (parentById.concept_type_id !== expectedParentTypeId) {
+        failures.push(buildFailure(row, `PartOf concept id '${row.partOfConceptId}' is not in the required parent ConceptType.`))
+        continue
+      }
+
+      partOfConceptId = parentById.id
+    } else if (row.partOfName) {
+      const expectedParentTypeId = conceptType.part_of_concept_type_id
+      if (!expectedParentTypeId) {
+        failures.push(buildFailure(row, `ConceptType ${conceptType.name} does not allow PartOf relationships.`))
+        continue
+      }
+
+      const parentCandidates = getScopedCandidates(allByTypeAndName, expectedParentTypeId, row.partOfName, scopedRootId)
+      if (parentCandidates.length > 1) {
+        failures.push(
+          buildFailure(
+            row,
+            `PartOf target '${row.partOfName}' is ambiguous in the selected scope. Provide partOfConceptId.`,
+          ),
+        )
+        continue
+      }
+
+      const parent = parentCandidates[0] ?? null
       if (!parent) {
-        failures.push({
-          rowNumber: row.rowNumber,
-          name: row.name,
-          conceptTypeName: row.conceptTypeName,
-          partOfName: row.partOfName,
-          partOrder: row.partOrder,
-          referenceToName: row.referenceToName,
-          error: `PartOf target '${row.partOfName}' not found in required parent ConceptType.`,
-        })
+        failures.push(buildFailure(row, `PartOf target '${row.partOfName}' not found in required parent ConceptType.`))
         continue
       }
 
@@ -435,49 +468,67 @@ export const importConceptRows = async (
     }
 
     let referenceToConceptId: string | null = null
-    if (row.referenceToName) {
-      const expectedReferenceTypeId = conceptType.reference_to_concept_type_id
-      if (!expectedReferenceTypeId) {
-        failures.push({
-          rowNumber: row.rowNumber,
-          name: row.name,
-          conceptTypeName: row.conceptTypeName,
-          partOfName: row.partOfName,
-          partOrder: row.partOrder,
-          referenceToName: row.referenceToName,
-          error: `ConceptType ${conceptType.name} does not allow ReferenceTo relationships.`,
-        })
+    if (row.referenceToConceptId) {
+      const referenceById = allById.get(row.referenceToConceptId) ?? null
+      if (!referenceById) {
+        failures.push(buildFailure(row, `ReferenceTo concept id '${row.referenceToConceptId}' not found.`))
         continue
       }
 
-      const reference = allByTypeAndName.get(getConceptTypeAndNameKey(expectedReferenceTypeId, row.referenceToName))
+      const expectedReferenceTypeId = conceptType.reference_to_concept_type_id
+      if (!expectedReferenceTypeId) {
+        failures.push(buildFailure(row, `ConceptType ${conceptType.name} does not allow ReferenceTo relationships.`))
+        continue
+      }
+
+      if (referenceById.concept_type_id !== expectedReferenceTypeId) {
+        failures.push(
+          buildFailure(
+            row,
+            `ReferenceTo concept id '${row.referenceToConceptId}' is not in the required reference ConceptType.`,
+          ),
+        )
+        continue
+      }
+
+      referenceToConceptId = referenceById.id
+    } else if (row.referenceToName) {
+      const expectedReferenceTypeId = conceptType.reference_to_concept_type_id
+      if (!expectedReferenceTypeId) {
+        failures.push(buildFailure(row, `ConceptType ${conceptType.name} does not allow ReferenceTo relationships.`))
+        continue
+      }
+
+      const referenceCandidates = getScopedCandidates(
+        allByTypeAndName,
+        expectedReferenceTypeId,
+        row.referenceToName,
+        scopedRootId,
+      )
+      if (referenceCandidates.length > 1) {
+        failures.push(
+          buildFailure(
+            row,
+            `ReferenceTo target '${row.referenceToName}' is ambiguous in the selected scope. Provide referenceToConceptId.`,
+          ),
+        )
+        continue
+      }
+
+      const reference = referenceCandidates[0] ?? null
       if (!reference) {
-        failures.push({
-          rowNumber: row.rowNumber,
-          name: row.name,
-          conceptTypeName: row.conceptTypeName,
-          partOfName: row.partOfName,
-          partOrder: row.partOrder,
-          referenceToName: row.referenceToName,
-          error: `ReferenceTo target '${row.referenceToName}' not found in required reference ConceptType.`,
-        })
+        failures.push(
+          buildFailure(row, `ReferenceTo target '${row.referenceToName}' not found in required reference ConceptType.`),
+        )
         continue
       }
 
       referenceToConceptId = reference.id
     }
 
-    const normalizedPartOrder = row.partOfName ? row.partOrder : null
-    if (!row.partOfName && row.partOrder !== null) {
-      failures.push({
-        rowNumber: row.rowNumber,
-        name: row.name,
-        conceptTypeName: row.conceptTypeName,
-        partOfName: row.partOfName,
-        partOrder: row.partOrder,
-        referenceToName: row.referenceToName,
-        error: 'partOrder requires partOfName.',
-      })
+    const normalizedPartOrder = partOfConceptId ? row.partOrder : null
+    if (!partOfConceptId && row.partOrder !== null) {
+      failures.push(buildFailure(row, 'partOrder requires partOfName or partOfConceptId.'))
       continue
     }
 
@@ -492,15 +543,7 @@ export const importConceptRows = async (
 
     const updateError = await updateConcept(target.id, payload)
     if (updateError) {
-      failures.push({
-        rowNumber: row.rowNumber,
-        name: row.name,
-        conceptTypeName: row.conceptTypeName,
-        partOfName: row.partOfName,
-        partOrder: row.partOrder,
-        referenceToName: row.referenceToName,
-        error: updateError,
-      })
+      failures.push(buildFailure(row, updateError))
       continue
     }
 
