@@ -102,21 +102,21 @@ export function AuthenticatedConceptTypeView({
             className={activeTab === 'edit' ? 'tabButton active' : 'tabButton'}
             onClick={() => setActiveTab('edit')}
           >
-            Edit MetaModel
+            MetaModel Types
           </button>
           <button
             type="button"
             className={activeTab === 'models' ? 'tabButton active' : 'tabButton'}
             onClick={() => setActiveTab('models')}
           >
-            Edit Concepts
+            Concept Instances
           </button>
           <button
             type="button"
             className={activeTab === 'import' ? 'tabButton active' : 'tabButton'}
             onClick={() => setActiveTab('import')}
           >
-            Import
+            MetaModel Import/Export
           </button>
           <button
             type="button"
@@ -128,11 +128,11 @@ export function AuthenticatedConceptTypeView({
         </div>
         <p className="hint">
           {activeTab === 'edit'
-            ? 'Create, update, and inspect metamodel concept types.'
+            ? 'Create, update, and inspect metamodel types.'
             : activeTab === 'models'
               ? 'Create and maintain concept instances constrained by metamodel semantics.'
             : activeTab === 'import'
-              ? 'Run CSV preview/import with safety checks and impact summary.'
+              ? 'Run metamodel CSV preview/import with safety checks and impact summary.'
               : 'Run high-impact operations (reset, structure delete, purge) with confirmations.'}
         </p>
       </div>
@@ -176,7 +176,7 @@ export function AuthenticatedConceptTypeView({
 
       {activeTab === 'import' ? (
         <section className="card">
-          <h2>Import & Export</h2>
+          <h2>MetaModel Import & Export</h2>
           <ImportPanel
             importCsvText={importCsvText}
             setImportCsvText={setImportCsvText}

@@ -133,7 +133,7 @@ export function ConceptTypeForm({
         </label>
 
         <div className="actions">
-          <button type="submit">{editingId ? 'Save' : 'Create'}</button>
+          <button type="submit">{editingId ? 'Save MetaModel Type' : 'Create MetaModel Type'}</button>
           {editingId ? (
             <button type="button" onClick={onCancel}>
               Cancel

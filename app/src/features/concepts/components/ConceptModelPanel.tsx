@@ -78,6 +78,13 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
 
   const [audits, setAudits] = useState<ConceptRemediationAuditRecord[]>([])
   const [auditsLoading, setAuditsLoading] = useState(false)
+  const [activeTab, setActiveTab] = useState<'edit' | 'models' | 'import' | 'audits'>(() => {
+    const stored = window.localStorage.getItem('concept.activeTab')
+    if (stored === 'edit' || stored === 'models' || stored === 'import' || stored === 'audits') {
+      return stored
+    }
+    return 'models'
+  })
 
   const loadAudits = useCallback(async () => {
     if (!isAuthenticated) {
@@ -101,6 +108,10 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
     void loadAudits()
   }, [loadAudits])
 
+  useEffect(() => {
+    window.localStorage.setItem('concept.activeTab', activeTab)
+  }, [activeTab])
+
   const handleDeleteConcept = (id: string) => {
     if (window.confirm('Delete this concept?')) {
       void removeConcept(id)
@@ -109,69 +120,117 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
 
   return (
     <>
-      <ConceptEditorSection
-        editingId={editingId}
-        submitting={submitting}
-        name={name}
-        description={description}
-        conceptTypeId={conceptTypeId}
-        partOfConceptId={partOfConceptId}
-        partOrder={partOrder}
-        referenceToConceptId={referenceToConceptId}
-        conceptTypes={conceptTypes}
-        conceptOptions={conceptOptions}
-        onSetName={setName}
-        onSetDescription={setDescription}
-        onSetConceptTypeId={setConceptTypeId}
-        onSetPartOfConceptId={setPartOfConceptId}
-        onSetPartOrder={setPartOrder}
-        onSetReferenceToConceptId={setReferenceToConceptId}
-        onClearError={() => setError(null)}
-        onSubmit={submitConcept}
-        onReset={resetForm}
-      />
+      <div className="stickyToolbar">
+        <div className="tabRow" role="tablist" aria-label="Concept maintenance sections">
+          <button
+            type="button"
+            className={activeTab === 'models' ? 'tabButton active' : 'tabButton'}
+            onClick={() => setActiveTab('models')}
+          >
+            Concept Models
+          </button>
+          <button
+            type="button"
+            className={activeTab === 'edit' ? 'tabButton active' : 'tabButton'}
+            onClick={() => setActiveTab('edit')}
+          >
+            Concept Editor
+          </button>
+          <button
+            type="button"
+            className={activeTab === 'import' ? 'tabButton active' : 'tabButton'}
+            onClick={() => setActiveTab('import')}
+          >
+            Concept Import/Export
+          </button>
+          <button
+            type="button"
+            className={activeTab === 'audits' ? 'tabButton active' : 'tabButton'}
+            onClick={() => setActiveTab('audits')}
+          >
+            Remediation Audits
+          </button>
+        </div>
+        <p className="hint">
+          {activeTab === 'models'
+            ? 'Inspect and maintain concept instances using flat, tree, and compact model views.'
+            : activeTab === 'edit'
+              ? 'Create or update a single concept with PartOf and ReferenceTo semantics.'
+              : activeTab === 'import'
+                ? 'Import or export concept instances via CSV.'
+                : 'Review recent remediation and auto-fix audit events.'}
+        </p>
+      </div>
 
-      <section className="card">
-        <h2>Concept Import & Export</h2>
-        <ConceptImportPanel
-          importCsvText={importCsvText}
-          setImportCsvText={setImportCsvText}
-          importFileName={importFileName}
-          importFileError={importFileError}
-          importing={importing}
-          hasConcepts={concepts.length > 0}
-          onImportFileSelected={onImportFileSelected}
-          onImport={importConcepts}
-          onDownloadSampleCsv={downloadSampleCsv}
-          onExportCsv={exportConcepts}
-          onClear={clearImportFields}
-          onDownloadImportErrorsCsv={downloadImportErrorsCsv}
-          clearFileStatus={clearFileStatus}
-          importSummary={importSummary}
+      {activeTab === 'edit' ? (
+        <ConceptEditorSection
+          editingId={editingId}
+          submitting={submitting}
+          name={name}
+          description={description}
+          conceptTypeId={conceptTypeId}
+          partOfConceptId={partOfConceptId}
+          partOrder={partOrder}
+          referenceToConceptId={referenceToConceptId}
+          conceptTypes={conceptTypes}
+          conceptOptions={conceptOptions}
+          onSetName={setName}
+          onSetDescription={setDescription}
+          onSetConceptTypeId={setConceptTypeId}
+          onSetPartOfConceptId={setPartOfConceptId}
+          onSetPartOrder={setPartOrder}
+          onSetReferenceToConceptId={setReferenceToConceptId}
+          onClearError={() => setError(null)}
+          onSubmit={submitConcept}
+          onReset={resetForm}
         />
-      </section>
+      ) : null}
 
-      <ConceptModelsSection
-        concepts={concepts}
-        conceptTypes={conceptTypes}
-        loading={loading}
-        onCreateConcept={(payload) => createConceptFromPayload(payload, 'Concept created via compact view.')}
-        onUpdateConcept={(id, payload) => updateConceptFromPayload(id, payload, 'Concept updated via compact view.')}
-        onEditConcept={editConcept}
-        onDeleteConcept={handleDeleteConcept}
-        movingConceptId={movingConceptId}
-        onMoveConceptWithinParent={moveConceptWithinParent}
-        onNormalizeConceptSiblingOrders={normalizeConceptSiblingOrders}
-        normalizingSiblingOrders={normalizingSiblingOrders}
-        onClearPartOfForConcept={clearPartOfForConcept}
-        onClearReferenceToForConcept={clearReferenceToForConcept}
-        onClearPartOfForConceptsBulk={clearPartOfForConceptsBulk}
-        onClearReferenceToForConceptsBulk={clearReferenceToForConceptsBulk}
-        onRunSafeAutoFix={runSafeAutoFix}
-        onRefreshAudits={loadAudits}
-      />
+      {activeTab === 'import' ? (
+        <section className="card">
+          <h2>Concept Import & Export</h2>
+          <ConceptImportPanel
+            importCsvText={importCsvText}
+            setImportCsvText={setImportCsvText}
+            importFileName={importFileName}
+            importFileError={importFileError}
+            importing={importing}
+            hasConcepts={concepts.length > 0}
+            onImportFileSelected={onImportFileSelected}
+            onImport={importConcepts}
+            onDownloadSampleCsv={downloadSampleCsv}
+            onExportCsv={exportConcepts}
+            onClear={clearImportFields}
+            onDownloadImportErrorsCsv={downloadImportErrorsCsv}
+            clearFileStatus={clearFileStatus}
+            importSummary={importSummary}
+          />
+        </section>
+      ) : null}
 
-      <ConceptAuditPanel audits={audits} loading={auditsLoading} onRefresh={() => void loadAudits()} />
+      {activeTab === 'models' ? (
+        <ConceptModelsSection
+          concepts={concepts}
+          conceptTypes={conceptTypes}
+          loading={loading}
+          onCreateConcept={(payload) => createConceptFromPayload(payload, 'Concept created via compact view.')}
+          onUpdateConcept={(id, payload) => updateConceptFromPayload(id, payload, 'Concept updated via compact view.')}
+          onEditConcept={editConcept}
+          onDeleteConcept={handleDeleteConcept}
+          movingConceptId={movingConceptId}
+          onMoveConceptWithinParent={moveConceptWithinParent}
+          onNormalizeConceptSiblingOrders={normalizeConceptSiblingOrders}
+          normalizingSiblingOrders={normalizingSiblingOrders}
+          onClearPartOfForConcept={clearPartOfForConcept}
+          onClearReferenceToForConcept={clearReferenceToForConcept}
+          onClearPartOfForConceptsBulk={clearPartOfForConceptsBulk}
+          onClearReferenceToForConceptsBulk={clearReferenceToForConceptsBulk}
+          onRunSafeAutoFix={runSafeAutoFix}
+          onRefreshAudits={loadAudits}
+        />
+      ) : null}
+
+      {activeTab === 'audits' ? <ConceptAuditPanel audits={audits} loading={auditsLoading} onRefresh={() => void loadAudits()} /> : null}
 
       {message ? <p className="message ok">{message}</p> : null}
       {error ? <p className="message error">{error}</p> : null}
