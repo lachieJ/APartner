@@ -31,6 +31,8 @@ export function AuthenticatedConceptTypeView({
     setReferenceToConceptTypeId,
     clearFieldError,
     onSubmitConceptType,
+    onCreateConceptTypeFromPayload,
+    onUpdateConceptTypeFromPayload,
     onCancelConceptType,
     importCsvText,
     setImportCsvText,
@@ -165,6 +167,8 @@ export function AuthenticatedConceptTypeView({
               loading={loading}
               onEdit={onEditConceptType}
               onDelete={onDeleteConceptType}
+              onCreateConceptTypeFromPayload={onCreateConceptTypeFromPayload}
+              onUpdateConceptTypeFromPayload={onUpdateConceptTypeFromPayload}
               movingConceptTypeId={movingConceptTypeId}
               onMoveConceptType={onMoveConceptType}
               normalizingSiblingOrders={normalizingSiblingOrders}

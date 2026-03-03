@@ -1,4 +1,5 @@
 import type { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react'
+import type { ConceptTypePayload } from '../data/conceptTypeService'
 import type { ConceptTypeRecord } from '../types/domain'
 import type { ConceptTypeFormErrorField, ConceptTypeFormErrors } from '../types/form'
 import type { AuthenticatedConceptTypeWorkspace, ConceptTypeOption } from '../types/workspace'
@@ -22,6 +23,8 @@ type UseAuthenticatedConceptTypeWorkspaceParams = {
   setPartOrder: (value: string) => void
   setReferenceToConceptTypeId: (value: string) => void
   onSubmitConceptType: (event: FormEvent<HTMLFormElement>) => void
+  onCreateConceptTypeFromPayload: (payload: ConceptTypePayload, successMessage?: string) => Promise<boolean>
+  onUpdateConceptTypeFromPayload: (id: string, payload: ConceptTypePayload, successMessage?: string) => Promise<boolean>
   importCsvText: string
   setImportCsvText: (value: string) => void
   importFileName: string | null
@@ -105,6 +108,8 @@ export function useAuthenticatedConceptTypeWorkspace(
     setReferenceToConceptTypeId: params.setReferenceToConceptTypeId,
     clearFieldError,
     onSubmitConceptType: params.onSubmitConceptType,
+    onCreateConceptTypeFromPayload: params.onCreateConceptTypeFromPayload,
+    onUpdateConceptTypeFromPayload: params.onUpdateConceptTypeFromPayload,
     onCancelConceptType: () => {
       params.clearFormErrors()
       params.handleFormCancel()

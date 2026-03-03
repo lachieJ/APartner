@@ -2,6 +2,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import type { ConceptTypeRecord } from '../csv/types'
 import type { ConceptTypeFormErrors } from '../types/form'
 import {
+  type ConceptTypePayload,
   createConceptType,
   deleteConceptType,
   listConceptTypes,
@@ -154,6 +155,64 @@ export function useConceptTypes({
     await reloadConceptTypes()
   }
 
+  const validateConceptTypePayload = (payload: ConceptTypePayload): string | null => {
+    if (!payload.name.trim()) {
+      return 'Name is required.'
+    }
+
+    if (payload.reference_to_concept_type_id && !payload.part_of_concept_type_id) {
+      return 'Reference To requires Part Of.'
+    }
+
+    if (payload.part_of_concept_type_id && payload.part_order !== null && payload.part_order < 1) {
+      return 'Order within parent must be a whole number greater than 0.'
+    }
+
+    return null
+  }
+
+  const createConceptTypeFromPayload = async (payload: ConceptTypePayload, successMessage?: string) => {
+    setMessage(null)
+    setError(null)
+
+    const validationError = validateConceptTypePayload(payload)
+    if (validationError) {
+      setError(validationError)
+      return false
+    }
+
+    const createError = await createConceptType(payload)
+    if (createError) {
+      setError(createError)
+      return false
+    }
+
+    setMessage(successMessage ?? 'ConceptType created.')
+    await reloadConceptTypes()
+    return true
+  }
+
+  const updateConceptTypeFromPayload = async (id: string, payload: ConceptTypePayload, successMessage?: string) => {
+    setMessage(null)
+    setError(null)
+
+    const validationError = validateConceptTypePayload(payload)
+    if (validationError) {
+      setError(validationError)
+      return false
+    }
+
+    const updateError = await updateConceptType(id, payload)
+    if (updateError) {
+      setError(updateError)
+      return false
+    }
+
+    setMessage(successMessage ?? 'ConceptType updated.')
+    await reloadConceptTypes()
+    return true
+  }
+
   const removeConceptType = async (id: string) => {
     setMessage(null)
     setError(null)
@@ -264,6 +323,8 @@ export function useConceptTypes({
     normalizingSiblingOrders,
     reloadConceptTypes,
     submitConceptType,
+    createConceptTypeFromPayload,
+    updateConceptTypeFromPayload,
     removeConceptType,
     moveConceptTypeWithinParent,
     normalizeSiblingOrders,

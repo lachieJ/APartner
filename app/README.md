@@ -102,6 +102,24 @@ Delete-structure external reference policy:
   - **Block** (default), or
   - **Null ReferenceTo blockers and continue**.
 
+## Compact MetaModel Maintenance
+
+In **MetaModel Types**, the list view now includes **Compact maintenance tree** to align editing with the compact concept maintenance approach.
+
+Key capabilities in compact mode:
+
+- Inline root creation (`Add root`).
+- Per-node inline child creation (`Add child`).
+- Per-node inline editing (`Edit`) and deletion (`Delete`).
+- Sibling reordering via `↑` / `↓` for non-root nodes.
+- `Show edit controls` toggle.
+- `Tree depth` filter (`All`, `0..6`) for focused structural editing.
+
+Notes:
+
+- `ReferenceTo` follows metamodel constraints (`ReferenceTo` requires `PartOf`).
+- Self-reference is not offered in compact edit `ReferenceTo` options.
+
 ## Related docs
 
 - Setup and migrations: [`../SETUP_CONCEPTTYPE_MVP.md`](../SETUP_CONCEPTTYPE_MVP.md)

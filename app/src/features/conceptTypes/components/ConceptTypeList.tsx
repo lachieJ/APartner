@@ -6,14 +6,18 @@ import type { ConceptTypeFlatRowActions, ConceptTypeTreeRowActions } from '../ty
 import type { RootFilterMode } from '../utils/conceptTypeGraphDerivations'
 import { getConceptTypeUsage } from '../utils/conceptTypeRowHelpers'
 import { ConceptTypeIssuesPanel } from './ConceptTypeIssuesPanel'
+import { ConceptTypeCompactView } from './ConceptTypeCompactView'
 import { ConceptTypeFlatRow } from './ConceptTypeFlatRow'
 import { ConceptTypeTreeNode } from './ConceptTypeTreeNode'
+import type { ConceptTypePayload } from '../data/conceptTypeService'
 
-type ConceptTypeListProps = {
+export type ConceptTypeListProps = {
   conceptTypes: ConceptTypeRecord[]
   loading: boolean
   onEdit: (conceptType: ConceptTypeRecord) => void
   onDelete: (id: string) => void
+  onCreateConceptTypeFromPayload: (payload: ConceptTypePayload, successMessage?: string) => Promise<boolean>
+  onUpdateConceptTypeFromPayload: (id: string, payload: ConceptTypePayload, successMessage?: string) => Promise<boolean>
   movingConceptTypeId: string | null
   onMoveConceptType: (id: string, direction: 'up' | 'down') => void
   normalizingSiblingOrders: boolean
@@ -25,12 +29,14 @@ export function ConceptTypeList({
   loading,
   onEdit,
   onDelete,
+  onCreateConceptTypeFromPayload,
+  onUpdateConceptTypeFromPayload,
   movingConceptTypeId,
   onMoveConceptType,
   normalizingSiblingOrders,
   onNormalizeSiblingOrders,
 }: ConceptTypeListProps) {
-  const [viewMode, setViewMode] = useState<'flat' | 'tree'>('flat')
+  const [viewMode, setViewMode] = useState<'flat' | 'tree' | 'compact'>('flat')
   const [selectedRootId, setSelectedRootId] = useState('')
   const [rootFilterMode, setRootFilterMode] = useState<RootFilterMode>('partof-empty-or-self')
   const [showIssuesOnly, setShowIssuesOnly] = useState(false)
@@ -112,13 +118,14 @@ export function ConceptTypeList({
         <div className="viewControls">
           <label>
             View
-            <select value={viewMode} onChange={(event) => setViewMode(event.target.value as 'flat' | 'tree')}>
+            <select value={viewMode} onChange={(event) => setViewMode(event.target.value as 'flat' | 'tree' | 'compact')}>
               <option value="flat">Flat list</option>
               <option value="tree">Tree from selected root</option>
+              <option value="compact">Compact maintenance tree</option>
             </select>
           </label>
 
-          {viewMode === 'tree' ? (
+          {viewMode === 'tree' || viewMode === 'compact' ? (
             <>
               <label>
                 Root filter
@@ -202,6 +209,19 @@ export function ConceptTypeList({
 
       {!loading && viewMode === 'tree' && !selectedRoot && rootOptions.length === 0 ? (
         <p className="hint">No root options match the current filter.</p>
+      ) : null}
+
+      {!loading && viewMode === 'compact' ? (
+        <ConceptTypeCompactView
+          conceptTypes={conceptTypes}
+          selectedRoot={selectedRoot}
+          childrenByParentId={childrenByParentId}
+          movingConceptTypeId={movingConceptTypeId}
+          onCreateConceptTypeFromPayload={onCreateConceptTypeFromPayload}
+          onUpdateConceptTypeFromPayload={onUpdateConceptTypeFromPayload}
+          onDelete={onDelete}
+          onMoveConceptType={onMoveConceptType}
+        />
       ) : null}
     </>
   )

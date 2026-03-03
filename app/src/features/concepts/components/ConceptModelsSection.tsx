@@ -137,6 +137,7 @@ export function ConceptModelsSection({
           conceptById={conceptById}
           onCreateConcept={onCreateConcept}
           onUpdateConcept={onUpdateConcept}
+          onDeleteConcept={onDeleteConcept}
           movingConceptId={movingConceptId}
           onMoveConceptWithinParent={onMoveConceptWithinParent}
           onNormalizeSiblingOrders={onNormalizeConceptSiblingOrders}

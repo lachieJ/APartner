@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-03-03
+
+### Added
+- Compact MetaModel maintenance mode in Concept Type admin:
+  - New **Compact maintenance tree** view with inline root/child create, inline edit, per-node delete, and sibling up/down controls.
+  - Added compact tree depth filtering (`All`, `0..6`) and edit-controls toggle for focused maintenance workflows.
+  - Added contract tests to lock compact metamodel callback/type alignment.
+
+### Changed
+- Clarified MetaModel/Concept workspace navigation labels for stronger separation of metamodel vs concept-instance maintenance.
+- Added editor-level delete action for concept maintenance and compact-tree delete parity for concept nodes.
+- Updated app documentation with a dedicated compact metamodel maintenance section.
+
 ## 2026-03-02
 
 ### Changed

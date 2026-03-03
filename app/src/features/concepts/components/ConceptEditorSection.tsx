@@ -27,6 +27,7 @@ type ConceptEditorSectionProps = {
   onClearError: () => void
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
   onReset: () => void
+  onDelete: () => void
 }
 
 export function ConceptEditorSection({
@@ -49,6 +50,7 @@ export function ConceptEditorSection({
   onClearError,
   onSubmit,
   onReset,
+  onDelete,
 }: ConceptEditorSectionProps) {
   const conceptTypeById = new Map(conceptTypes.map((conceptType) => [conceptType.id, conceptType]))
 
@@ -172,6 +174,11 @@ export function ConceptEditorSection({
           {editingId ? (
             <button type="button" onClick={onReset}>
               Cancel
+            </button>
+          ) : null}
+          {editingId ? (
+            <button type="button" onClick={onDelete} disabled={submitting}>
+              Delete
             </button>
           ) : null}
         </div>

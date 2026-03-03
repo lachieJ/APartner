@@ -63,6 +63,7 @@ export type BranchActionsContract = {
   handleCreateReferenceConcept: (referenceConceptTypeId: string, panelKey: string) => Promise<void>
   handleSaveConceptEdit: (concept: ConceptRecord) => Promise<void>
   handleAddChildInstance: (parentConceptId: string, childConceptTypeId: string) => Promise<void>
+  handleDeleteConcept: (conceptId: string) => void
   handleMoveConceptWithinParent: (conceptId: string, direction: 'up' | 'down') => Promise<void>
 }
 
@@ -115,6 +116,7 @@ export function ConceptCompactBranch({
     handleCreateReferenceConcept,
     handleSaveConceptEdit,
     handleAddChildInstance,
+    handleDeleteConcept,
     handleMoveConceptWithinParent,
   } = actions
 
@@ -193,6 +195,9 @@ export function ConceptCompactBranch({
             </button>
             <button type="button" onClick={() => openEditPanel(concept)}>
               Edit
+            </button>
+            <button type="button" onClick={() => handleDeleteConcept(concept.id)} disabled={isMoveInProgress}>
+              Delete
             </button>
           </div>
         ) : null}

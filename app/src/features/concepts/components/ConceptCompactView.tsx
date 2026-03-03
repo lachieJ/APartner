@@ -23,6 +23,7 @@ type ConceptCompactViewProps = {
   conceptById: Map<string, ConceptRecord>
   onCreateConcept: (payload: ConceptPayload) => Promise<boolean>
   onUpdateConcept: (id: string, payload: ConceptPayload) => Promise<boolean>
+  onDeleteConcept: (id: string) => void
   movingConceptId: string | null
   onMoveConceptWithinParent: (id: string, direction: 'up' | 'down') => Promise<void>
   onNormalizeSiblingOrders: () => Promise<void>
@@ -36,6 +37,7 @@ export function ConceptCompactView({
   conceptById,
   onCreateConcept,
   onUpdateConcept,
+  onDeleteConcept,
   movingConceptId,
   onMoveConceptWithinParent,
   onNormalizeSiblingOrders,
@@ -162,6 +164,7 @@ export function ConceptCompactView({
       handleCreateReferenceConcept,
       handleSaveConceptEdit,
       handleAddChildInstance,
+      handleDeleteConcept: onDeleteConcept,
       handleMoveConceptWithinParent: onMoveConceptWithinParent,
     }),
     [
@@ -169,6 +172,7 @@ export function ConceptCompactView({
       handleCreateReferenceConcept,
       handleSaveConceptEdit,
       handleAddChildInstance,
+      onDeleteConcept,
       onMoveConceptWithinParent,
     ],
   )

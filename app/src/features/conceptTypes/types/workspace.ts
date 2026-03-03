@@ -1,5 +1,6 @@
 import type { FormEvent } from 'react'
 import type { ImportPreviewSummary, ImportSummary } from '../csv/types'
+import type { ConceptTypePayload } from '../data/conceptTypeService'
 import type { ConceptTypeRecord } from './domain'
 import type { ConceptTypeFormErrorField, ConceptTypeFormErrors } from './form'
 
@@ -24,6 +25,8 @@ export type AuthenticatedConceptTypeWorkspace = {
   setReferenceToConceptTypeId: (value: string) => void
   clearFieldError: (field: ConceptTypeFormErrorField) => void
   onSubmitConceptType: (event: FormEvent<HTMLFormElement>) => void
+  onCreateConceptTypeFromPayload: (payload: ConceptTypePayload, successMessage?: string) => Promise<boolean>
+  onUpdateConceptTypeFromPayload: (id: string, payload: ConceptTypePayload, successMessage?: string) => Promise<boolean>
   onCancelConceptType: () => void
   importCsvText: string
   setImportCsvText: (value: string) => void

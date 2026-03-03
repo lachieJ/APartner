@@ -118,6 +118,19 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
     }
   }
 
+  const handleEditConcept = (...args: Parameters<typeof editConcept>) => {
+    editConcept(...args)
+    setActiveTab('edit')
+  }
+
+  const handleDeleteEditedConcept = () => {
+    if (!editingId) {
+      return
+    }
+
+    handleDeleteConcept(editingId)
+  }
+
   return (
     <>
       <div className="stickyToolbar">
@@ -183,6 +196,7 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
           onClearError={() => setError(null)}
           onSubmit={submitConcept}
           onReset={resetForm}
+          onDelete={handleDeleteEditedConcept}
         />
       ) : null}
 
@@ -215,7 +229,7 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
           loading={loading}
           onCreateConcept={(payload) => createConceptFromPayload(payload, 'Concept created via compact view.')}
           onUpdateConcept={(id, payload) => updateConceptFromPayload(id, payload, 'Concept updated via compact view.')}
-          onEditConcept={editConcept}
+          onEditConcept={handleEditConcept}
           onDeleteConcept={handleDeleteConcept}
           movingConceptId={movingConceptId}
           onMoveConceptWithinParent={moveConceptWithinParent}
