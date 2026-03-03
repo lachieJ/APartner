@@ -16,6 +16,9 @@
 - Clarified MetaModel/Concept workspace navigation labels for stronger separation of metamodel vs concept-instance maintenance.
 - Added editor-level delete action for concept maintenance and compact-tree delete parity for concept nodes.
 - Updated app documentation with a dedicated compact metamodel maintenance section.
+- Hardened Concepts CSV import for root-scoped non-unique names:
+  - Added optional ID columns (`conceptId`, `rootConceptId`, `partOfConceptId`, `referenceToConceptId`) to parse/export/error CSV flows.
+  - Import now resolves by ID first, falls back to root-scoped name matching, and reports ambiguity at row level with actionable guidance.
 
 ## 2026-03-02
 
