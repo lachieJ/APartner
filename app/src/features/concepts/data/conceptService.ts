@@ -137,6 +137,48 @@ export const updateConceptPartOrder = async (id: string, partOrder: number | nul
 }
 
 export const deleteConcept = async (id: string): Promise<string | null> => {
+  const { data: blockers, error: blockersError } = await supabase
+    .from('concept')
+    .select('id,name,part_of_concept_id,reference_to_concept_id,root_concept_id')
+    .or(`part_of_concept_id.eq.${id},reference_to_concept_id.eq.${id},root_concept_id.eq.${id}`)
+    .order('name', { ascending: true })
+
+  if (blockersError) {
+    return fromDbError(blockersError)
+  }
+
+  const blockersWithoutSelf = (blockers ?? []).filter((item) => item.id !== id)
+
+  if (blockersWithoutSelf.length > 0) {
+    const usedAsPartOfBy = blockersWithoutSelf
+      .filter((item) => item.part_of_concept_id === id)
+      .map((item) => item.name)
+    const usedAsReferenceToBy = blockersWithoutSelf
+      .filter((item) => item.reference_to_concept_id === id)
+      .map((item) => item.name)
+    const usedAsRootBy = blockersWithoutSelf.filter((item) => item.root_concept_id === id).map((item) => item.name)
+
+    const formatNames = (names: string[]) => {
+      if (names.length === 0) return ''
+      const shown = names.slice(0, 3).join(', ')
+      const extra = names.length > 3 ? ` (+${names.length - 3} more)` : ''
+      return `${shown}${extra}`
+    }
+
+    const segments: string[] = []
+    if (usedAsPartOfBy.length > 0) {
+      segments.push(`PartOf by: ${formatNames(usedAsPartOfBy)}`)
+    }
+    if (usedAsReferenceToBy.length > 0) {
+      segments.push(`ReferenceTo by: ${formatNames(usedAsReferenceToBy)}`)
+    }
+    if (usedAsRootBy.length > 0) {
+      segments.push(`Root for: ${formatNames(usedAsRootBy)}`)
+    }
+
+    return `Cannot delete this concept because it is still referenced. ${segments.join(' | ')}. Remove these links first.`
+  }
+
   const { error } = await supabase.from('concept').delete().eq('id', id)
   return error ? fromDbError(error) : null
 }
