@@ -1,0 +1,26 @@
+{
+  "modelFamily": "government",
+  "source": {
+    "provider": "Business Architecture Guild",
+    "name": "Government Reference Model",
+    "version": "5.0",
+    "artifacts": [
+      "Government Reference Model v5.0.xlsx",
+      "Government Reference Model v5.0.pdf"
+    ]
+  },
+  "packageVersion": "0.1.0",
+  "status": "draft",
+  "loadOrder": [
+    "01-concept-types.csv",
+    "02-concepts-capability.csv",
+    "03-concepts-value-stream.csv",
+    "04-concepts-information.csv",
+    "05-concepts-stakeholder.csv"
+  ],
+  "notes": [
+    "Metamodel-first import",
+    "No-ID concept imports using rootConceptName where unique",
+    "Bridge concepts used for many-to-many information relationships"
+  ]
+}

@@ -23,6 +23,7 @@ export const parseConceptImportCsv = (csvText: string): ConceptImportRow[] => {
   const descriptionIndex = getColumnIndex(['description'])
   const conceptTypeNameIndex = getColumnIndex(['concepttypename', 'type', 'typeName'.toLowerCase()])
   const rootConceptIdIndex = getColumnIndex(['rootconceptid', 'rootid'])
+  const rootConceptNameIndex = getColumnIndex(['rootconceptname', 'rootname'])
   const partOfConceptIdIndex = getColumnIndex(['partofconceptid', 'parentconceptid', 'parentid'])
   const partOfNameIndex = getColumnIndex(['partofname', 'partofconceptname'])
   const partOrderIndex = getColumnIndex(['partorder', 'partoforder', 'order', 'orderwithinparent'])
@@ -67,6 +68,7 @@ export const parseConceptImportCsv = (csvText: string): ConceptImportRow[] => {
       description: descriptionIndex >= 0 ? (cells[descriptionIndex] ?? '').trim() || null : null,
       conceptTypeName,
       rootConceptId: rootConceptIdIndex >= 0 ? (cells[rootConceptIdIndex] ?? '').trim() || null : null,
+      rootConceptName: rootConceptNameIndex >= 0 ? (cells[rootConceptNameIndex] ?? '').trim() || null : null,
       partOfConceptId: partOfConceptIdIndex >= 0 ? (cells[partOfConceptIdIndex] ?? '').trim() || null : null,
       partOfName: partOfNameIndex >= 0 ? (cells[partOfNameIndex] ?? '').trim() || null : null,
       partOrder,
@@ -81,7 +83,7 @@ export const buildConceptsCsv = (concepts: ConceptRecord[], conceptTypes: Concep
   const conceptTypeById = new Map(conceptTypes.map((conceptType) => [conceptType.id, conceptType.name]))
   const conceptNameById = new Map(concepts.map((concept) => [concept.id, concept.name]))
   const lines = [
-    'conceptId,name,description,conceptTypeName,rootConceptId,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName',
+    'conceptId,name,description,conceptTypeName,rootConceptId,rootConceptName,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName',
   ]
 
   for (const concept of concepts) {
@@ -92,6 +94,7 @@ export const buildConceptsCsv = (concepts: ConceptRecord[], conceptTypes: Concep
         toCsvCell(concept.description),
         toCsvCell(conceptTypeById.get(concept.concept_type_id) ?? concept.concept_type_id),
         toCsvCell(concept.root_concept_id),
+        toCsvCell(conceptNameById.get(concept.root_concept_id) ?? ''),
         toCsvCell(concept.part_of_concept_id),
         toCsvCell(concept.part_of_concept_id ? conceptNameById.get(concept.part_of_concept_id) ?? '' : ''),
         toCsvCell(concept.part_order !== null ? String(concept.part_order) : ''),
@@ -106,7 +109,7 @@ export const buildConceptsCsv = (concepts: ConceptRecord[], conceptTypes: Concep
 
 export const buildConceptImportErrorsCsv = (failures: ConceptImportFailure[]) => {
   const lines = [
-    'rowNumber,conceptId,name,conceptTypeName,rootConceptId,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName,error',
+    'rowNumber,conceptId,name,conceptTypeName,rootConceptId,rootConceptName,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName,error',
   ]
 
   for (const failure of failures) {
@@ -117,6 +120,7 @@ export const buildConceptImportErrorsCsv = (failures: ConceptImportFailure[]) =>
         toCsvCell(failure.name),
         toCsvCell(failure.conceptTypeName),
         toCsvCell(failure.rootConceptId),
+        toCsvCell(failure.rootConceptName),
         toCsvCell(failure.partOfConceptId),
         toCsvCell(failure.partOfName),
         toCsvCell(failure.partOrder !== null ? String(failure.partOrder) : ''),
@@ -131,8 +135,8 @@ export const buildConceptImportErrorsCsv = (failures: ConceptImportFailure[]) =>
 }
 
 export const SAMPLE_CONCEPTS_CSV = [
-  'conceptId,name,description,conceptTypeName,rootConceptId,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName',
-  ',Treasury,National treasury department,Enterprise,,,,,,',
-  ',Tax Administration,Core revenue stream,Value Stream,,,Treasury,1,,',
-  ',Taxpayer Registry,Core registry concept,Information Concept,,,Treasury,2,,',
+  'conceptId,name,description,conceptTypeName,rootConceptId,rootConceptName,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName',
+  ',Treasury,National treasury department,Enterprise,,,,,,,',
+  ',Tax Administration,Core revenue stream,Value Stream,,Treasury,,Treasury,1,,',
+  ',Taxpayer Registry,Core registry concept,Information Concept,,Treasury,,Treasury,2,,',
 ].join('\n')

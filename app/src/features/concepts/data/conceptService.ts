@@ -238,6 +238,7 @@ export const importConceptRows = async (
     name: row.name,
     conceptTypeName: row.conceptTypeName,
     rootConceptId: row.rootConceptId,
+    rootConceptName: row.rootConceptName,
     partOfConceptId: row.partOfConceptId,
     partOfName: row.partOfName,
     partOrder: row.partOrder,
@@ -274,8 +275,113 @@ export const importConceptRows = async (
     return candidates.filter((candidate) => candidate.root_concept_id === rootConceptId)
   }
 
+  const indexRootConceptsByName = (concepts: ConceptRecord[]) => {
+    const index = new Map<string, ConceptRecord[]>()
+
+    for (const concept of concepts) {
+      if (concept.part_of_concept_id !== null) {
+        continue
+      }
+
+      const key = normalizeConceptLookupValue(concept.name)
+      const values = index.get(key) ?? []
+      values.push(concept)
+      index.set(key, values)
+    }
+
+    return index
+  }
+
+  const getExpectedRootConceptTypeId = (conceptTypeId: string): string => {
+    let currentTypeId = conceptTypeId
+    const visitedTypeIds = new Set<string>()
+
+    while (!visitedTypeIds.has(currentTypeId)) {
+      visitedTypeIds.add(currentTypeId)
+      const currentType = conceptTypes.find((conceptType) => conceptType.id === currentTypeId)
+      if (!currentType?.part_of_concept_type_id) {
+        return currentTypeId
+      }
+
+      if (currentType.part_of_concept_type_id === currentTypeId) {
+        return currentTypeId
+      }
+
+      currentTypeId = currentType.part_of_concept_type_id
+    }
+
+    return conceptTypeId
+  }
+
+  const resolveRootConceptId = (
+    row: ConceptImportRow,
+    conceptTypeId: string,
+    byId: Map<string, ConceptRecord>,
+    rootByName: Map<string, ConceptRecord[]>,
+  ): { rootConceptId: string | null; error: string | null } => {
+    if (row.rootConceptId) {
+      const explicitRoot = byId.get(row.rootConceptId)
+      if (!explicitRoot) {
+        return {
+          rootConceptId: null,
+          error: `rootConceptId '${row.rootConceptId}' was not found.`,
+        }
+      }
+
+      return {
+        rootConceptId: explicitRoot.id,
+        error: null,
+      }
+    }
+
+    if (!row.rootConceptName) {
+      return {
+        rootConceptId: null,
+        error: null,
+      }
+    }
+
+    const allCandidates = rootByName.get(normalizeConceptLookupValue(row.rootConceptName)) ?? []
+    const expectedRootTypeId = getExpectedRootConceptTypeId(conceptTypeId)
+    const scopedCandidates = allCandidates.filter((candidate) => candidate.concept_type_id === expectedRootTypeId)
+
+    if (scopedCandidates.length === 1) {
+      return {
+        rootConceptId: scopedCandidates[0].id,
+        error: null,
+      }
+    }
+
+    if (scopedCandidates.length > 1) {
+      return {
+        rootConceptId: null,
+        error: `rootConceptName '${row.rootConceptName}' is ambiguous in expected root ConceptType. Provide rootConceptId.`,
+      }
+    }
+
+    if (allCandidates.length === 0) {
+      return {
+        rootConceptId: null,
+        error: `rootConceptName '${row.rootConceptName}' was not found among root concepts.`,
+      }
+    }
+
+    if (allCandidates.length > 1) {
+      return {
+        rootConceptId: null,
+        error: `rootConceptName '${row.rootConceptName}' is ambiguous across root concepts. Provide rootConceptId.`,
+      }
+    }
+
+    return {
+      rootConceptId: allCandidates[0].id,
+      error: null,
+    }
+  }
+
   const existingByTypeAndName = indexByTypeAndName(existingConcepts)
   const existingById = new Map(existingConcepts.map((concept) => [concept.id, concept]))
+  const existingRootByName = indexRootConceptsByName(existingConcepts)
 
   const failures: ConceptImportFailure[] = []
   const failedRowNumbers = new Set<number>()
@@ -287,6 +393,18 @@ export const importConceptRows = async (
     const conceptType = conceptTypeByName.get(normalizeConceptLookupValue(row.conceptTypeName))
     if (!conceptType) {
       failures.push(buildFailure(row, `Unknown conceptTypeName: ${row.conceptTypeName}`))
+      failedRowNumbers.add(row.rowNumber)
+      continue
+    }
+
+    const { rootConceptId: resolvedRootConceptId, error: rootResolveError } = resolveRootConceptId(
+      row,
+      conceptType.id,
+      existingById,
+      existingRootByName,
+    )
+    if (rootResolveError) {
+      failures.push(buildFailure(row, rootResolveError))
       failedRowNumbers.add(row.rowNumber)
       continue
     }
@@ -310,7 +428,7 @@ export const importConceptRows = async (
       continue
     }
 
-    const candidates = getScopedCandidates(existingByTypeAndName, conceptType.id, row.name, row.rootConceptId)
+    const candidates = getScopedCandidates(existingByTypeAndName, conceptType.id, row.name, resolvedRootConceptId)
     if (candidates.length > 1) {
       failures.push(
         buildFailure(
@@ -323,7 +441,7 @@ export const importConceptRows = async (
     }
 
     if (candidates.length === 0) {
-      const createKey = `${conceptType.id}::${normalizeConceptLookupValue(row.name)}::${row.rootConceptId ?? ''}`
+      const createKey = `${conceptType.id}::${normalizeConceptLookupValue(row.name)}::${resolvedRootConceptId ?? normalizeConceptLookupValue(row.rootConceptName ?? '')}`
       if (seenCreateKeys.has(createKey)) {
         continue
       }
@@ -375,6 +493,7 @@ export const importConceptRows = async (
   const allValues = allConcepts ?? []
   const allById = new Map(allValues.map((concept) => [concept.id, concept]))
   const allByTypeAndName = indexByTypeAndName(allValues)
+  const allRootByName = indexRootConceptsByName(allValues)
 
   for (const row of rows) {
     if (failedRowNumbers.has(row.rowNumber)) {
@@ -383,6 +502,17 @@ export const importConceptRows = async (
 
     const conceptType = conceptTypeByName.get(normalizeConceptLookupValue(row.conceptTypeName))
     if (!conceptType) {
+      continue
+    }
+
+    const { rootConceptId: resolvedRootConceptId, error: rootResolveError } = resolveRootConceptId(
+      row,
+      conceptType.id,
+      allById,
+      allRootByName,
+    )
+    if (rootResolveError) {
+      failures.push(buildFailure(row, rootResolveError))
       continue
     }
 
@@ -398,8 +528,18 @@ export const importConceptRows = async (
         failures.push(buildFailure(row, `Concept id '${row.conceptId}' is not in ConceptType '${row.conceptTypeName}'.`))
         continue
       }
+
+      if (resolvedRootConceptId && target.root_concept_id !== resolvedRootConceptId) {
+        failures.push(
+          buildFailure(
+            row,
+            `Concept id '${row.conceptId}' is not in rootConcept '${row.rootConceptName ?? resolvedRootConceptId}'.`,
+          ),
+        )
+        continue
+      }
     } else {
-      const targetCandidates = getScopedCandidates(allByTypeAndName, conceptType.id, row.name, row.rootConceptId)
+      const targetCandidates = getScopedCandidates(allByTypeAndName, conceptType.id, row.name, resolvedRootConceptId)
       if (targetCandidates.length > 1) {
         failures.push(
           buildFailure(
@@ -418,7 +558,7 @@ export const importConceptRows = async (
       continue
     }
 
-    const scopedRootId = row.rootConceptId ?? target.root_concept_id
+    const scopedRootId = resolvedRootConceptId ?? target.root_concept_id
 
     let partOfConceptId: string | null = null
     if (row.partOfConceptId) {
@@ -505,7 +645,28 @@ export const importConceptRows = async (
         row.referenceToName,
         scopedRootId,
       )
-      if (referenceCandidates.length > 1) {
+      if (referenceCandidates.length === 0 && scopedRootId) {
+        const globalReferenceCandidates = getScopedCandidates(
+          allByTypeAndName,
+          expectedReferenceTypeId,
+          row.referenceToName,
+          null,
+        )
+        if (globalReferenceCandidates.length === 1) {
+          referenceToConceptId = globalReferenceCandidates[0].id
+        } else if (globalReferenceCandidates.length > 1) {
+          failures.push(
+            buildFailure(
+              row,
+              `ReferenceTo target '${row.referenceToName}' is ambiguous across roots. Provide referenceToConceptId.`,
+            ),
+          )
+          continue
+        }
+      }
+      if (referenceToConceptId) {
+        // resolved via global unique fallback
+      } else if (referenceCandidates.length > 1) {
         failures.push(
           buildFailure(
             row,
@@ -513,17 +674,24 @@ export const importConceptRows = async (
           ),
         )
         continue
+      } else {
+        const reference = referenceCandidates[0] ?? null
+        if (!reference) {
+          failures.push(
+            buildFailure(row, `ReferenceTo target '${row.referenceToName}' not found in required reference ConceptType.`),
+          )
+          continue
+        }
+
+        referenceToConceptId = reference.id
       }
 
-      const reference = referenceCandidates[0] ?? null
-      if (!reference) {
+      if (!referenceToConceptId) {
         failures.push(
           buildFailure(row, `ReferenceTo target '${row.referenceToName}' not found in required reference ConceptType.`),
         )
         continue
       }
-
-      referenceToConceptId = reference.id
     }
 
     const normalizedPartOrder = partOfConceptId ? row.partOrder : null

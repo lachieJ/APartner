@@ -5,6 +5,7 @@ export type ConceptImportRow = {
   description: string | null
   conceptTypeName: string
   rootConceptId: string | null
+  rootConceptName: string | null
   partOfConceptId: string | null
   partOfName: string | null
   partOrder: number | null
@@ -18,6 +19,7 @@ export type ConceptImportFailure = {
   name: string
   conceptTypeName: string
   rootConceptId: string | null
+  rootConceptName: string | null
   partOfConceptId: string | null
   partOfName: string | null
   partOrder: number | null

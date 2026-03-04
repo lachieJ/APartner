@@ -171,7 +171,7 @@ export function ConceptModelPanel({ isAuthenticated, conceptTypes }: ConceptMode
             : activeTab === 'edit'
               ? 'Create or update a single concept with PartOf and ReferenceTo semantics.'
               : activeTab === 'import'
-                ? 'Import or export concept instances via CSV.'
+                ? 'Import or export concept instances via CSV, including no-ID imports using rootConceptName when unique.'
                 : 'Review recent remediation and auto-fix audit events.'}
         </p>
       </div>

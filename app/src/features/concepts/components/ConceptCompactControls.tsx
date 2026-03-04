@@ -50,6 +50,10 @@ export function ConceptCompactControls({
   disableCopyConceptModel,
 }: ConceptCompactControlsProps) {
   const depthSelectValue = maxTreeDepth === null ? 'all' : String(maxTreeDepth)
+  const isDecomposableRootType = Boolean(
+    selectedRootType && selectedRootType.part_of_concept_type_id === selectedRootType.id,
+  )
+  const selectedConceptValue = selectedRootConceptId || (isDecomposableRootType ? '__all__' : '')
 
   return (
     <>
@@ -75,8 +79,11 @@ export function ConceptCompactControls({
 
         <label>
           Concept instance
-          <select value={selectedRootConceptId} onChange={(event) => onSetSelectedRootConceptId(event.target.value)}>
-            <option value="">(select)</option>
+          <select
+            value={selectedConceptValue}
+            onChange={(event) => onSetSelectedRootConceptId(event.target.value === '__all__' ? '' : event.target.value)}
+          >
+            {isDecomposableRootType ? <option value="__all__">Show all roots</option> : <option value="">(select)</option>}
             {rootConceptOptions.map((concept) => (
               <option key={concept.id} value={concept.id}>
                 {concept.name} ({concept.id})
@@ -125,6 +132,9 @@ export function ConceptCompactControls({
       {!selectedRootType ? <p className="hint">Select a root or decomposable ConceptType to begin.</p> : null}
       {selectedRootType && rootConceptOptions.length === 0 ? (
         <p className="hint">No concept instances exist for the selected ConceptType.</p>
+      ) : null}
+      {isDecomposableRootType && !selectedRootConceptId ? (
+        <p className="hint">Decomposable ConceptTypes show all root instances when Concept instance is left unselected.</p>
       ) : null}
       {selectedRootType && selectedRootConceptId && !canCopyConceptModelFromRoot ? (
         <p className="hint">Copy model is currently limited to concepts selected from true root ConceptTypes.</p>

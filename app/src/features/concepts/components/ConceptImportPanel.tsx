@@ -37,8 +37,9 @@ export function ConceptImportPanel({
     <>
       <h3>Concept Model Import & Export</h3>
       <p className="hint">
-        CSV format: conceptId, name, description, conceptTypeName, rootConceptId, partOfConceptId, partOfName, partOrder,
-        referenceToConceptId, referenceToName (max file size: 2 MB)
+        CSV format: conceptId, name, description, conceptTypeName, rootConceptId, rootConceptName, partOfConceptId,
+        partOfName, partOrder, referenceToConceptId, referenceToName (max file size: 2 MB). IDs are optional when names
+        resolve uniquely in scope; use rootConceptId when rootConceptName is ambiguous.
       </p>
       <input type="file" accept=".csv,text/csv" onChange={onImportFileSelected} />
       <p className="fileStatus">{importFileName ? `Selected file: ${importFileName}` : 'No file selected'}</p>
@@ -52,9 +53,9 @@ export function ConceptImportPanel({
           clearFileStatus()
         }}
         placeholder={[
-          'conceptId,name,description,conceptTypeName,rootConceptId,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName',
-          ',Treasury,National treasury department,Enterprise,,,,,,',
-          ',Tax Administration,Core revenue stream,Value Stream,,,Treasury,1,,',
+          'conceptId,name,description,conceptTypeName,rootConceptId,rootConceptName,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName',
+          ',Treasury,National treasury department,Enterprise,,,,,,,',
+          ',Tax Administration,Core revenue stream,Value Stream,,Treasury,,Treasury,1,,',
         ].join('\n')}
       />
 

@@ -1,0 +1,9 @@
+name,description,partOfName,partOrder,referenceToName
+Capability,Government business capability (supports decomposition),Capability,1,
+Value Stream,End-to-end value delivery perspective,,,
+Value Stream Stage,Stage within a value stream,Value Stream,1,
+Information Concept,Business information object,,,
+Information Concept Type,Classification of an information concept,Information Concept,1,
+Information Concept State,State/status of an information concept,Information Concept,2,
+Information Concept Link,Bridge concept for related information concepts,Information Concept,3,Information Concept
+Stakeholder,Person or organization role in value delivery,,,

@@ -1,0 +1,1574 @@
+conceptId,name,description,conceptTypeName,rootConceptId,rootConceptName,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName
+,Accreditation,"Category: Primary. An endorsement by a duly recognized and acknowledged third party that indicates ability, competence, knowledge, provenance, or quality.",Information Concept,,,,,,,
+,Academic,Type for Accreditation,Information Concept Type,,Accreditation,,Accreditation,1,,
+,Professional,Type for Accreditation,Information Concept Type,,Accreditation,,Accreditation,2,,
+,Governmental,Type for Accreditation,Information Concept Type,,Accreditation,,Accreditation,3,,
+,Pending,State for Accreditation,Information Concept State,,Accreditation,,Accreditation,1,,
+,Active,State for Accreditation,Information Concept State,,Accreditation,,Accreditation,2,,
+,Inactive,State for Accreditation,Information Concept State,,Accreditation,,Accreditation,3,,
+,Accreditation -> Competency,Related information concept link from Accreditation to Competency,Information Concept Link,,Accreditation,,Accreditation,1,,Competency
+,Accreditation -> Human Resource,Related information concept link from Accreditation to Human Resource,Information Concept Link,,Accreditation,,Accreditation,2,,Human Resource
+,Accreditation -> Job,Related information concept link from Accreditation to Job,Information Concept Link,,Accreditation,,Accreditation,3,,Job
+,Accreditation -> Partner,Related information concept link from Accreditation to Partner,Information Concept Link,,Accreditation,,Accreditation,4,,Partner
+,Accreditation -> Policy,Related information concept link from Accreditation to Policy,Information Concept Link,,Accreditation,,Accreditation,5,,Policy
+,Accreditation -> Public Sector Entity,Related information concept link from Accreditation to Public Sector Entity,Information Concept Link,,Accreditation,,Accreditation,6,,Public Sector Entity
+,Agreement,Category: Primary. A set of legally binding rights and obligations between two or more legal entities.,Information Concept,,,,,,,
+,Bilateral,Type for Agreement,Information Concept Type,,Agreement,,Agreement,1,,
+,Multilateral,Type for Agreement,Information Concept Type,,Agreement,,Agreement,2,,
+,Express,Type for Agreement,Information Concept Type,,Agreement,,Agreement,3,,
+,Implied,Type for Agreement,Information Concept Type,,Agreement,,Agreement,4,,
+,Pending,State for Agreement,Information Concept State,,Agreement,,Agreement,1,,
+,In Force,State for Agreement,Information Concept State,,Agreement,,Agreement,2,,
+,Terminated,State for Agreement,Information Concept State,,Agreement,,Agreement,3,,
+,Abandoned,State for Agreement,Information Concept State,,Agreement,,Agreement,4,,
+,Agreement -> Agreement,Related information concept link from Agreement to Agreement,Information Concept Link,,Agreement,,Agreement,1,,Agreement
+,Agreement -> Asset,Related information concept link from Agreement to Asset,Information Concept Link,,Agreement,,Agreement,2,,Asset
+,Agreement -> Channel,Related information concept link from Agreement to Channel,Information Concept Link,,Agreement,,Agreement,3,,Channel
+,Agreement -> Constituent,Related information concept link from Agreement to Constituent,Information Concept Link,,Agreement,,Agreement,4,,Constituent
+,Agreement -> Content,Related information concept link from Agreement to Content,Information Concept Link,,Agreement,,Agreement,5,,Content
+,Agreement -> Energy,Related information concept link from Agreement to Energy,Information Concept Link,,Agreement,,Agreement,6,,Energy
+,Agreement -> Financial Account,Related information concept link from Agreement to Financial Account,Information Concept Link,,Agreement,,Agreement,7,,Financial Account
+,Agreement -> Government Service,Related information concept link from Agreement to Government Service,Information Concept Link,,Agreement,,Agreement,8,,Government Service
+,Agreement -> Human Resource,Related information concept link from Agreement to Human Resource,Information Concept Link,,Agreement,,Agreement,9,,Human Resource
+,Agreement -> Infrastructure,Related information concept link from Agreement to Infrastructure,Information Concept Link,,Agreement,,Agreement,10,,Infrastructure
+,Agreement -> Partner,Related information concept link from Agreement to Partner,Information Concept Link,,Agreement,,Agreement,11,,Partner
+,Agreement -> Payment,Related information concept link from Agreement to Payment,Information Concept Link,,Agreement,,Agreement,12,,Payment
+,Agreement -> Policy,Related information concept link from Agreement to Policy,Information Concept Link,,Agreement,,Agreement,13,,Policy
+,Agreement -> Time,Related information concept link from Agreement to Time,Information Concept Link,,Agreement,,Agreement,14,,Time
+,Agreement Term,Category: Secondary. A legally enforceable condition set forth within the bounds of an agreement.,Information Concept,,,,,,,
+,Survivable,Type for Agreement Term,Information Concept Type,,Agreement Term,,Agreement Term,1,,
+,Non-survivable,Type for Agreement Term,Information Concept Type,,Agreement Term,,Agreement Term,2,,
+,Pending,State for Agreement Term,Information Concept State,,Agreement Term,,Agreement Term,1,,
+,In Force,State for Agreement Term,Information Concept State,,Agreement Term,,Agreement Term,2,,
+,Terminated,State for Agreement Term,Information Concept State,,Agreement Term,,Agreement Term,3,,
+,Abandoned,State for Agreement Term,Information Concept State,,Agreement Term,,Agreement Term,4,,
+,Agreement Term -> Policy,Related information concept link from Agreement Term to Policy,Information Concept Link,,Agreement Term,,Agreement Term,1,,Policy
+,Asset,Category: Primary. Tangible or intangible property.,Information Concept,,,,,,,
+,Tangible,Type for Asset,Information Concept Type,,Asset,,Asset,1,,
+,Intangible,Type for Asset,Information Concept Type,,Asset,,Asset,2,,
+,Requested,State for Asset,Information Concept State,,Asset,,Asset,1,,
+,In-Preparation,State for Asset,Information Concept State,,Asset,,Asset,2,,
+,In-Use,State for Asset,Information Concept State,,Asset,,Asset,3,,
+,Retired,State for Asset,Information Concept State,,Asset,,Asset,4,,
+,Disposed,State for Asset,Information Concept State,,Asset,,Asset,5,,
+,Asset -> Accreditation,Related information concept link from Asset to Accreditation,Information Concept Link,,Asset,,Asset,1,,Accreditation
+,Asset -> Asset,Related information concept link from Asset to Asset,Information Concept Link,,Asset,,Asset,2,,Asset
+,Asset -> Biological Organism,Related information concept link from Asset to Biological Organism,Information Concept Link,,Asset,,Asset,3,,Biological Organism
+,Asset -> Case,Related information concept link from Asset to Case,Information Concept Link,,Asset,,Asset,4,,Case
+,Asset -> Competency,Related information concept link from Asset to Competency,Information Concept Link,,Asset,,Asset,5,,Competency
+,Asset -> Constituent,Related information concept link from Asset to Constituent,Information Concept Link,,Asset,,Asset,6,,Constituent
+,Asset -> Dispute,Related information concept link from Asset to Dispute,Information Concept Link,,Asset,,Asset,7,,Dispute
+,Asset -> Evidence,Related information concept link from Asset to Evidence,Information Concept Link,,Asset,,Asset,8,,Evidence
+,Asset -> Financial Forecast,Related information concept link from Asset to Financial Forecast,Information Concept Link,,Asset,,Asset,9,,Financial Forecast
+,Asset -> Financial Position,Related information concept link from Asset to Financial Position,Information Concept Link,,Asset,,Asset,10,,Financial Position
+,Asset -> Health Condition,Related information concept link from Asset to Health Condition,Information Concept Link,,Asset,,Asset,11,,Health Condition
+,Asset -> Human Resource,Related information concept link from Asset to Human Resource,Information Concept Link,,Asset,,Asset,12,,Human Resource
+,Asset -> Infrastructure,Related information concept link from Asset to Infrastructure,Information Concept Link,,Asset,,Asset,13,,Infrastructure
+,Asset -> Initiative,Related information concept link from Asset to Initiative,Information Concept Link,,Asset,,Asset,14,,Initiative
+,Asset -> Investment Portfolio,Related information concept link from Asset to Investment Portfolio,Information Concept Link,,Asset,,Asset,15,,Investment Portfolio
+,Asset -> Job,Related information concept link from Asset to Job,Information Concept Link,,Asset,,Asset,16,,Job
+,Asset -> Legislation,Related information concept link from Asset to Legislation,Information Concept Link,,Asset,,Asset,17,,Legislation
+,Asset -> License,Related information concept link from Asset to License,Information Concept Link,,Asset,,Asset,18,,License
+,Asset -> Location,Related information concept link from Asset to Location,Information Concept Link,,Asset,,Asset,19,,Location
+,Asset -> Partner,Related information concept link from Asset to Partner,Information Concept Link,,Asset,,Asset,20,,Partner
+,Asset -> Policy,Related information concept link from Asset to Policy,Information Concept Link,,Asset,,Asset,21,,Policy
+,Asset -> Public Sector Entity,Related information concept link from Asset to Public Sector Entity,Information Concept Link,,Asset,,Asset,22,,Public Sector Entity
+,Asset -> Standard,Related information concept link from Asset to Standard,Information Concept Link,,Asset,,Asset,23,,Standard
+,Asset -> Work Item,Related information concept link from Asset to Work Item,Information Concept Link,,Asset,,Asset,24,,Work Item
+,Biological Organism,Category: Primary. Non-human living thing.,Information Concept,,,,,,,
+,Animal,Type for Biological Organism,Information Concept Type,,Biological Organism,,Biological Organism,1,,
+,Plant,Type for Biological Organism,Information Concept Type,,Biological Organism,,Biological Organism,2,,
+,Fungi,Type for Biological Organism,Information Concept Type,,Biological Organism,,Biological Organism,3,,
+,Micro-organism,Type for Biological Organism,Information Concept Type,,Biological Organism,,Biological Organism,4,,
+,Healthy,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,1,,
+,Pregnant,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,2,,
+,Newborn,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,3,,
+,Juvenile,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,4,,
+,Adolescent,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,5,,
+,Adult,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,6,,
+,Senior,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,7,,
+,Deceased,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,8,,
+,Under Care,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,9,,
+,Extinct,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,10,,
+,Endangered,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,11,,
+,Under Protection,State for Biological Organism,Information Concept State,,Biological Organism,,Biological Organism,12,,
+,Biological Organism -> Biological Organism,Related information concept link from Biological Organism to Biological Organism,Information Concept Link,,Biological Organism,,Biological Organism,1,,Biological Organism
+,Biological Organism -> Case,Related information concept link from Biological Organism to Case,Information Concept Link,,Biological Organism,,Biological Organism,2,,Case
+,Biological Organism -> Constituent,Related information concept link from Biological Organism to Constituent,Information Concept Link,,Biological Organism,,Biological Organism,3,,Constituent
+,Biological Organism -> Conveyor,Related information concept link from Biological Organism to Conveyor,Information Concept Link,,Biological Organism,,Biological Organism,4,,Conveyor
+,Biological Organism -> Energy,Related information concept link from Biological Organism to Energy,Information Concept Link,,Biological Organism,,Biological Organism,5,,Energy
+,Biological Organism -> Health Condition,Related information concept link from Biological Organism to Health Condition,Information Concept Link,,Biological Organism,,Biological Organism,6,,Health Condition
+,Biological Organism -> Incident,Related information concept link from Biological Organism to Incident,Information Concept Link,,Biological Organism,,Biological Organism,7,,Incident
+,Biological Organism -> Initiative,Related information concept link from Biological Organism to Initiative,Information Concept Link,,Biological Organism,,Biological Organism,8,,Initiative
+,Biological Organism -> Legislation,Related information concept link from Biological Organism to Legislation,Information Concept Link,,Biological Organism,,Biological Organism,9,,Legislation
+,Biological Organism -> License,Related information concept link from Biological Organism to License,Information Concept Link,,Biological Organism,,Biological Organism,10,,License
+,Biological Organism -> Location,Related information concept link from Biological Organism to Location,Information Concept Link,,Biological Organism,,Biological Organism,11,,Location
+,Biological Organism -> Market,Related information concept link from Biological Organism to Market,Information Concept Link,,Biological Organism,,Biological Organism,12,,Market
+,Biological Organism -> Material,Related information concept link from Biological Organism to Material,Information Concept Link,,Biological Organism,,Biological Organism,13,,Material
+,Biological Organism -> Natural Resource,Related information concept link from Biological Organism to Natural Resource,Information Concept Link,,Biological Organism,,Biological Organism,14,,Natural Resource
+,Biological Organism -> Operation,Related information concept link from Biological Organism to Operation,Information Concept Link,,Biological Organism,,Biological Organism,15,,Operation
+,Biological Organism -> Order,Related information concept link from Biological Organism to Order,Information Concept Link,,Biological Organism,,Biological Organism,16,,Order
+,Biological Organism -> Partner,Related information concept link from Biological Organism to Partner,Information Concept Link,,Biological Organism,,Biological Organism,17,,Partner
+,Biological Organism -> Plan,Related information concept link from Biological Organism to Plan,Information Concept Link,,Biological Organism,,Biological Organism,18,,Plan
+,Biological Organism -> Policy,Related information concept link from Biological Organism to Policy,Information Concept Link,,Biological Organism,,Biological Organism,19,,Policy
+,Biological Organism -> Route,Related information concept link from Biological Organism to Route,Information Concept Link,,Biological Organism,,Biological Organism,20,,Route
+,Biological Organism -> Strategy,Related information concept link from Biological Organism to Strategy,Information Concept Link,,Biological Organism,,Biological Organism,21,,Strategy
+,Biological Organism -> Trip,Related information concept link from Biological Organism to Trip,Information Concept Link,,Biological Organism,,Biological Organism,22,,Trip
+,Brand,"Category: Primary. A name, symbol, or design that identifies and differentiates products, offerings, or organizational identities.",Information Concept,,,,,,,
+,Name,Type for Brand,Information Concept Type,,Brand,,Brand,1,,
+,Symbol,Type for Brand,Information Concept Type,,Brand,,Brand,2,,
+,Mark,Type for Brand,Information Concept Type,,Brand,,Brand,3,,
+,Logo,Type for Brand,Information Concept Type,,Brand,,Brand,4,,
+,Tagline,Type for Brand,Information Concept Type,,Brand,,Brand,5,,
+,Service Mark,Type for Brand,Information Concept Type,,Brand,,Brand,6,,
+,Jingle,Type for Brand,Information Concept Type,,Brand,,Brand,7,,
+,Sound,Type for Brand,Information Concept Type,,Brand,,Brand,8,,
+,Proposed,State for Brand,Information Concept State,,Brand,,Brand,1,,
+,Accepted,State for Brand,Information Concept State,,Brand,,Brand,2,,
+,Retired,State for Brand,Information Concept State,,Brand,,Brand,3,,
+,Brand -> Channel,Related information concept link from Brand to Channel,Information Concept Link,,Brand,,Brand,1,,Channel
+,Brand -> Infrastructure,Related information concept link from Brand to Infrastructure,Information Concept Link,,Brand,,Brand,2,,Infrastructure
+,Brand -> Intellectual Property Rights,Related information concept link from Brand to Intellectual Property Rights,Information Concept Link,,Brand,,Brand,3,,Intellectual Property Rights
+,Brand -> Message,Related information concept link from Brand to Message,Information Concept Link,,Brand,,Brand,4,,Message
+,Brand -> Partner,Related information concept link from Brand to Partner,Information Concept Link,,Brand,,Brand,5,,Partner
+,Brand -> Plan,Related information concept link from Brand to Plan,Information Concept Link,,Brand,,Brand,6,,Plan
+,Brand -> Policy,Related information concept link from Brand to Policy,Information Concept Link,,Brand,,Brand,7,,Policy
+,Brand -> Public Sector Entity,Related information concept link from Brand to Public Sector Entity,Information Concept Link,,Brand,,Brand,8,,Public Sector Entity
+,Brand -> Strategy,Related information concept link from Brand to Strategy,Information Concept Link,,Brand,,Brand,9,,Strategy
+,Campaign,"Category: Primary. An outreach activity that targets a specific population, for example, constituents, human resources, partners, and patients, to achieve a certain goal, such as marketing awareness, hiring activities, and health awareness.",Information Concept,,,,,,,
+,Internal,Type for Campaign,Information Concept Type,,Campaign,,Campaign,1,,
+,External,Type for Campaign,Information Concept Type,,Campaign,,Campaign,2,,
+,Planned,State for Campaign,Information Concept State,,Campaign,,Campaign,1,,
+,Designed,State for Campaign,Information Concept State,,Campaign,,Campaign,2,,
+,Launched,State for Campaign,Information Concept State,,Campaign,,Campaign,3,,
+,In-Process,State for Campaign,Information Concept State,,Campaign,,Campaign,4,,
+,Completed,State for Campaign,Information Concept State,,Campaign,,Campaign,5,,
+,Terminated,State for Campaign,Information Concept State,,Campaign,,Campaign,6,,
+,Campaign -> Brand,Related information concept link from Campaign to Brand,Information Concept Link,,Campaign,,Campaign,1,,Brand
+,Campaign -> Channel,Related information concept link from Campaign to Channel,Information Concept Link,,Campaign,,Campaign,2,,Channel
+,Campaign -> Constituent,Related information concept link from Campaign to Constituent,Information Concept Link,,Campaign,,Campaign,3,,Constituent
+,Campaign -> Content,Related information concept link from Campaign to Content,Information Concept Link,,Campaign,,Campaign,4,,Content
+,Campaign -> Energy,Related information concept link from Campaign to Energy,Information Concept Link,,Campaign,,Campaign,5,,Energy
+,Campaign -> Financial Forecast,Related information concept link from Campaign to Financial Forecast,Information Concept Link,,Campaign,,Campaign,6,,Financial Forecast
+,Campaign -> Financial Position,Related information concept link from Campaign to Financial Position,Information Concept Link,,Campaign,,Campaign,7,,Financial Position
+,Campaign -> Government Service,Related information concept link from Campaign to Government Service,Information Concept Link,,Campaign,,Campaign,8,,Government Service
+,Campaign -> Initiative,Related information concept link from Campaign to Initiative,Information Concept Link,,Campaign,,Campaign,9,,Initiative
+,Campaign -> Intellectual Property Rights,Related information concept link from Campaign to Intellectual Property Rights,Information Concept Link,,Campaign,,Campaign,10,,Intellectual Property Rights
+,Campaign -> Interaction,Related information concept link from Campaign to Interaction,Information Concept Link,,Campaign,,Campaign,11,,Interaction
+,Campaign -> Job,Related information concept link from Campaign to Job,Information Concept Link,,Campaign,,Campaign,12,,Job
+,Campaign -> Location,Related information concept link from Campaign to Location,Information Concept Link,,Campaign,,Campaign,13,,Location
+,Campaign -> Market,Related information concept link from Campaign to Market,Information Concept Link,,Campaign,,Campaign,14,,Market
+,Campaign -> Natural Resource,Related information concept link from Campaign to Natural Resource,Information Concept Link,,Campaign,,Campaign,15,,Natural Resource
+,Campaign -> Partner,Related information concept link from Campaign to Partner,Information Concept Link,,Campaign,,Campaign,16,,Partner
+,Campaign -> Plan,Related information concept link from Campaign to Plan,Information Concept Link,,Campaign,,Campaign,17,,Plan
+,Campaign -> Policy,Related information concept link from Campaign to Policy,Information Concept Link,,Campaign,,Campaign,18,,Policy
+,Campaign -> Strategy,Related information concept link from Campaign to Strategy,Information Concept Link,,Campaign,,Campaign,19,,Strategy
+,Campaign -> Training Course,Related information concept link from Campaign to Training Course,Information Concept Link,,Campaign,,Campaign,20,,Training Course
+,Case,"Category: Primary. An instance of a need or demand that requires resolution, such as in the context of legal, social welfare, healthcare, or related government services.",Information Concept,,,,,,,
+,Legal,Type for Case,Information Concept Type,,Case,,Case,1,,
+,Health,Type for Case,Information Concept Type,,Case,,Case,2,,
+,Financial,Type for Case,Information Concept Type,,Case,,Case,3,,
+,Submitted,State for Case,Information Concept State,,Case,,Case,1,,
+,Pending,State for Case,Information Concept State,,Case,,Case,2,,
+,Active,State for Case,Information Concept State,,Case,,Case,3,,
+,Inactive,State for Case,Information Concept State,,Case,,Case,4,,
+,Completed,State for Case,Information Concept State,,Case,,Case,5,,
+,Case -> Case,Related information concept link from Case to Case,Information Concept Link,,Case,,Case,1,,Case
+,Case -> Channel,Related information concept link from Case to Channel,Information Concept Link,,Case,,Case,2,,Channel
+,Case -> Constituent,Related information concept link from Case to Constituent,Information Concept Link,,Case,,Case,3,,Constituent
+,Case -> Government Service,Related information concept link from Case to Government Service,Information Concept Link,,Case,,Case,4,,Government Service
+,Case -> Human Resource,Related information concept link from Case to Human Resource,Information Concept Link,,Case,,Case,5,,Human Resource
+,Case -> Message,Related information concept link from Case to Message,Information Concept Link,,Case,,Case,6,,Message
+,Case -> Partner,Related information concept link from Case to Partner,Information Concept Link,,Case,,Case,7,,Partner
+,Case -> Payment,Related information concept link from Case to Payment,Information Concept Link,,Case,,Case,8,,Payment
+,Case -> Plan,Related information concept link from Case to Plan,Information Concept Link,,Case,,Case,9,,Plan
+,Case -> Policy,Related information concept link from Case to Policy,Information Concept Link,,Case,,Case,10,,Policy
+,Case -> Public Sector Entity,Related information concept link from Case to Public Sector Entity,Information Concept Link,,Case,,Case,11,,Public Sector Entity
+,Case -> Schedule,Related information concept link from Case to Schedule,Information Concept Link,,Case,,Case,12,,Schedule
+,Case -> Submission,Related information concept link from Case to Submission,Information Concept Link,,Case,,Case,13,,Submission
+,Case -> Work Item,Related information concept link from Case to Work Item,Information Concept Link,,Case,,Case,14,,Work Item
+,Channel,"Category: Primary. A digital, analog, or physical conduit through which products, related services, or communications are delivered or received, including the Internet, phone, delivery service, satellite, radio, or physical means.",Information Concept,,,,,,,
+,Digital,Type for Channel,Information Concept Type,,Channel,,Channel,1,,
+,Analog,Type for Channel,Information Concept Type,,Channel,,Channel,2,,
+,Physical,Type for Channel,Information Concept Type,,Channel,,Channel,3,,
+,Active,State for Channel,Information Concept State,,Channel,,Channel,1,,
+,Inactive,State for Channel,Information Concept State,,Channel,,Channel,2,,
+,Channel -> Channel,Related information concept link from Channel to Channel,Information Concept Link,,Channel,,Channel,1,,Channel
+,Channel -> Location,Related information concept link from Channel to Location,Information Concept Link,,Channel,,Channel,2,,Location
+,Channel -> Policy,Related information concept link from Channel to Policy,Information Concept Link,,Channel,,Channel,3,,Policy
+,Channel -> Strategy,Related information concept link from Channel to Strategy,Information Concept Link,,Channel,,Channel,4,,Strategy
+,Claim,Category: Primary. A demand or request to indemnify constituents under the terms of an agreement.,Information Concept,,,,,,,
+,Negligence,Type for Claim,Information Concept Type,,Claim,,Claim,1,,
+,Injury,Type for Claim,Information Concept Type,,Claim,,Claim,2,,
+,Property Damage,Type for Claim,Information Concept Type,,Claim,,Claim,3,,
+,Natural Disaster Relief,Type for Claim,Information Concept Type,,Claim,,Claim,4,,
+,Submitted,State for Claim,Information Concept State,,Claim,,Claim,1,,
+,Pending,State for Claim,Information Concept State,,Claim,,Claim,2,,
+,Active,State for Claim,Information Concept State,,Claim,,Claim,3,,
+,Inactive,State for Claim,Information Concept State,,Claim,,Claim,4,,
+,Completed,State for Claim,Information Concept State,,Claim,,Claim,5,,
+,Claim -> Agreement,Related information concept link from Claim to Agreement,Information Concept Link,,Claim,,Claim,1,,Agreement
+,Claim -> Constituent,Related information concept link from Claim to Constituent,Information Concept Link,,Claim,,Claim,2,,Constituent
+,Claim -> Incident,Related information concept link from Claim to Incident,Information Concept Link,,Claim,,Claim,3,,Incident
+,Claim -> Partner,Related information concept link from Claim to Partner,Information Concept Link,,Claim,,Claim,4,,Partner
+,Claim -> Payment,Related information concept link from Claim to Payment,Information Concept Link,,Claim,,Claim,5,,Payment
+,Claim -> Plan,Related information concept link from Claim to Plan,Information Concept Link,,Claim,,Claim,6,,Plan
+,Claim -> Research,Related information concept link from Claim to Research,Information Concept Link,,Claim,,Claim,7,,Research
+,Claim -> Strategy,Related information concept link from Claim to Strategy,Information Concept Link,,Claim,,Claim,8,,Strategy
+,Competency,Category: Primary. The skills and knowledge necessary to do something.,Information Concept,,,,,,,
+,Learned,Type for Competency,Information Concept Type,,Competency,,Competency,1,,
+,Intrinsic,Type for Competency,Information Concept Type,,Competency,,Competency,2,,
+,Identified,State for Competency,Information Concept State,,Competency,,Competency,1,,
+,Developing,State for Competency,Information Concept State,,Competency,,Competency,2,,
+,Achieved,State for Competency,Information Concept State,,Competency,,Competency,3,,
+,Dated,State for Competency,Information Concept State,,Competency,,Competency,4,,
+,Competency -> Competency,Related information concept link from Competency to Competency,Information Concept Link,,Competency,,Competency,1,,Competency
+,Competency -> Content,Related information concept link from Competency to Content,Information Concept Link,,Competency,,Competency,2,,Content
+,Competency -> Language,Related information concept link from Competency to Language,Information Concept Link,,Competency,,Competency,3,,Language
+,Competency -> Plan,Related information concept link from Competency to Plan,Information Concept Link,,Competency,,Competency,4,,Plan
+,Competency -> Policy,Related information concept link from Competency to Policy,Information Concept Link,,Competency,,Competency,5,,Policy
+,Competency -> Training Course,Related information concept link from Competency to Training Course,Information Concept Link,,Competency,,Competency,6,,Training Course
+,Constituent,Category: Primary. An individual or entity relative to an organization's sphere of responsibility.,Information Concept,,,,,,,
+,Individual,Type for Constituent,Information Concept Type,,Constituent,,Constituent,1,,
+,Organization,Type for Constituent,Information Concept Type,,Constituent,,Constituent,2,,
+,Citizen,Type for Constituent,Information Concept Type,,Constituent,,Constituent,3,,
+,Migrant,Type for Constituent,Information Concept Type,,Constituent,,Constituent,4,,
+,Asylum Seeker,Type for Constituent,Information Concept Type,,Constituent,,Constituent,5,,
+,Candidate,Type for Constituent,Information Concept Type,,Constituent,,Constituent,6,,
+,Voter,Type for Constituent,Information Concept Type,,Constituent,,Constituent,7,,
+,Electorate,Type for Constituent,Information Concept Type,,Constituent,,Constituent,8,,
+,Healthy,State for Constituent,Information Concept State,,Constituent,,Constituent,1,,
+,Pregnant,State for Constituent,Information Concept State,,Constituent,,Constituent,2,,
+,Newborn,State for Constituent,Information Concept State,,Constituent,,Constituent,3,,
+,Juvenile,State for Constituent,Information Concept State,,Constituent,,Constituent,4,,
+,Adolescent,State for Constituent,Information Concept State,,Constituent,,Constituent,5,,
+,Adult,State for Constituent,Information Concept State,,Constituent,,Constituent,6,,
+,Senior,State for Constituent,Information Concept State,,Constituent,,Constituent,7,,
+,Deceased,State for Constituent,Information Concept State,,Constituent,,Constituent,8,,
+,Under Care,State for Constituent,Information Concept State,,Constituent,,Constituent,9,,
+,Prospective Citizen,State for Constituent,Information Concept State,,Constituent,,Constituent,10,,
+,Citizen,State for Constituent,Information Concept State,,Constituent,,Constituent,11,,
+,Naturalized,State for Constituent,Information Concept State,,Constituent,,Constituent,12,,
+,De-naturalized,State for Constituent,Information Concept State,,Constituent,,Constituent,13,,
+,Constituent -> Channel,Related information concept link from Constituent to Channel,Information Concept Link,,Constituent,,Constituent,1,,Channel
+,Constituent -> Constituent,Related information concept link from Constituent to Constituent,Information Concept Link,,Constituent,,Constituent,2,,Constituent
+,Constituent -> Government Service,Related information concept link from Constituent to Government Service,Information Concept Link,,Constituent,,Constituent,3,,Government Service
+,Constituent -> Human Resource,Related information concept link from Constituent to Human Resource,Information Concept Link,,Constituent,,Constituent,4,,Human Resource
+,Constituent -> Initiative,Related information concept link from Constituent to Initiative,Information Concept Link,,Constituent,,Constituent,5,,Initiative
+,Constituent -> Language,Related information concept link from Constituent to Language,Information Concept Link,,Constituent,,Constituent,6,,Language
+,Constituent -> Legislation,Related information concept link from Constituent to Legislation,Information Concept Link,,Constituent,,Constituent,7,,Legislation
+,Constituent -> Location,Related information concept link from Constituent to Location,Information Concept Link,,Constituent,,Constituent,8,,Location
+,Constituent -> Market,Related information concept link from Constituent to Market,Information Concept Link,,Constituent,,Constituent,9,,Market
+,Constituent -> Message,Related information concept link from Constituent to Message,Information Concept Link,,Constituent,,Constituent,10,,Message
+,Constituent -> Partner,Related information concept link from Constituent to Partner,Information Concept Link,,Constituent,,Constituent,11,,Partner
+,Constituent -> Plan,Related information concept link from Constituent to Plan,Information Concept Link,,Constituent,,Constituent,12,,Plan
+,Constituent -> Policy,Related information concept link from Constituent to Policy,Information Concept Link,,Constituent,,Constituent,13,,Policy
+,Constituent -> Strategy,Related information concept link from Constituent to Strategy,Information Concept Link,,Constituent,,Constituent,14,,Strategy
+,Content,"Category: Primary. A creative work or other authored item, such as is manifested in audio/visual, still image, textual, experiential, mixed-media, or other forms.",Information Concept,,,,,,,
+,Visual,Type for Content,Information Concept Type,,Content,,Content,1,,
+,Audial,Type for Content,Information Concept Type,,Content,,Content,2,,
+,Text,Type for Content,Information Concept Type,,Content,,Content,3,,
+,In-Development,State for Content,Information Concept State,,Content,,Content,1,,
+,Developed,State for Content,Information Concept State,,Content,,Content,2,,
+,Undeveloped,State for Content,Information Concept State,,Content,,Content,3,,
+,Content -> Asset,Related information concept link from Content to Asset,Information Concept Link,,Content,,Content,1,,Asset
+,Content -> Channel,Related information concept link from Content to Channel,Information Concept Link,,Content,,Content,2,,Channel
+,Content -> Constituent,Related information concept link from Content to Constituent,Information Concept Link,,Content,,Content,3,,Constituent
+,Content -> Content,Related information concept link from Content to Content,Information Concept Link,,Content,,Content,4,,Content
+,Content -> Government Service,Related information concept link from Content to Government Service,Information Concept Link,,Content,,Content,5,,Government Service
+,Content -> Legislation,Related information concept link from Content to Legislation,Information Concept Link,,Content,,Content,6,,Legislation
+,Content -> Location,Related information concept link from Content to Location,Information Concept Link,,Content,,Content,7,,Location
+,Content -> Market,Related information concept link from Content to Market,Information Concept Link,,Content,,Content,8,,Market
+,Content -> Message,Related information concept link from Content to Message,Information Concept Link,,Content,,Content,9,,Message
+,Content -> Partner,Related information concept link from Content to Partner,Information Concept Link,,Content,,Content,10,,Partner
+,Content -> Plan,Related information concept link from Content to Plan,Information Concept Link,,Content,,Content,11,,Plan
+,Content -> Policy,Related information concept link from Content to Policy,Information Concept Link,,Content,,Content,12,,Policy
+,Content -> Strategy,Related information concept link from Content to Strategy,Information Concept Link,,Content,,Content,13,,Strategy
+,Content Impression,Category: Secondary. An instance of content consumption.,Information Concept,,,,,,,
+,Organic,Type for Content Impression,Information Concept Type,,Content Impression,,Content Impression,1,,
+,Paid,Type for Content Impression,Information Concept Type,,Content Impression,,Content Impression,2,,
+,Viral,Type for Content Impression,Information Concept Type,,Content Impression,,Content Impression,3,,
+,Recognized,State for Content Impression,Information Concept State,,Content Impression,,Content Impression,1,,
+,Unrecognized,State for Content Impression,Information Concept State,,Content Impression,,Content Impression,2,,
+,Conveyor,"Category: Primary. An apparatus or assembly, whether human or robot-piloted, that has the capacity to transport people and physical items, such as animals, goods, or other assets.",Information Concept,,,,,,,
+,Trucks,Type for Conveyor,Information Concept Type,,Conveyor,,Conveyor,1,,
+,Airplanes,Type for Conveyor,Information Concept Type,,Conveyor,,Conveyor,2,,
+,Automobiles,Type for Conveyor,Information Concept Type,,Conveyor,,Conveyor,3,,
+,Carts,Type for Conveyor,Information Concept Type,,Conveyor,,Conveyor,4,,
+,Rail-based Vehicles,Type for Conveyor,Information Concept Type,,Conveyor,,Conveyor,5,,
+,Water-borne Craft,Type for Conveyor,Information Concept Type,,Conveyor,,Conveyor,6,,
+,Animal-pulled Devices,Type for Conveyor,Information Concept Type,,Conveyor,,Conveyor,7,,
+,Animal-assemblies,Type for Conveyor,Information Concept Type,,Conveyor,,Conveyor,8,,
+,Planned,State for Conveyor,Information Concept State,,Conveyor,,Conveyor,1,,
+,Designed,State for Conveyor,Information Concept State,,Conveyor,,Conveyor,2,,
+,Specified,State for Conveyor,Information Concept State,,Conveyor,,Conveyor,3,,
+,Operational,State for Conveyor,Information Concept State,,Conveyor,,Conveyor,4,,
+,De-activated,State for Conveyor,Information Concept State,,Conveyor,,Conveyor,5,,
+,Conveyor -> Asset,Related information concept link from Conveyor to Asset,Information Concept Link,,Conveyor,,Conveyor,1,,Asset
+,Conveyor -> Case,Related information concept link from Conveyor to Case,Information Concept Link,,Conveyor,,Conveyor,2,,Case
+,Conveyor -> Constituent,Related information concept link from Conveyor to Constituent,Information Concept Link,,Conveyor,,Conveyor,3,,Constituent
+,Conveyor -> Dispute,Related information concept link from Conveyor to Dispute,Information Concept Link,,Conveyor,,Conveyor,4,,Dispute
+,Conveyor -> Evidence,Related information concept link from Conveyor to Evidence,Information Concept Link,,Conveyor,,Conveyor,5,,Evidence
+,Conveyor -> Human Resource,Related information concept link from Conveyor to Human Resource,Information Concept Link,,Conveyor,,Conveyor,6,,Human Resource
+,Conveyor -> Location,Related information concept link from Conveyor to Location,Information Concept Link,,Conveyor,,Conveyor,7,,Location
+,Conveyor -> Material,Related information concept link from Conveyor to Material,Information Concept Link,,Conveyor,,Conveyor,8,,Material
+,Conveyor -> Operation,Related information concept link from Conveyor to Operation,Information Concept Link,,Conveyor,,Conveyor,9,,Operation
+,Conveyor -> Partner,Related information concept link from Conveyor to Partner,Information Concept Link,,Conveyor,,Conveyor,10,,Partner
+,Conveyor -> Plan,Related information concept link from Conveyor to Plan,Information Concept Link,,Conveyor,,Conveyor,11,,Plan
+,Conveyor -> Route,Related information concept link from Conveyor to Route,Information Concept Link,,Conveyor,,Conveyor,12,,Route
+,Conveyor -> Strategy,Related information concept link from Conveyor to Strategy,Information Concept Link,,Conveyor,,Conveyor,13,,Strategy
+,Conveyor -> Trip,Related information concept link from Conveyor to Trip,Information Concept Link,,Conveyor,,Conveyor,14,,Trip
+,Decision,Category: Primary. A conclusion or resolution reached after considering alternative options.,Information Concept,,,,,,,
+,Binding,Type for Decision,Information Concept Type,,Decision,,Decision,1,,
+,Provisional,Type for Decision,Information Concept Type,,Decision,,Decision,2,,
+,Under-Deliberation,State for Decision,Information Concept State,,Decision,,Decision,1,,
+,Determined,State for Decision,Information Concept State,,Decision,,Decision,2,,
+,Decision -> Agreement,Related information concept link from Decision to Agreement,Information Concept Link,,Decision,,Decision,1,,Agreement
+,Decision -> Biological Organism,Related information concept link from Decision to Biological Organism,Information Concept Link,,Decision,,Decision,2,,Biological Organism
+,Decision -> Case,Related information concept link from Decision to Case,Information Concept Link,,Decision,,Decision,3,,Case
+,Decision -> Claim,Related information concept link from Decision to Claim,Information Concept Link,,Decision,,Decision,4,,Claim
+,Decision -> Constituent,Related information concept link from Decision to Constituent,Information Concept Link,,Decision,,Decision,5,,Constituent
+,Decision -> Content,Related information concept link from Decision to Content,Information Concept Link,,Decision,,Decision,6,,Content
+,Decision -> Decision,Related information concept link from Decision to Decision,Information Concept Link,,Decision,,Decision,7,,Decision
+,Decision -> Dispute,Related information concept link from Decision to Dispute,Information Concept Link,,Decision,,Decision,8,,Dispute
+,Decision -> Energy,Related information concept link from Decision to Energy,Information Concept Link,,Decision,,Decision,9,,Energy
+,Decision -> Event,Related information concept link from Decision to Event,Information Concept Link,,Decision,,Decision,10,,Event
+,Decision -> Geographic Border,Related information concept link from Decision to Geographic Border,Information Concept Link,,Decision,,Decision,11,,Geographic Border
+,Decision -> Geographic Space,Related information concept link from Decision to Geographic Space,Information Concept Link,,Decision,,Decision,12,,Geographic Space
+,Decision -> Government Service,Related information concept link from Decision to Government Service,Information Concept Link,,Decision,,Decision,13,,Government Service
+,Decision -> Human Resource,Related information concept link from Decision to Human Resource,Information Concept Link,,Decision,,Decision,14,,Human Resource
+,Decision -> Incident,Related information concept link from Decision to Incident,Information Concept Link,,Decision,,Decision,15,,Incident
+,Decision -> Infrastructure,Related information concept link from Decision to Infrastructure,Information Concept Link,,Decision,,Decision,16,,Infrastructure
+,Decision -> Initiative,Related information concept link from Decision to Initiative,Information Concept Link,,Decision,,Decision,17,,Initiative
+,Decision -> Interaction,Related information concept link from Decision to Interaction,Information Concept Link,,Decision,,Decision,18,,Interaction
+,Decision -> Investment Portfolio,Related information concept link from Decision to Investment Portfolio,Information Concept Link,,Decision,,Decision,19,,Investment Portfolio
+,Decision -> Language,Related information concept link from Decision to Language,Information Concept Link,,Decision,,Decision,20,,Language
+,Decision -> Legislation,Related information concept link from Decision to Legislation,Information Concept Link,,Decision,,Decision,21,,Legislation
+,Decision -> License,Related information concept link from Decision to License,Information Concept Link,,Decision,,Decision,22,,License
+,Decision -> Location,Related information concept link from Decision to Location,Information Concept Link,,Decision,,Decision,23,,Location
+,Decision -> Market,Related information concept link from Decision to Market,Information Concept Link,,Decision,,Decision,24,,Market
+,Decision -> Objective,Related information concept link from Decision to Objective,Information Concept Link,,Decision,,Decision,25,,Objective
+,Decision -> Partner,Related information concept link from Decision to Partner,Information Concept Link,,Decision,,Decision,26,,Partner
+,Decision -> Plan,Related information concept link from Decision to Plan,Information Concept Link,,Decision,,Decision,27,,Plan
+,Decision -> Policy,Related information concept link from Decision to Policy,Information Concept Link,,Decision,,Decision,28,,Policy
+,Decision -> Public Sector Entity,Related information concept link from Decision to Public Sector Entity,Information Concept Link,,Decision,,Decision,29,,Public Sector Entity
+,Decision -> Research,Related information concept link from Decision to Research,Information Concept Link,,Decision,,Decision,30,,Research
+,Decision -> Time,Related information concept link from Decision to Time,Information Concept Link,,Decision,,Decision,31,,Time
+,Decision -> Training Course,Related information concept link from Decision to Training Course,Information Concept Link,,Decision,,Decision,32,,Training Course
+,Decision -> Work Item,Related information concept link from Decision to Work Item,Information Concept Link,,Decision,,Decision,33,,Work Item
+,Decision -> Work Queue,Related information concept link from Decision to Work Queue,Information Concept Link,,Decision,,Decision,34,,Work Queue
+,Dispute,"Category: Primary. An argument, disagreement, or protest of perceived injustice.",Information Concept,,,,,,,
+,Civil,Type for Dispute,Information Concept Type,,Dispute,,Dispute,1,,
+,Criminal,Type for Dispute,Information Concept Type,,Dispute,,Dispute,2,,
+,Administrative,Type for Dispute,Information Concept Type,,Dispute,,Dispute,3,,
+,Pending,State for Dispute,Information Concept State,,Dispute,,Dispute,1,,
+,Ongoing,State for Dispute,Information Concept State,,Dispute,,Dispute,2,,
+,Resolved,State for Dispute,Information Concept State,,Dispute,,Dispute,3,,
+,Posted/Published,State for Dispute,Information Concept State,,Dispute,,Dispute,4,,
+,Dispute -> Agreement,Related information concept link from Dispute to Agreement,Information Concept Link,,Dispute,,Dispute,1,,Agreement
+,Dispute -> Case,Related information concept link from Dispute to Case,Information Concept Link,,Dispute,,Dispute,2,,Case
+,Dispute -> Claim,Related information concept link from Dispute to Claim,Information Concept Link,,Dispute,,Dispute,3,,Claim
+,Dispute -> Constituent,Related information concept link from Dispute to Constituent,Information Concept Link,,Dispute,,Dispute,4,,Constituent
+,Dispute -> Partner,Related information concept link from Dispute to Partner,Information Concept Link,,Dispute,,Dispute,5,,Partner
+,Dispute -> Standard,Related information concept link from Dispute to Standard,Information Concept Link,,Dispute,,Dispute,6,,Standard
+,Dispute -> Vote,Related information concept link from Dispute to Vote,Information Concept Link,,Dispute,,Dispute,7,,Vote
+,Energy,Category: Primary. Sources of power.,Information Concept,,,,,,,
+,Electrical,Type for Energy,Information Concept Type,,Energy,,Energy,1,,
+,Thermal,Type for Energy,Information Concept Type,,Energy,,Energy,2,,
+,Motion,Type for Energy,Information Concept Type,,Energy,,Energy,3,,
+,Gravitational,Type for Energy,Information Concept Type,,Energy,,Energy,4,,
+,Sound,Type for Energy,Information Concept Type,,Energy,,Energy,5,,
+,Elastic,Type for Energy,Information Concept Type,,Energy,,Energy,6,,
+,Nuclear,Type for Energy,Information Concept Type,,Energy,,Energy,7,,
+,Chemical,Type for Energy,Information Concept Type,,Energy,,Energy,8,,
+,Radiant,Type for Energy,Information Concept Type,,Energy,,Energy,9,,
+,Conserved,State for Energy,Information Concept State,,Energy,,Energy,1,,
+,Transformed,State for Energy,Information Concept State,,Energy,,Energy,2,,
+,Energy -> Agreement Term,Related information concept link from Energy to Agreement Term,Information Concept Link,,Energy,,Energy,1,,Agreement Term
+,Energy -> Incident,Related information concept link from Energy to Incident,Information Concept Link,,Energy,,Energy,2,,Incident
+,Energy -> Initiative,Related information concept link from Energy to Initiative,Information Concept Link,,Energy,,Energy,3,,Initiative
+,Energy -> Legislation,Related information concept link from Energy to Legislation,Information Concept Link,,Energy,,Energy,4,,Legislation
+,Energy -> Location,Related information concept link from Energy to Location,Information Concept Link,,Energy,,Energy,5,,Location
+,Energy -> Operation,Related information concept link from Energy to Operation,Information Concept Link,,Energy,,Energy,6,,Operation
+,Energy -> Plan,Related information concept link from Energy to Plan,Information Concept Link,,Energy,,Energy,7,,Plan
+,Energy -> Policy,Related information concept link from Energy to Policy,Information Concept Link,,Energy,,Energy,8,,Policy
+,Event,"Category: Primary. An occurrence that has happened or may happen, especially one of importance, concern, or interest.",Information Concept,,,,,,,
+,Planned,Type for Event,Information Concept Type,,Event,,Event,1,,
+,Unplanned,Type for Event,Information Concept Type,,Event,,Event,2,,
+,Triggering,Type for Event,Information Concept Type,,Event,,Event,3,,
+,Resulting,Type for Event,Information Concept Type,,Event,,Event,4,,
+,Past,State for Event,Information Concept State,,Event,,Event,1,,
+,In-Progress,State for Event,Information Concept State,,Event,,Event,2,,
+,Future,State for Event,Information Concept State,,Event,,Event,3,,
+,Event -> Accreditation,Related information concept link from Event to Accreditation,Information Concept Link,,Event,,Event,1,,Accreditation
+,Event -> Agreement,Related information concept link from Event to Agreement,Information Concept Link,,Event,,Event,2,,Agreement
+,Event -> Asset,Related information concept link from Event to Asset,Information Concept Link,,Event,,Event,3,,Asset
+,Event -> Biological Organism,Related information concept link from Event to Biological Organism,Information Concept Link,,Event,,Event,4,,Biological Organism
+,Event -> Brand,Related information concept link from Event to Brand,Information Concept Link,,Event,,Event,5,,Brand
+,Event -> Campaign,Related information concept link from Event to Campaign,Information Concept Link,,Event,,Event,6,,Campaign
+,Event -> Case,Related information concept link from Event to Case,Information Concept Link,,Event,,Event,7,,Case
+,Event -> Channel,Related information concept link from Event to Channel,Information Concept Link,,Event,,Event,8,,Channel
+,Event -> Claim,Related information concept link from Event to Claim,Information Concept Link,,Event,,Event,9,,Claim
+,Event -> Competency,Related information concept link from Event to Competency,Information Concept Link,,Event,,Event,10,,Competency
+,Event -> Constituent,Related information concept link from Event to Constituent,Information Concept Link,,Event,,Event,11,,Constituent
+,Event -> Content Impression,Related information concept link from Event to Content Impression,Information Concept Link,,Event,,Event,12,,Content Impression
+,Event -> Content,Related information concept link from Event to Content,Information Concept Link,,Event,,Event,13,,Content
+,Event -> Conveyor,Related information concept link from Event to Conveyor,Information Concept Link,,Event,,Event,14,,Conveyor
+,Event -> Currency,Related information concept link from Event to Currency,Information Concept Link,,Event,,Event,15,,Currency
+,Event -> Dispute,Related information concept link from Event to Dispute,Information Concept Link,,Event,,Event,16,,Dispute
+,Event -> Energy,Related information concept link from Event to Energy,Information Concept Link,,Event,,Event,17,,Energy
+,Event -> Event,Related information concept link from Event to Event,Information Concept Link,,Event,,Event,18,,Event
+,Event -> Evidence,Related information concept link from Event to Evidence,Information Concept Link,,Event,,Event,19,,Evidence
+,Event -> Financial Account,Related information concept link from Event to Financial Account,Information Concept Link,,Event,,Event,20,,Financial Account
+,Event -> Financial Forecast,Related information concept link from Event to Financial Forecast,Information Concept Link,,Event,,Event,21,,Financial Forecast
+,Event -> Financial Instrument,Related information concept link from Event to Financial Instrument,Information Concept Link,,Event,,Event,22,,Financial Instrument
+,Event -> Financial Transaction,Related information concept link from Event to Financial Transaction,Information Concept Link,,Event,,Event,23,,Financial Transaction
+,Event -> Geographic Border,Related information concept link from Event to Geographic Border,Information Concept Link,,Event,,Event,24,,Geographic Border
+,Event -> Geographic Space,Related information concept link from Event to Geographic Space,Information Concept Link,,Event,,Event,25,,Geographic Space
+,Event -> Goal,Related information concept link from Event to Goal,Information Concept Link,,Event,,Event,26,,Goal
+,Event -> Government Service,Related information concept link from Event to Government Service,Information Concept Link,,Event,,Event,27,,Government Service
+,Event -> Health Condition,Related information concept link from Event to Health Condition,Information Concept Link,,Event,,Event,28,,Health Condition
+,Event -> Human Resource,Related information concept link from Event to Human Resource,Information Concept Link,,Event,,Event,29,,Human Resource
+,Event -> Incident,Related information concept link from Event to Incident,Information Concept Link,,Event,,Event,30,,Incident
+,Event -> Infrastructure,Related information concept link from Event to Infrastructure,Information Concept Link,,Event,,Event,31,,Infrastructure
+,Event -> Initiative,Related information concept link from Event to Initiative,Information Concept Link,,Event,,Event,32,,Initiative
+,Event -> Inquiry,Related information concept link from Event to Inquiry,Information Concept Link,,Event,,Event,33,,Inquiry
+,Event -> Intellectual Property Rights,Related information concept link from Event to Intellectual Property Rights,Information Concept Link,,Event,,Event,34,,Intellectual Property Rights
+,Event -> Interaction,Related information concept link from Event to Interaction,Information Concept Link,,Event,,Event,35,,Interaction
+,Event -> Investment Portfolio,Related information concept link from Event to Investment Portfolio,Information Concept Link,,Event,,Event,36,,Investment Portfolio
+,Event -> Job,Related information concept link from Event to Job,Information Concept Link,,Event,,Event,37,,Job
+,Event -> Language,Related information concept link from Event to Language,Information Concept Link,,Event,,Event,38,,Language
+,Event -> License,Related information concept link from Event to License,Information Concept Link,,Event,,Event,39,,License
+,Event -> Location,Related information concept link from Event to Location,Information Concept Link,,Event,,Event,40,,Location
+,Event -> Market,Related information concept link from Event to Market,Information Concept Link,,Event,,Event,41,,Market
+,Event -> Material,Related information concept link from Event to Material,Information Concept Link,,Event,,Event,42,,Material
+,Event -> Message,Related information concept link from Event to Message,Information Concept Link,,Event,,Event,43,,Message
+,Event -> Monetary Amount,Related information concept link from Event to Monetary Amount,Information Concept Link,,Event,,Event,44,,Monetary Amount
+,Event -> Natural Resource,Related information concept link from Event to Natural Resource,Information Concept Link,,Event,,Event,45,,Natural Resource
+,Event -> Network,Related information concept link from Event to Network,Information Concept Link,,Event,,Event,46,,Network
+,Event -> Objective,Related information concept link from Event to Objective,Information Concept Link,,Event,,Event,47,,Objective
+,Event -> Operation,Related information concept link from Event to Operation,Information Concept Link,,Event,,Event,48,,Operation
+,Event -> Order,Related information concept link from Event to Order,Information Concept Link,,Event,,Event,49,,Order
+,Event -> Partner,Related information concept link from Event to Partner,Information Concept Link,,Event,,Event,50,,Partner
+,Event -> Payment,Related information concept link from Event to Payment,Information Concept Link,,Event,,Event,51,,Payment
+,Event -> Plan,Related information concept link from Event to Plan,Information Concept Link,,Event,,Event,52,,Plan
+,Event -> Policy,Related information concept link from Event to Policy,Information Concept Link,,Event,,Event,53,,Policy
+,Event -> Public Sector Entity,Related information concept link from Event to Public Sector Entity,Information Concept Link,,Event,,Event,54,,Public Sector Entity
+,Event -> Research,Related information concept link from Event to Research,Information Concept Link,,Event,,Event,55,,Research
+,Event -> Route,Related information concept link from Event to Route,Information Concept Link,,Event,,Event,56,,Route
+,Event -> Schedule,Related information concept link from Event to Schedule,Information Concept Link,,Event,,Event,57,,Schedule
+,Event -> Standard,Related information concept link from Event to Standard,Information Concept Link,,Event,,Event,58,,Standard
+,Event -> Strategy,Related information concept link from Event to Strategy,Information Concept Link,,Event,,Event,59,,Strategy
+,Event -> Tax,Related information concept link from Event to Tax,Information Concept Link,,Event,,Event,60,,Tax
+,Event -> Time,Related information concept link from Event to Time,Information Concept Link,,Event,,Event,61,,Time
+,Event -> Training Course,Related information concept link from Event to Training Course,Information Concept Link,,Event,,Event,62,,Training Course
+,Event -> Trip,Related information concept link from Event to Trip,Information Concept Link,,Event,,Event,63,,Trip
+,Event -> Vision,Related information concept link from Event to Vision,Information Concept Link,,Event,,Event,64,,Vision
+,Event -> Vote,Related information concept link from Event to Vote,Information Concept Link,,Event,,Event,65,,Vote
+,Event -> Work,Related information concept link from Event to Work,Information Concept Link,,Event,,Event,66,,Work
+,Event -> Work Queue,Related information concept link from Event to Work Queue,Information Concept Link,,Event,,Event,67,,Work Queue
+,Evidence,Category: Primary. Proof to support a proposition.,Information Concept,,,,,,,
+,Demonstrative,Type for Evidence,Information Concept Type,,Evidence,,Evidence,1,,
+,Real,Type for Evidence,Information Concept Type,,Evidence,,Evidence,2,,
+,Testimonial,Type for Evidence,Information Concept Type,,Evidence,,Evidence,3,,
+,Documentary,Type for Evidence,Information Concept Type,,Evidence,,Evidence,4,,
+,Pending,State for Evidence,Information Concept State,,Evidence,,Evidence,1,,
+,Validated,State for Evidence,Information Concept State,,Evidence,,Evidence,2,,
+,Discredited,State for Evidence,Information Concept State,,Evidence,,Evidence,3,,
+,Evidence -> Accreditation,Related information concept link from Evidence to Accreditation,Information Concept Link,,Evidence,,Evidence,1,,Accreditation
+,Evidence -> Agreement,Related information concept link from Evidence to Agreement,Information Concept Link,,Evidence,,Evidence,2,,Agreement
+,Evidence -> Biological Organism,Related information concept link from Evidence to Biological Organism,Information Concept Link,,Evidence,,Evidence,3,,Biological Organism
+,Evidence -> Case,Related information concept link from Evidence to Case,Information Concept Link,,Evidence,,Evidence,4,,Case
+,Evidence -> Channel,Related information concept link from Evidence to Channel,Information Concept Link,,Evidence,,Evidence,5,,Channel
+,Evidence -> Claim,Related information concept link from Evidence to Claim,Information Concept Link,,Evidence,,Evidence,6,,Claim
+,Evidence -> Constituent,Related information concept link from Evidence to Constituent,Information Concept Link,,Evidence,,Evidence,7,,Constituent
+,Evidence -> Content,Related information concept link from Evidence to Content,Information Concept Link,,Evidence,,Evidence,8,,Content
+,Evidence -> Dispute,Related information concept link from Evidence to Dispute,Information Concept Link,,Evidence,,Evidence,9,,Dispute
+,Evidence -> Financial Account,Related information concept link from Evidence to Financial Account,Information Concept Link,,Evidence,,Evidence,10,,Financial Account
+,Evidence -> Financial Transaction,Related information concept link from Evidence to Financial Transaction,Information Concept Link,,Evidence,,Evidence,11,,Financial Transaction
+,Evidence -> Geographic Border,Related information concept link from Evidence to Geographic Border,Information Concept Link,,Evidence,,Evidence,12,,Geographic Border
+,Evidence -> Geographic Space,Related information concept link from Evidence to Geographic Space,Information Concept Link,,Evidence,,Evidence,13,,Geographic Space
+,Evidence -> Government Service,Related information concept link from Evidence to Government Service,Information Concept Link,,Evidence,,Evidence,14,,Government Service
+,Evidence -> Human Resource,Related information concept link from Evidence to Human Resource,Information Concept Link,,Evidence,,Evidence,15,,Human Resource
+,Evidence -> Incident,Related information concept link from Evidence to Incident,Information Concept Link,,Evidence,,Evidence,16,,Incident
+,Evidence -> Inquiry,Related information concept link from Evidence to Inquiry,Information Concept Link,,Evidence,,Evidence,17,,Inquiry
+,Evidence -> Intellectual Property Rights,Related information concept link from Evidence to Intellectual Property Rights,Information Concept Link,,Evidence,,Evidence,18,,Intellectual Property Rights
+,Evidence -> Language,Related information concept link from Evidence to Language,Information Concept Link,,Evidence,,Evidence,19,,Language
+,Evidence -> Legislation,Related information concept link from Evidence to Legislation,Information Concept Link,,Evidence,,Evidence,20,,Legislation
+,Evidence -> License,Related information concept link from Evidence to License,Information Concept Link,,Evidence,,Evidence,21,,License
+,Evidence -> Location,Related information concept link from Evidence to Location,Information Concept Link,,Evidence,,Evidence,22,,Location
+,Evidence -> Market,Related information concept link from Evidence to Market,Information Concept Link,,Evidence,,Evidence,23,,Market
+,Evidence -> Material,Related information concept link from Evidence to Material,Information Concept Link,,Evidence,,Evidence,24,,Material
+,Evidence -> Message,Related information concept link from Evidence to Message,Information Concept Link,,Evidence,,Evidence,25,,Message
+,Evidence -> Natural Resource,Related information concept link from Evidence to Natural Resource,Information Concept Link,,Evidence,,Evidence,26,,Natural Resource
+,Evidence -> Partner,Related information concept link from Evidence to Partner,Information Concept Link,,Evidence,,Evidence,27,,Partner
+,Evidence -> Plan,Related information concept link from Evidence to Plan,Information Concept Link,,Evidence,,Evidence,28,,Plan
+,Evidence -> Policy,Related information concept link from Evidence to Policy,Information Concept Link,,Evidence,,Evidence,29,,Policy
+,Evidence -> Research,Related information concept link from Evidence to Research,Information Concept Link,,Evidence,,Evidence,30,,Research
+,Evidence -> Time,Related information concept link from Evidence to Time,Information Concept Link,,Evidence,,Evidence,31,,Time
+,Evidence -> Vote,Related information concept link from Evidence to Vote,Information Concept Link,,Evidence,,Evidence,32,,Vote
+,Evidence -> Work Item,Related information concept link from Evidence to Work Item,Information Concept Link,,Evidence,,Evidence,33,,Work Item
+,Finance,Category: Primary. Monetary aspects and resources.,Information Concept,,,,,,,
+,Currency,Category: Secondary. An agreed medium of value exchange.,Information Concept,,,,,,,
+,Representational,Type for Currency,Information Concept Type,,Currency,,Currency,1,,
+,Intrinsic,Type for Currency,Information Concept Type,,Currency,,Currency,2,,
+,such as CAD,Type for Currency,Information Concept Type,,Currency,,Currency,3,,
+,USD,Type for Currency,Information Concept Type,,Currency,,Currency,4,,
+,GBP,Type for Currency,Information Concept Type,,Currency,,Currency,5,,
+,or RMB,Type for Currency,Information Concept Type,,Currency,,Currency,6,,
+,Recognized,State for Currency,Information Concept State,,Currency,,Currency,1,,
+,Unrecognized,State for Currency,Information Concept State,,Currency,,Currency,2,,
+,Financial Account,"Category: Secondary. A named container of monetary value transactions that are typically organized into assets, liabilities, income, expense, equity, and other related categories.",Information Concept,,,,,,,
+,Asset,Type for Financial Account,Information Concept Type,,Financial Account,,Financial Account,1,,
+,Equity/Capital,Type for Financial Account,Information Concept Type,,Financial Account,,Financial Account,2,,
+,Expense,Type for Financial Account,Information Concept Type,,Financial Account,,Financial Account,3,,
+,Income,Type for Financial Account,Information Concept Type,,Financial Account,,Financial Account,4,,
+,Liability,Type for Financial Account,Information Concept Type,,Financial Account,,Financial Account,5,,
+,Suspense,Type for Financial Account,Information Concept Type,,Financial Account,,Financial Account,6,,
+,Active,State for Financial Account,Information Concept State,,Financial Account,,Financial Account,1,,
+,Closed,State for Financial Account,Information Concept State,,Financial Account,,Financial Account,2,,
+,Pending,State for Financial Account,Information Concept State,,Financial Account,,Financial Account,3,,
+,Suspended,State for Financial Account,Information Concept State,,Financial Account,,Financial Account,4,,
+,Financial Account -> Constituent,Related information concept link from Financial Account to Constituent,Information Concept Link,,Financial Account,,Financial Account,1,,Constituent
+,Financial Account -> Currency,Related information concept link from Financial Account to Currency,Information Concept Link,,Financial Account,,Financial Account,2,,Currency
+,Financial Account -> Financial Account,Related information concept link from Financial Account to Financial Account,Information Concept Link,,Financial Account,,Financial Account,3,,Financial Account
+,Financial Account -> Financial Forecast,Related information concept link from Financial Account to Financial Forecast,Information Concept Link,,Financial Account,,Financial Account,4,,Financial Forecast
+,Financial Account -> Financial Position,Related information concept link from Financial Account to Financial Position,Information Concept Link,,Financial Account,,Financial Account,5,,Financial Position
+,Financial Account -> Location,Related information concept link from Financial Account to Location,Information Concept Link,,Financial Account,,Financial Account,6,,Location
+,Financial Account -> Partner,Related information concept link from Financial Account to Partner,Information Concept Link,,Financial Account,,Financial Account,7,,Partner
+,Financial Account -> Policy,Related information concept link from Financial Account to Policy,Information Concept Link,,Financial Account,,Financial Account,8,,Policy
+,Financial Account -> Public Sector Entity,Related information concept link from Financial Account to Public Sector Entity,Information Concept Link,,Financial Account,,Financial Account,9,,Public Sector Entity
+,Financial Forecast,"Category: Secondary. A financial estimate, prediction, or projection.",Information Concept,,,,,,,
+,Net-Worth Projection,Type for Financial Forecast,Information Concept Type,,Financial Forecast,,Financial Forecast,1,,
+,Income & Expense Projection (Budget),Type for Financial Forecast,Information Concept Type,,Financial Forecast,,Financial Forecast,2,,
+,Balance Sheet Projection,Type for Financial Forecast,Information Concept Type,,Financial Forecast,,Financial Forecast,3,,
+,Cash Flow Projection,Type for Financial Forecast,Information Concept Type,,Financial Forecast,,Financial Forecast,4,,
+,Current,State for Financial Forecast,Information Concept State,,Financial Forecast,,Financial Forecast,1,,
+,Historical,State for Financial Forecast,Information Concept State,,Financial Forecast,,Financial Forecast,2,,
+,Being-Prepared,State for Financial Forecast,Information Concept State,,Financial Forecast,,Financial Forecast,3,,
+,Completed,State for Financial Forecast,Information Concept State,,Financial Forecast,,Financial Forecast,4,,
+,Financial Position,Category: Secondary. A consolidated and holistic representation of actual financial standing or activity for a point in time or duration.,Information Concept,,,,,,,
+,Balance Sheet,Type for Financial Position,Information Concept Type,,Financial Position,,Financial Position,1,,
+,Cash Flow,Type for Financial Position,Information Concept Type,,Financial Position,,Financial Position,2,,
+,Income & Expense,Type for Financial Position,Information Concept Type,,Financial Position,,Financial Position,3,,
+,Net-Worth,Type for Financial Position,Information Concept Type,,Financial Position,,Financial Position,4,,
+,Current,State for Financial Position,Information Concept State,,Financial Position,,Financial Position,1,,
+,Historical,State for Financial Position,Information Concept State,,Financial Position,,Financial Position,2,,
+,Being-Prepared,State for Financial Position,Information Concept State,,Financial Position,,Financial Position,3,,
+,Completed,State for Financial Position,Information Concept State,,Financial Position,,Financial Position,4,,
+,Financial Position -> Financial Forecast,Related information concept link from Financial Position to Financial Forecast,Information Concept Link,,Financial Position,,Financial Position,1,,Financial Forecast
+,Financial Transaction,"Category: Secondary. An instance of a monetary amount movement or related exchange across businesses, agreements, or financial accounts.",Information Concept,,,,,,,
+,Sale,Type for Financial Transaction,Information Concept Type,,Financial Transaction,,Financial Transaction,1,,
+,Purchase,Type for Financial Transaction,Information Concept Type,,Financial Transaction,,Financial Transaction,2,,
+,Receipt,Type for Financial Transaction,Information Concept Type,,Financial Transaction,,Financial Transaction,3,,
+,Payment,Type for Financial Transaction,Information Concept Type,,Financial Transaction,,Financial Transaction,4,,
+,Deposit,Type for Financial Transaction,Information Concept Type,,Financial Transaction,,Financial Transaction,5,,
+,Withdrawal,Type for Financial Transaction,Information Concept Type,,Financial Transaction,,Financial Transaction,6,,
+,Executed,State for Financial Transaction,Information Concept State,,Financial Transaction,,Financial Transaction,1,,
+,Pending,State for Financial Transaction,Information Concept State,,Financial Transaction,,Financial Transaction,2,,
+,Rejected,State for Financial Transaction,Information Concept State,,Financial Transaction,,Financial Transaction,3,,
+,Cancelled,State for Financial Transaction,Information Concept State,,Financial Transaction,,Financial Transaction,4,,
+,Financial Transaction -> Asset,Related information concept link from Financial Transaction to Asset,Information Concept Link,,Financial Transaction,,Financial Transaction,1,,Asset
+,Financial Transaction -> Channel,Related information concept link from Financial Transaction to Channel,Information Concept Link,,Financial Transaction,,Financial Transaction,2,,Channel
+,Financial Transaction -> Constituent,Related information concept link from Financial Transaction to Constituent,Information Concept Link,,Financial Transaction,,Financial Transaction,3,,Constituent
+,Financial Transaction -> Currency,Related information concept link from Financial Transaction to Currency,Information Concept Link,,Financial Transaction,,Financial Transaction,4,,Currency
+,Financial Transaction -> Financial Account,Related information concept link from Financial Transaction to Financial Account,Information Concept Link,,Financial Transaction,,Financial Transaction,5,,Financial Account
+,Financial Transaction -> Human Resource,Related information concept link from Financial Transaction to Human Resource,Information Concept Link,,Financial Transaction,,Financial Transaction,6,,Human Resource
+,Financial Transaction -> Investment Portfolio,Related information concept link from Financial Transaction to Investment Portfolio,Information Concept Link,,Financial Transaction,,Financial Transaction,7,,Investment Portfolio
+,Financial Transaction -> Order,Related information concept link from Financial Transaction to Order,Information Concept Link,,Financial Transaction,,Financial Transaction,8,,Order
+,Financial Transaction -> Partner,Related information concept link from Financial Transaction to Partner,Information Concept Link,,Financial Transaction,,Financial Transaction,9,,Partner
+,Monetary Amount,Category: Secondary. A representation of value as expressed in a given currency.,Information Concept,,,,,,,
+,Negative,Type for Monetary Amount,Information Concept Type,,Monetary Amount,,Monetary Amount,1,,
+,Positive,Type for Monetary Amount,Information Concept Type,,Monetary Amount,,Monetary Amount,2,,
+,Zero,Type for Monetary Amount,Information Concept Type,,Monetary Amount,,Monetary Amount,3,,
+,Determined,State for Monetary Amount,Information Concept State,,Monetary Amount,,Monetary Amount,1,,
+,Estimated,State for Monetary Amount,Information Concept State,,Monetary Amount,,Monetary Amount,2,,
+,Undetermined,State for Monetary Amount,Information Concept State,,Monetary Amount,,Monetary Amount,3,,
+,Monetary Amount -> Currency,Related information concept link from Monetary Amount to Currency,Information Concept Link,,Monetary Amount,,Monetary Amount,1,,Currency
+,Monetary Amount -> Financial Account,Related information concept link from Monetary Amount to Financial Account,Information Concept Link,,Monetary Amount,,Monetary Amount,2,,Financial Account
+,Monetary Amount -> Financial Transaction,Related information concept link from Monetary Amount to Financial Transaction,Information Concept Link,,Monetary Amount,,Monetary Amount,3,,Financial Transaction
+,Monetary Amount -> Payment,Related information concept link from Monetary Amount to Payment,Information Concept Link,,Monetary Amount,,Monetary Amount,4,,Payment
+,Monetary Amount -> Tax,Related information concept link from Monetary Amount to Tax,Information Concept Link,,Monetary Amount,,Monetary Amount,5,,Tax
+,Payment,"Category: Secondary. An obligation to remit or receive a monetary amount between an organization and a constituent, partner, or other external party.",Information Concept,,,,,,,
+,Inbound,Type for Payment,Information Concept Type,,Payment,,Payment,1,,
+,Outbound,Type for Payment,Information Concept Type,,Payment,,Payment,2,,
+,Cancelled,State for Payment,Information Concept State,,Payment,,Payment,1,,
+,Paid,State for Payment,Information Concept State,,Payment,,Payment,2,,
+,Pending,State for Payment,Information Concept State,,Payment,,Payment,3,,
+,Unpaid,State for Payment,Information Concept State,,Payment,,Payment,4,,
+,Payment -> Channel,Related information concept link from Payment to Channel,Information Concept Link,,Payment,,Payment,1,,Channel
+,Payment -> License,Related information concept link from Payment to License,Information Concept Link,,Payment,,Payment,2,,License
+,Tax,Category: Secondary. A compulsory contribution of monetary value to governing bodies.,Information Concept,,,,,,,
+,Income,Type for Tax,Information Concept Type,,Tax,,Tax,1,,
+,Sales,Type for Tax,Information Concept Type,,Tax,,Tax,2,,
+,Property,Type for Tax,Information Concept Type,,Tax,,Tax,3,,
+,Current,State for Tax,Information Concept State,,Tax,,Tax,1,,
+,Historical,State for Tax,Information Concept State,,Tax,,Tax,2,,
+,Pending,State for Tax,Information Concept State,,Tax,,Tax,3,,
+,Planned,State for Tax,Information Concept State,,Tax,,Tax,4,,
+,Financial Instrument,"Category: Primary. A tradeable asset, such as stocks, bonds, bills of exchange, futures, options, evidence of ownership, and cash.",Information Concept,,,,,,,
+,Cash Equivalents,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,1,,
+,e.g.,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,2,,
+,check or draft,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,3,,
+,Trade-able Assets,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,4,,
+,stocks,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,6,,
+,corporate bonds,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,7,,
+,derivatives,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,8,,
+,futures,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,9,,
+,options,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,10,,
+,evidence of ownership such as a property title,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,11,,
+,Investment in Public Interests,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,12,,
+,treasury bonds,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,14,,
+,securities and municipal bonds.,Type for Financial Instrument,Information Concept Type,,Financial Instrument,,Financial Instrument,15,,
+,Valid,State for Financial Instrument,Information Concept State,,Financial Instrument,,Financial Instrument,1,,
+,Invalid,State for Financial Instrument,Information Concept State,,Financial Instrument,,Financial Instrument,2,,
+,Financial Instrument -> Financial Instrument,Related information concept link from Financial Instrument to Financial Instrument,Information Concept Link,,Financial Instrument,,Financial Instrument,1,,Financial Instrument
+,Financial Instrument -> Market,Related information concept link from Financial Instrument to Market,Information Concept Link,,Financial Instrument,,Financial Instrument,2,,Market
+,Geographic Space,"Category: Primary. A physical area across land, air, and water.",Information Concept,,,,,,,
+,National Land Territory,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,1,,
+,National Waters and Air Space Territory,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,2,,
+,Conservation Area,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,3,,
+,Indigenous Area,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,4,,
+,Rural Parcel,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,5,,
+,Urban Parcel,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,6,,
+,Restricted Access Area,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,7,,
+,such as Military site,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,8,,
+,Airport,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,9,,
+,or Port,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,10,,
+,an Area of Total Protection or Area of Partial Protection,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,11,,
+,such as a coast line,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,12,,
+,river line,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,13,,
+,railway perimeter,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,14,,
+,high voltage perimeter,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,15,,
+,or a Public Use Area,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,16,,
+,such as a hospital or school.,Type for Geographic Space,Information Concept Type,,Geographic Space,,Geographic Space,17,,
+,Planned-for-Use,State for Geographic Space,Information Concept State,,Geographic Space,,Geographic Space,1,,
+,In-Development,State for Geographic Space,Information Concept State,,Geographic Space,,Geographic Space,2,,
+,Developed,State for Geographic Space,Information Concept State,,Geographic Space,,Geographic Space,3,,
+,In-Use,State for Geographic Space,Information Concept State,,Geographic Space,,Geographic Space,4,,
+,Geographic Space -> Location,Related information concept link from Geographic Space to Location,Information Concept Link,,Geographic Space,,Geographic Space,1,,Location
+,Geographic Space -> Public Sector Entity,Related information concept link from Geographic Space to Public Sector Entity,Information Concept Link,,Geographic Space,,Geographic Space,2,,Public Sector Entity
+,Geographic Space -> Strategy,Related information concept link from Geographic Space to Strategy,Information Concept Link,,Geographic Space,,Geographic Space,3,,Strategy
+,Geographic Border,Category: Secondary. A line of demarcation around a geographic space or between one geographic space and another geographic space.,Information Concept,,,,,,,
+,Natural,Type for Geographic Border,Information Concept Type,,Geographic Border,,Geographic Border,1,,
+,Declared,Type for Geographic Border,Information Concept Type,,Geographic Border,,Geographic Border,2,,
+,Declared,State for Geographic Border,Information Concept State,,Geographic Border,,Geographic Border,1,,
+,Recognized,State for Geographic Border,Information Concept State,,Geographic Border,,Geographic Border,2,,
+,Disputed,State for Geographic Border,Information Concept State,,Geographic Border,,Geographic Border,3,,
+,Historical,State for Geographic Border,Information Concept State,,Geographic Border,,Geographic Border,4,,
+,Geographic Border -> Geographic Border,Related information concept link from Geographic Border to Geographic Border,Information Concept Link,,Geographic Border,,Geographic Border,1,,Geographic Border
+,Geographic Border -> Geographic Space,Related information concept link from Geographic Border to Geographic Space,Information Concept Link,,Geographic Border,,Geographic Border,2,,Geographic Space
+,Geographic Border -> Location,Related information concept link from Geographic Border to Location,Information Concept Link,,Geographic Border,,Geographic Border,3,,Location
+,Government Service,"Category: Primary. A named combination of goods, doing-of-work-for-others, and entitlements that can be offered to constituents.",Information Concept,,,,,,,
+,Good,Type for Government Service,Information Concept Type,,Government Service,,Government Service,1,,
+,Service,Type for Government Service,Information Concept Type,,Government Service,,Government Service,2,,
+,Planned,State for Government Service,Information Concept State,,Government Service,,Government Service,1,,
+,Offered,State for Government Service,Information Concept State,,Government Service,,Government Service,2,,
+,Discontinued,State for Government Service,Information Concept State,,Government Service,,Government Service,3,,
+,Government Service -> Asset,Related information concept link from Government Service to Asset,Information Concept Link,,Government Service,,Government Service,1,,Asset
+,Government Service -> Brand,Related information concept link from Government Service to Brand,Information Concept Link,,Government Service,,Government Service,2,,Brand
+,Government Service -> Channel,Related information concept link from Government Service to Channel,Information Concept Link,,Government Service,,Government Service,3,,Channel
+,Government Service -> Financial Forecast,Related information concept link from Government Service to Financial Forecast,Information Concept Link,,Government Service,,Government Service,4,,Financial Forecast
+,Government Service -> Government Service,Related information concept link from Government Service to Government Service,Information Concept Link,,Government Service,,Government Service,5,,Government Service
+,Government Service -> Intellectual Property Rights,Related information concept link from Government Service to Intellectual Property Rights,Information Concept Link,,Government Service,,Government Service,6,,Intellectual Property Rights
+,Government Service -> Location,Related information concept link from Government Service to Location,Information Concept Link,,Government Service,,Government Service,7,,Location
+,Government Service -> Market,Related information concept link from Government Service to Market,Information Concept Link,,Government Service,,Government Service,8,,Market
+,Government Service -> Plan,Related information concept link from Government Service to Plan,Information Concept Link,,Government Service,,Government Service,9,,Plan
+,Government Service -> Policy,Related information concept link from Government Service to Policy,Information Concept Link,,Government Service,,Government Service,10,,Policy
+,Government Service -> Strategy,Related information concept link from Government Service to Strategy,Information Concept Link,,Government Service,,Government Service,11,,Strategy
+,Health Condition,Category: Primary. A state of well-being of a human being or biological organism.,Information Concept,,,,,,,
+,Stable,Type for Health Condition,Information Concept Type,,Health Condition,,Health Condition,1,,
+,Resolvable,Type for Health Condition,Information Concept Type,,Health Condition,,Health Condition,2,,
+,Unresolvable,Type for Health Condition,Information Concept Type,,Health Condition,,Health Condition,3,,
+,Active,State for Health Condition,Information Concept State,,Health Condition,,Health Condition,1,,
+,Inactive,State for Health Condition,Information Concept State,,Health Condition,,Health Condition,2,,
+,Undetermined,State for Health Condition,Information Concept State,,Health Condition,,Health Condition,3,,
+,Health Condition -> Constituent,Related information concept link from Health Condition to Constituent,Information Concept Link,,Health Condition,,Health Condition,1,,Constituent
+,Human Resource,"Category: Primary. An individual who has, plans to have, or has had a legal agreement with the organization, which may include compensation and other benefits, on a temporary or permanent basis.",Information Concept,,,,,,,
+,Contractor,Type for Human Resource,Information Concept Type,,Human Resource,,Human Resource,1,,
+,Employee,Type for Human Resource,Information Concept Type,,Human Resource,,Human Resource,2,,
+,Intern,Type for Human Resource,Information Concept Type,,Human Resource,,Human Resource,3,,
+,Volunteer,Type for Human Resource,Information Concept Type,,Human Resource,,Human Resource,4,,
+,Former,State for Human Resource,Information Concept State,,Human Resource,,Human Resource,1,,
+,Current,State for Human Resource,Information Concept State,,Human Resource,,Human Resource,2,,
+,Future,State for Human Resource,Information Concept State,,Human Resource,,Human Resource,3,,
+,Human Resource -> Campaign,Related information concept link from Human Resource to Campaign,Information Concept Link,,Human Resource,,Human Resource,1,,Campaign
+,Human Resource -> Claim,Related information concept link from Human Resource to Claim,Information Concept Link,,Human Resource,,Human Resource,2,,Claim
+,Human Resource -> Competency,Related information concept link from Human Resource to Competency,Information Concept Link,,Human Resource,,Human Resource,3,,Competency
+,Human Resource -> Human Resource,Related information concept link from Human Resource to Human Resource,Information Concept Link,,Human Resource,,Human Resource,4,,Human Resource
+,Human Resource -> Infrastructure,Related information concept link from Human Resource to Infrastructure,Information Concept Link,,Human Resource,,Human Resource,5,,Infrastructure
+,Human Resource -> Job,Related information concept link from Human Resource to Job,Information Concept Link,,Human Resource,,Human Resource,6,,Job
+,Human Resource -> Language,Related information concept link from Human Resource to Language,Information Concept Link,,Human Resource,,Human Resource,7,,Language
+,Human Resource -> Legislation,Related information concept link from Human Resource to Legislation,Information Concept Link,,Human Resource,,Human Resource,8,,Legislation
+,Human Resource -> Location,Related information concept link from Human Resource to Location,Information Concept Link,,Human Resource,,Human Resource,9,,Location
+,Human Resource -> Operation,Related information concept link from Human Resource to Operation,Information Concept Link,,Human Resource,,Human Resource,10,,Operation
+,Human Resource -> Partner,Related information concept link from Human Resource to Partner,Information Concept Link,,Human Resource,,Human Resource,11,,Partner
+,Human Resource -> Payment,Related information concept link from Human Resource to Payment,Information Concept Link,,Human Resource,,Human Resource,12,,Payment
+,Human Resource -> Plan,Related information concept link from Human Resource to Plan,Information Concept Link,,Human Resource,,Human Resource,13,,Plan
+,Human Resource -> Policy,Related information concept link from Human Resource to Policy,Information Concept Link,,Human Resource,,Human Resource,14,,Policy
+,Human Resource -> Public Sector Entity,Related information concept link from Human Resource to Public Sector Entity,Information Concept Link,,Human Resource,,Human Resource,15,,Public Sector Entity
+,Human Resource -> Research,Related information concept link from Human Resource to Research,Information Concept Link,,Human Resource,,Human Resource,16,,Research
+,Incident,"Category: Primary. An unplanned, disruptive or potentially disruptive experience.",Information Concept,,,,,,,
+,Critical/Severe,Type for Incident,Information Concept Type,,Incident,,Incident,1,,
+,Emergency,Type for Incident,Information Concept Type,,Incident,,Incident,2,,
+,Major,Type for Incident,Information Concept Type,,Incident,,Incident,3,,
+,Minor,Type for Incident,Information Concept Type,,Incident,,Incident,4,,
+,Detected,State for Incident,Information Concept State,,Incident,,Incident,1,,
+,Acknowledged,State for Incident,Information Concept State,,Incident,,Incident,2,,
+,Appraised,State for Incident,Information Concept State,,Incident,,Incident,3,,
+,Concluded,State for Incident,Information Concept State,,Incident,,Incident,4,,
+,Incident -> Agreement,Related information concept link from Incident to Agreement,Information Concept Link,,Incident,,Incident,1,,Agreement
+,Incident -> Asset,Related information concept link from Incident to Asset,Information Concept Link,,Incident,,Incident,2,,Asset
+,Incident -> Brand,Related information concept link from Incident to Brand,Information Concept Link,,Incident,,Incident,3,,Brand
+,Incident -> Channel,Related information concept link from Incident to Channel,Information Concept Link,,Incident,,Incident,4,,Channel
+,Incident -> Constituent,Related information concept link from Incident to Constituent,Information Concept Link,,Incident,,Incident,5,,Constituent
+,Incident -> Financial Account,Related information concept link from Incident to Financial Account,Information Concept Link,,Incident,,Incident,6,,Financial Account
+,Incident -> Financial Transaction,Related information concept link from Incident to Financial Transaction,Information Concept Link,,Incident,,Incident,7,,Financial Transaction
+,Incident -> Government Service,Related information concept link from Incident to Government Service,Information Concept Link,,Incident,,Incident,8,,Government Service
+,Incident -> Human Resource,Related information concept link from Incident to Human Resource,Information Concept Link,,Incident,,Incident,9,,Human Resource
+,Incident -> Incident,Related information concept link from Incident to Incident,Information Concept Link,,Incident,,Incident,10,,Incident
+,Incident -> Initiative,Related information concept link from Incident to Initiative,Information Concept Link,,Incident,,Incident,11,,Initiative
+,Incident -> Interaction,Related information concept link from Incident to Interaction,Information Concept Link,,Incident,,Incident,12,,Interaction
+,Incident -> Legislation,Related information concept link from Incident to Legislation,Information Concept Link,,Incident,,Incident,13,,Legislation
+,Incident -> Partner,Related information concept link from Incident to Partner,Information Concept Link,,Incident,,Incident,14,,Partner
+,Incident -> Policy,Related information concept link from Incident to Policy,Information Concept Link,,Incident,,Incident,15,,Policy
+,Incident -> Strategy,Related information concept link from Incident to Strategy,Information Concept Link,,Incident,,Incident,16,,Strategy
+,Infrastructure,"Category: Primary. A physical structure or facility, which may include power grids, communication lines, railways, roadways, bridges, tunnels, and pipelines or conduits for water, gas, and power.",Information Concept,,,,,,,
+,Manufacturing,Type for Infrastructure,Information Concept Type,,Infrastructure,,Infrastructure,1,,
+,Services,Type for Infrastructure,Information Concept Type,,Infrastructure,,Infrastructure,2,,
+,Office,Type for Infrastructure,Information Concept Type,,Infrastructure,,Infrastructure,3,,
+,Distribution,Type for Infrastructure,Information Concept Type,,Infrastructure,,Infrastructure,4,,
+,Transportation,Type for Infrastructure,Information Concept Type,,Infrastructure,,Infrastructure,5,,
+,Communication,Type for Infrastructure,Information Concept Type,,Infrastructure,,Infrastructure,6,,
+,Storage,Type for Infrastructure,Information Concept Type,,Infrastructure,,Infrastructure,7,,
+,Planned,State for Infrastructure,Information Concept State,,Infrastructure,,Infrastructure,1,,
+,In-Development,State for Infrastructure,Information Concept State,,Infrastructure,,Infrastructure,2,,
+,In-Service,State for Infrastructure,Information Concept State,,Infrastructure,,Infrastructure,3,,
+,Not-in-Service,State for Infrastructure,Information Concept State,,Infrastructure,,Infrastructure,4,,
+,Infrastructure -> Competency,Related information concept link from Infrastructure to Competency,Information Concept Link,,Infrastructure,,Infrastructure,1,,Competency
+,Infrastructure -> Infrastructure,Related information concept link from Infrastructure to Infrastructure,Information Concept Link,,Infrastructure,,Infrastructure,2,,Infrastructure
+,Infrastructure -> Initiative,Related information concept link from Infrastructure to Initiative,Information Concept Link,,Infrastructure,,Infrastructure,3,,Initiative
+,Infrastructure -> Investment Portfolio,Related information concept link from Infrastructure to Investment Portfolio,Information Concept Link,,Infrastructure,,Infrastructure,4,,Investment Portfolio
+,Infrastructure -> Location,Related information concept link from Infrastructure to Location,Information Concept Link,,Infrastructure,,Infrastructure,5,,Location
+,Infrastructure -> Partner,Related information concept link from Infrastructure to Partner,Information Concept Link,,Infrastructure,,Infrastructure,6,,Partner
+,Infrastructure -> Plan,Related information concept link from Infrastructure to Plan,Information Concept Link,,Infrastructure,,Infrastructure,7,,Plan
+,Infrastructure -> Policy,Related information concept link from Infrastructure to Policy,Information Concept Link,,Infrastructure,,Infrastructure,8,,Policy
+,Infrastructure -> Public Sector Entity,Related information concept link from Infrastructure to Public Sector Entity,Information Concept Link,,Infrastructure,,Infrastructure,9,,Public Sector Entity
+,Infrastructure -> Work Item,Related information concept link from Infrastructure to Work Item,Information Concept Link,,Infrastructure,,Infrastructure,10,,Work Item
+,Initiative,Category: Primary. A coordinated collection of temporary endeavors undertaken to create a unique outcome.,Information Concept,,,,,,,
+,Strategic,Type for Initiative,Information Concept Type,,Initiative,,Initiative,1,,
+,Tactical,Type for Initiative,Information Concept Type,,Initiative,,Initiative,2,,
+,Operational,Type for Initiative,Information Concept Type,,Initiative,,Initiative,3,,
+,Proposed,State for Initiative,Information Concept State,,Initiative,,Initiative,1,,
+,In-Flight,State for Initiative,Information Concept State,,Initiative,,Initiative,2,,
+,Paused,State for Initiative,Information Concept State,,Initiative,,Initiative,3,,
+,Completed,State for Initiative,Information Concept State,,Initiative,,Initiative,4,,
+,Cancelled,State for Initiative,Information Concept State,,Initiative,,Initiative,5,,
+,Initiative -> Content,Related information concept link from Initiative to Content,Information Concept Link,,Initiative,,Initiative,1,,Content
+,Initiative -> Financial Forecast,Related information concept link from Initiative to Financial Forecast,Information Concept Link,,Initiative,,Initiative,2,,Financial Forecast
+,Initiative -> Financial Position,Related information concept link from Initiative to Financial Position,Information Concept Link,,Initiative,,Initiative,3,,Financial Position
+,Initiative -> Human Resource,Related information concept link from Initiative to Human Resource,Information Concept Link,,Initiative,,Initiative,4,,Human Resource
+,Initiative -> Investment Portfolio,Related information concept link from Initiative to Investment Portfolio,Information Concept Link,,Initiative,,Initiative,5,,Investment Portfolio
+,Initiative -> Partner,Related information concept link from Initiative to Partner,Information Concept Link,,Initiative,,Initiative,6,,Partner
+,Initiative -> Policy,Related information concept link from Initiative to Policy,Information Concept Link,,Initiative,,Initiative,7,,Policy
+,Initiative -> Strategy,Related information concept link from Initiative to Strategy,Information Concept Link,,Initiative,,Initiative,8,,Strategy
+,Initiative -> Work Item,Related information concept link from Initiative to Work Item,Information Concept Link,,Initiative,,Initiative,9,,Work Item
+,Inquiry,"Category: Primary. A question, request, feedback, or comment that may exist inside or outside of the organization.",Information Concept,,,,,,,
+,Application,Type for Inquiry,Information Concept Type,,Inquiry,,Inquiry,1,,
+,Feedback,Type for Inquiry,Information Concept Type,,Inquiry,,Inquiry,2,,
+,Issue,Type for Inquiry,Information Concept Type,,Inquiry,,Inquiry,3,,
+,Question,Type for Inquiry,Information Concept Type,,Inquiry,,Inquiry,4,,
+,Request,Type for Inquiry,Information Concept Type,,Inquiry,,Inquiry,5,,
+,Detected,State for Inquiry,Information Concept State,,Inquiry,,Inquiry,1,,
+,Acknowledged,State for Inquiry,Information Concept State,,Inquiry,,Inquiry,2,,
+,Accepted,State for Inquiry,Information Concept State,,Inquiry,,Inquiry,3,,
+,Rejected,State for Inquiry,Information Concept State,,Inquiry,,Inquiry,4,,
+,Concluded,State for Inquiry,Information Concept State,,Inquiry,,Inquiry,5,,
+,Inquiry -> Agreement,Related information concept link from Inquiry to Agreement,Information Concept Link,,Inquiry,,Inquiry,1,,Agreement
+,Inquiry -> Asset,Related information concept link from Inquiry to Asset,Information Concept Link,,Inquiry,,Inquiry,2,,Asset
+,Inquiry -> Brand,Related information concept link from Inquiry to Brand,Information Concept Link,,Inquiry,,Inquiry,3,,Brand
+,Inquiry -> Channel,Related information concept link from Inquiry to Channel,Information Concept Link,,Inquiry,,Inquiry,4,,Channel
+,Inquiry -> Constituent,Related information concept link from Inquiry to Constituent,Information Concept Link,,Inquiry,,Inquiry,5,,Constituent
+,Inquiry -> Content,Related information concept link from Inquiry to Content,Information Concept Link,,Inquiry,,Inquiry,6,,Content
+,Inquiry -> Energy,Related information concept link from Inquiry to Energy,Information Concept Link,,Inquiry,,Inquiry,7,,Energy
+,Inquiry -> Financial Account,Related information concept link from Inquiry to Financial Account,Information Concept Link,,Inquiry,,Inquiry,8,,Financial Account
+,Inquiry -> Financial Transaction,Related information concept link from Inquiry to Financial Transaction,Information Concept Link,,Inquiry,,Inquiry,9,,Financial Transaction
+,Inquiry -> Government Service,Related information concept link from Inquiry to Government Service,Information Concept Link,,Inquiry,,Inquiry,10,,Government Service
+,Inquiry -> Human Resource,Related information concept link from Inquiry to Human Resource,Information Concept Link,,Inquiry,,Inquiry,11,,Human Resource
+,Inquiry -> Incident,Related information concept link from Inquiry to Incident,Information Concept Link,,Inquiry,,Inquiry,12,,Incident
+,Inquiry -> Initiative,Related information concept link from Inquiry to Initiative,Information Concept Link,,Inquiry,,Inquiry,13,,Initiative
+,Inquiry -> Inquiry,Related information concept link from Inquiry to Inquiry,Information Concept Link,,Inquiry,,Inquiry,14,,Inquiry
+,Inquiry -> Interaction,Related information concept link from Inquiry to Interaction,Information Concept Link,,Inquiry,,Inquiry,15,,Interaction
+,Inquiry -> Natural Resource,Related information concept link from Inquiry to Natural Resource,Information Concept Link,,Inquiry,,Inquiry,16,,Natural Resource
+,Inquiry -> Order,Related information concept link from Inquiry to Order,Information Concept Link,,Inquiry,,Inquiry,17,,Order
+,Inquiry -> Partner,Related information concept link from Inquiry to Partner,Information Concept Link,,Inquiry,,Inquiry,18,,Partner
+,Inquiry -> Policy,Related information concept link from Inquiry to Policy,Information Concept Link,,Inquiry,,Inquiry,19,,Policy
+,Inquiry -> Research,Related information concept link from Inquiry to Research,Information Concept Link,,Inquiry,,Inquiry,20,,Research
+,Inquiry -> Strategy,Related information concept link from Inquiry to Strategy,Information Concept Link,,Inquiry,,Inquiry,21,,Strategy
+,Inquiry -> Training Course,Related information concept link from Inquiry to Training Course,Information Concept Link,,Inquiry,,Inquiry,22,,Training Course
+,Inquiry -> Work Item,Related information concept link from Inquiry to Work Item,Information Concept Link,,Inquiry,,Inquiry,23,,Work Item
+,Intellectual Property Rights,"Category: Primary. A legal protection, such as patent, trademark, or copyright.",Information Concept,,,,,,,
+,Patent,Type for Intellectual Property Rights,Information Concept Type,,Intellectual Property Rights,,Intellectual Property Rights,1,,
+,Copyright,Type for Intellectual Property Rights,Information Concept Type,,Intellectual Property Rights,,Intellectual Property Rights,2,,
+,Trademark,Type for Intellectual Property Rights,Information Concept Type,,Intellectual Property Rights,,Intellectual Property Rights,3,,
+,Trade Secret,Type for Intellectual Property Rights,Information Concept Type,,Intellectual Property Rights,,Intellectual Property Rights,4,,
+,Incipient,State for Intellectual Property Rights,Information Concept State,,Intellectual Property Rights,,Intellectual Property Rights,1,,
+,Applied-for,State for Intellectual Property Rights,Information Concept State,,Intellectual Property Rights,,Intellectual Property Rights,2,,
+,Granted,State for Intellectual Property Rights,Information Concept State,,Intellectual Property Rights,,Intellectual Property Rights,3,,
+,Intellectual Property Rights -> Agreement,Related information concept link from Intellectual Property Rights to Agreement,Information Concept Link,,Intellectual Property Rights,,Intellectual Property Rights,1,,Agreement
+,Intellectual Property Rights -> Asset,Related information concept link from Intellectual Property Rights to Asset,Information Concept Link,,Intellectual Property Rights,,Intellectual Property Rights,2,,Asset
+,Intellectual Property Rights -> Content,Related information concept link from Intellectual Property Rights to Content,Information Concept Link,,Intellectual Property Rights,,Intellectual Property Rights,3,,Content
+,Intellectual Property Rights -> Intellectual Property Rights,Related information concept link from Intellectual Property Rights to Intellectual Property Rights,Information Concept Link,,Intellectual Property Rights,,Intellectual Property Rights,4,,Intellectual Property Rights
+,Intellectual Property Rights -> Public Sector Entity,Related information concept link from Intellectual Property Rights to Public Sector Entity,Information Concept Link,,Intellectual Property Rights,,Intellectual Property Rights,5,,Public Sector Entity
+,Interaction,"Category: Primary. A set of contemporaneous collaborations or contacts about a given subject, over a span of time, between two or more entities, using one or more channels, at one or more physical or virtual locations such as meetings, interviews, seminars, or consultations.",Information Concept,,,,,,,
+,Internal,Type for Interaction,Information Concept Type,,Interaction,,Interaction,1,,
+,External,Type for Interaction,Information Concept Type,,Interaction,,Interaction,2,,
+,Meeting,Type for Interaction,Information Concept Type,,Interaction,,Interaction,3,,
+,Interview,Type for Interaction,Information Concept Type,,Interaction,,Interaction,4,,
+,Seminar,Type for Interaction,Information Concept Type,,Interaction,,Interaction,5,,
+,Consultation,Type for Interaction,Information Concept Type,,Interaction,,Interaction,6,,
+,In-Progress,State for Interaction,Information Concept State,,Interaction,,Interaction,1,,
+,Past,State for Interaction,Information Concept State,,Interaction,,Interaction,2,,
+,Planned,State for Interaction,Information Concept State,,Interaction,,Interaction,3,,
+,Interaction -> Agreement,Related information concept link from Interaction to Agreement,Information Concept Link,,Interaction,,Interaction,1,,Agreement
+,Interaction -> Asset,Related information concept link from Interaction to Asset,Information Concept Link,,Interaction,,Interaction,2,,Asset
+,Interaction -> Channel,Related information concept link from Interaction to Channel,Information Concept Link,,Interaction,,Interaction,3,,Channel
+,Interaction -> Constituent,Related information concept link from Interaction to Constituent,Information Concept Link,,Interaction,,Interaction,4,,Constituent
+,Interaction -> Content,Related information concept link from Interaction to Content,Information Concept Link,,Interaction,,Interaction,5,,Content
+,Interaction -> Dispute,Related information concept link from Interaction to Dispute,Information Concept Link,,Interaction,,Interaction,6,,Dispute
+,Interaction -> Evidence,Related information concept link from Interaction to Evidence,Information Concept Link,,Interaction,,Interaction,7,,Evidence
+,Interaction -> Government Service,Related information concept link from Interaction to Government Service,Information Concept Link,,Interaction,,Interaction,8,,Government Service
+,Interaction -> Human Resource,Related information concept link from Interaction to Human Resource,Information Concept Link,,Interaction,,Interaction,9,,Human Resource
+,Interaction -> Infrastructure,Related information concept link from Interaction to Infrastructure,Information Concept Link,,Interaction,,Interaction,10,,Infrastructure
+,Interaction -> Initiative,Related information concept link from Interaction to Initiative,Information Concept Link,,Interaction,,Interaction,11,,Initiative
+,Interaction -> Interaction,Related information concept link from Interaction to Interaction,Information Concept Link,,Interaction,,Interaction,12,,Interaction
+,Interaction -> Language,Related information concept link from Interaction to Language,Information Concept Link,,Interaction,,Interaction,13,,Language
+,Interaction -> Legislation,Related information concept link from Interaction to Legislation,Information Concept Link,,Interaction,,Interaction,14,,Legislation
+,Interaction -> Location,Related information concept link from Interaction to Location,Information Concept Link,,Interaction,,Interaction,15,,Location
+,Interaction -> Market,Related information concept link from Interaction to Market,Information Concept Link,,Interaction,,Interaction,16,,Market
+,Interaction -> Objective,Related information concept link from Interaction to Objective,Information Concept Link,,Interaction,,Interaction,17,,Objective
+,Interaction -> Partner,Related information concept link from Interaction to Partner,Information Concept Link,,Interaction,,Interaction,18,,Partner
+,Interaction -> Plan,Related information concept link from Interaction to Plan,Information Concept Link,,Interaction,,Interaction,19,,Plan
+,Interaction -> Policy,Related information concept link from Interaction to Policy,Information Concept Link,,Interaction,,Interaction,20,,Policy
+,Interaction -> Public Sector Entity,Related information concept link from Interaction to Public Sector Entity,Information Concept Link,,Interaction,,Interaction,21,,Public Sector Entity
+,Interaction -> Strategy,Related information concept link from Interaction to Strategy,Information Concept Link,,Interaction,,Interaction,22,,Strategy
+,Interaction -> Training Course,Related information concept link from Interaction to Training Course,Information Concept Link,,Interaction,,Interaction,23,,Training Course
+,Investment Portfolio,Category: Primary. A set of resources expected to increase in value or provide income.,Information Concept,,,,,,,
+,Financial Instrument,Type for Investment Portfolio,Information Concept Type,,Investment Portfolio,,Investment Portfolio,1,,
+,Property,Type for Investment Portfolio,Information Concept Type,,Investment Portfolio,,Investment Portfolio,2,,
+,Active,State for Investment Portfolio,Information Concept State,,Investment Portfolio,,Investment Portfolio,1,,
+,Closed,State for Investment Portfolio,Information Concept State,,Investment Portfolio,,Investment Portfolio,2,,
+,Pending,State for Investment Portfolio,Information Concept State,,Investment Portfolio,,Investment Portfolio,3,,
+,Investment Portfolio -> Agreement,Related information concept link from Investment Portfolio to Agreement,Information Concept Link,,Investment Portfolio,,Investment Portfolio,1,,Agreement
+,Investment Portfolio -> Currency,Related information concept link from Investment Portfolio to Currency,Information Concept Link,,Investment Portfolio,,Investment Portfolio,2,,Currency
+,Investment Portfolio -> Financial Account,Related information concept link from Investment Portfolio to Financial Account,Information Concept Link,,Investment Portfolio,,Investment Portfolio,3,,Financial Account
+,Investment Portfolio -> Financial Forecast,Related information concept link from Investment Portfolio to Financial Forecast,Information Concept Link,,Investment Portfolio,,Investment Portfolio,4,,Financial Forecast
+,Investment Portfolio -> Financial Instrument,Related information concept link from Investment Portfolio to Financial Instrument,Information Concept Link,,Investment Portfolio,,Investment Portfolio,5,,Financial Instrument
+,Investment Portfolio -> Financial Position,Related information concept link from Investment Portfolio to Financial Position,Information Concept Link,,Investment Portfolio,,Investment Portfolio,6,,Financial Position
+,Investment Portfolio -> Investment Portfolio,Related information concept link from Investment Portfolio to Investment Portfolio,Information Concept Link,,Investment Portfolio,,Investment Portfolio,7,,Investment Portfolio
+,Investment Portfolio -> Payment,Related information concept link from Investment Portfolio to Payment,Information Concept Link,,Investment Portfolio,,Investment Portfolio,8,,Payment
+,Investment Portfolio -> Plan,Related information concept link from Investment Portfolio to Plan,Information Concept Link,,Investment Portfolio,,Investment Portfolio,9,,Plan
+,Investment Portfolio -> Policy,Related information concept link from Investment Portfolio to Policy,Information Concept Link,,Investment Portfolio,,Investment Portfolio,10,,Policy
+,Investment Portfolio -> Research,Related information concept link from Investment Portfolio to Research,Information Concept Link,,Investment Portfolio,,Investment Portfolio,11,,Research
+,Investment Portfolio -> Strategy,Related information concept link from Investment Portfolio to Strategy,Information Concept Link,,Investment Portfolio,,Investment Portfolio,12,,Strategy
+,Job,"Category: Primary. A named category of accountabilities, whether remunerative or non-remunerative, associated with an assigned, specific, and accountable business duty, role, or function that can be executed by a human or non-human resource.",Information Concept,,,,,,,
+,Permanent,Type for Job,Information Concept Type,,Job,,Job,1,,
+,Temporary,Type for Job,Information Concept Type,,Job,,Job,2,,
+,Closed,State for Job,Information Concept State,,Job,,Job,1,,
+,Open,State for Job,Information Concept State,,Job,,Job,2,,
+,Job -> Agreement,Related information concept link from Job to Agreement,Information Concept Link,,Job,,Job,1,,Agreement
+,Job -> Competency,Related information concept link from Job to Competency,Information Concept Link,,Job,,Job,2,,Competency
+,Job -> Constituent,Related information concept link from Job to Constituent,Information Concept Link,,Job,,Job,3,,Constituent
+,Job -> Content,Related information concept link from Job to Content,Information Concept Link,,Job,,Job,4,,Content
+,Job -> Job,Related information concept link from Job to Job,Information Concept Link,,Job,,Job,5,,Job
+,Job -> Location,Related information concept link from Job to Location,Information Concept Link,,Job,,Job,6,,Location
+,Job -> Plan,Related information concept link from Job to Plan,Information Concept Link,,Job,,Job,7,,Plan
+,Job -> Policy,Related information concept link from Job to Policy,Information Concept Link,,Job,,Job,8,,Policy
+,Job -> Strategy,Related information concept link from Job to Strategy,Information Concept Link,,Job,,Job,9,,Strategy
+,Language,"Category: Primary. A method of communication or dialect variant consisting of units of representation or meaning, such as numbers, words, symbols, sounds, or other physical manifestations and gestures, presented in a structured way.",Information Concept,,,,,,,
+,Receptive,Type for Language,Information Concept Type,,Language,,Language,1,,
+,Expressive,Type for Language,Information Concept Type,,Language,,Language,2,,
+,Pragmatic,Type for Language,Information Concept Type,,Language,,Language,3,,
+,Recognized,State for Language,Information Concept State,,Language,,Language,1,,
+,Unrecognized,State for Language,Information Concept State,,Language,,Language,2,,
+,Language -> Content,Related information concept link from Language to Content,Information Concept Link,,Language,,Language,1,,Content
+,Language -> Language,Related information concept link from Language to Language,Information Concept Link,,Language,,Language,2,,Language
+,Language -> Location,Related information concept link from Language to Location,Information Concept Link,,Language,,Language,3,,Location
+,Legislation,Category: Primary. A set of authoritative directives that include laws or related statutory instruments.,Information Concept,,,,,,,
+,Bills,Type for Legislation,Information Concept Type,,Legislation,,Legislation,1,,
+,Joint Resolutions,Type for Legislation,Information Concept Type,,Legislation,,Legislation,2,,
+,Concurrent Resolutions,Type for Legislation,Information Concept Type,,Legislation,,Legislation,3,,
+,Simple Resolution,Type for Legislation,Information Concept Type,,Legislation,,Legislation,4,,
+,Regulation,Type for Legislation,Information Concept Type,,Legislation,,Legislation,5,,
+,Pending,State for Legislation,Information Concept State,,Legislation,,Legislation,1,,
+,Passed,State for Legislation,Information Concept State,,Legislation,,Legislation,2,,
+,In Force,State for Legislation,Information Concept State,,Legislation,,Legislation,3,,
+,Vetoed,State for Legislation,Information Concept State,,Legislation,,Legislation,4,,
+,Rescinded,State for Legislation,Information Concept State,,Legislation,,Legislation,5,,
+,Legislation -> Agreement,Related information concept link from Legislation to Agreement,Information Concept Link,,Legislation,,Legislation,1,,Agreement
+,Legislation -> Event,Related information concept link from Legislation to Event,Information Concept Link,,Legislation,,Legislation,2,,Event
+,Legislation -> Intellectual Property Rights,Related information concept link from Legislation to Intellectual Property Rights,Information Concept Link,,Legislation,,Legislation,3,,Intellectual Property Rights
+,Legislation -> Language,Related information concept link from Legislation to Language,Information Concept Link,,Legislation,,Legislation,4,,Language
+,Legislation -> Legislation,Related information concept link from Legislation to Legislation,Information Concept Link,,Legislation,,Legislation,5,,Legislation
+,Legislation -> Location,Related information concept link from Legislation to Location,Information Concept Link,,Legislation,,Legislation,6,,Location
+,Legislation -> Partner,Related information concept link from Legislation to Partner,Information Concept Link,,Legislation,,Legislation,7,,Partner
+,Legislation -> Policy,Related information concept link from Legislation to Policy,Information Concept Link,,Legislation,,Legislation,8,,Policy
+,Legislation -> Public Sector Entity,Related information concept link from Legislation to Public Sector Entity,Information Concept Link,,Legislation,,Legislation,9,,Public Sector Entity
+,Legislation -> Research,Related information concept link from Legislation to Research,Information Concept Link,,Legislation,,Legislation,10,,Research
+,Legislation -> Strategy,Related information concept link from Legislation to Strategy,Information Concept Link,,Legislation,,Legislation,11,,Strategy
+,License,"Category: Primary. An authorization to perform a regulated activity, awarded by duly recognized governmental agency or third party, applied to an individual or organization, to engage in an activity, such as fishing, or use of regulated objects, such as modes of transportation or hazardous materials.",Information Concept,,,,,,,
+,Commercial,Type for License,Information Concept Type,,License,,License,1,,
+,Conveyor,Type for License,Information Concept Type,,License,,License,2,,
+,Animal,Type for License,Information Concept Type,,License,,License,3,,
+,Builder,Type for License,Information Concept Type,,License,,License,4,,
+,Sport,Type for License,Information Concept Type,,License,,License,5,,
+,Applied-for,State for License,Information Concept State,,License,,License,1,,
+,Granted,State for License,Information Concept State,,License,,License,2,,
+,Expired,State for License,Information Concept State,,License,,License,3,,
+,License -> Channel,Related information concept link from License to Channel,Information Concept Link,,License,,License,1,,Channel
+,License -> Constituent,Related information concept link from License to Constituent,Information Concept Link,,License,,License,2,,Constituent
+,License -> Financial Account,Related information concept link from License to Financial Account,Information Concept Link,,License,,License,3,,Financial Account
+,License -> License,Related information concept link from License to License,Information Concept Link,,License,,License,4,,License
+,License -> Material,Related information concept link from License to Material,Information Concept Link,,License,,License,5,,Material
+,License -> Partner,Related information concept link from License to Partner,Information Concept Link,,License,,License,6,,Partner
+,License -> Policy,Related information concept link from License to Policy,Information Concept Link,,License,,License,7,,Policy
+,License -> Public Sector Entity,Related information concept link from License to Public Sector Entity,Information Concept Link,,License,,License,8,,Public Sector Entity
+,License -> Time,Related information concept link from License to Time,Information Concept Link,,License,,License,9,,Time
+,License Term,Category: Secondary. A legally enforceable condition set forth within the bounds of a license.,Information Concept,,,,,,,
+,Fixed,Type for License Term,Information Concept Type,,License Term,,License Term,1,,
+,Variable,Type for License Term,Information Concept Type,,License Term,,License Term,2,,
+,Pending,State for License Term,Information Concept State,,License Term,,License Term,1,,
+,In Force,State for License Term,Information Concept State,,License Term,,License Term,2,,
+,Terminated,State for License Term,Information Concept State,,License Term,,License Term,3,,
+,Abandoned,State for License Term,Information Concept State,,License Term,,License Term,4,,
+,License Term -> License Term,Related information concept link from License Term to License Term,Information Concept Link,,License Term,,License Term,1,,License Term
+,License Term -> Partner,Related information concept link from License Term to Partner,Information Concept Link,,License Term,,License Term,2,,Partner
+,Location,Category: Primary. A position or site.,Information Concept,,,,,,,
+,Point,Type for Location,Information Concept Type,,Location,,Location,1,,
+,Area,Type for Location,Information Concept Type,,Location,,Location,2,,
+,Space,Type for Location,Information Concept Type,,Location,,Location,3,,
+,Known,State for Location,Information Concept State,,Location,,Location,1,,
+,Unknown,State for Location,Information Concept State,,Location,,Location,2,,
+,Location -> Location,Related information concept link from Location to Location,Information Concept Link,,Location,,Location,1,,Location
+,Market,"Category: Primary. Individuals, populations of individuals, or organizations constituting the demand for existing or future products and services.",Information Concept,,,,,,,
+,Regional,Type for Market,Information Concept Type,,Market,,Market,1,,
+,Conceptual,Type for Market,Information Concept Type,,Market,,Market,2,,
+,Locational,Type for Market,Information Concept Type,,Market,,Market,3,,
+,Non-Locational,Type for Market,Information Concept Type,,Market,,Market,4,,
+,Latent,State for Market,Information Concept State,,Market,,Market,1,,
+,Explicit,State for Market,Information Concept State,,Market,,Market,2,,
+,Market -> Brand,Related information concept link from Market to Brand,Information Concept Link,,Market,,Market,1,,Brand
+,Market -> Currency,Related information concept link from Market to Currency,Information Concept Link,,Market,,Market,2,,Currency
+,Market -> Location,Related information concept link from Market to Location,Information Concept Link,,Market,,Market,3,,Location
+,Material,"Category: Primary. Food, ingredients, chemicals, waste, and other physical elements used to enable an outcome including sustaining life, the growing of crops, the construction of assets and infrastructure, and the powering of equipment and conveyors.",Information Concept,,,,,,,
+,Food,Type for Material,Information Concept Type,,Material,,Material,1,,
+,Chemicals,Type for Material,Information Concept Type,,Material,,Material,2,,
+,Fuel,Type for Material,Information Concept Type,,Material,,Material,3,,
+,Waste,Type for Material,Information Concept Type,,Material,,Material,4,,
+,Raw,State for Material,Information Concept State,,Material,,Material,1,,
+,Sourced,State for Material,Information Concept State,,Material,,Material,2,,
+,Stocked,State for Material,Information Concept State,,Material,,Material,3,,
+,Depleted,State for Material,Information Concept State,,Material,,Material,4,,
+,Material -> Channel,Related information concept link from Material to Channel,Information Concept Link,,Material,,Material,1,,Channel
+,Material -> Location,Related information concept link from Material to Location,Information Concept Link,,Material,,Material,2,,Location
+,Material -> Partner,Related information concept link from Material to Partner,Information Concept Link,,Material,,Material,3,,Partner
+,Material -> Plan,Related information concept link from Material to Plan,Information Concept Link,,Material,,Material,4,,Plan
+,Message,"Category: Primary. A verbal, written, recorded, or digitally-represented communication, including missives, notifications, alerts, and other internally or externally targeted communication about the organization's mission, products, plans, activities, and other focal points.",Information Concept,,,,,,,
+,Internal (Inbound),Type for Message,Information Concept Type,,Message,,Message,1,,
+,External (Outbound),Type for Message,Information Concept Type,,Message,,Message,2,,
+,Formulating,State for Message,Information Concept State,,Message,,Message,1,,
+,Formulated,State for Message,Information Concept State,,Message,,Message,2,,
+,Message -> Accreditation,Related information concept link from Message to Accreditation,Information Concept Link,,Message,,Message,1,,Accreditation
+,Message -> Agreement,Related information concept link from Message to Agreement,Information Concept Link,,Message,,Message,2,,Agreement
+,Message -> Asset,Related information concept link from Message to Asset,Information Concept Link,,Message,,Message,3,,Asset
+,Message -> Biological Organism,Related information concept link from Message to Biological Organism,Information Concept Link,,Message,,Message,4,,Biological Organism
+,Message -> Campaign,Related information concept link from Message to Campaign,Information Concept Link,,Message,,Message,5,,Campaign
+,Message -> Channel,Related information concept link from Message to Channel,Information Concept Link,,Message,,Message,6,,Channel
+,Message -> Dispute,Related information concept link from Message to Dispute,Information Concept Link,,Message,,Message,7,,Dispute
+,Message -> Energy,Related information concept link from Message to Energy,Information Concept Link,,Message,,Message,8,,Energy
+,Message -> Financial Account,Related information concept link from Message to Financial Account,Information Concept Link,,Message,,Message,9,,Financial Account
+,Message -> Financial Transaction,Related information concept link from Message to Financial Transaction,Information Concept Link,,Message,,Message,10,,Financial Transaction
+,Message -> Geographic Border,Related information concept link from Message to Geographic Border,Information Concept Link,,Message,,Message,11,,Geographic Border
+,Message -> Geographic Space,Related information concept link from Message to Geographic Space,Information Concept Link,,Message,,Message,12,,Geographic Space
+,Message -> Government Service,Related information concept link from Message to Government Service,Information Concept Link,,Message,,Message,13,,Government Service
+,Message -> Human Resource,Related information concept link from Message to Human Resource,Information Concept Link,,Message,,Message,14,,Human Resource
+,Message -> Incident,Related information concept link from Message to Incident,Information Concept Link,,Message,,Message,15,,Incident
+,Message -> Initiative,Related information concept link from Message to Initiative,Information Concept Link,,Message,,Message,16,,Initiative
+,Message -> Inquiry,Related information concept link from Message to Inquiry,Information Concept Link,,Message,,Message,17,,Inquiry
+,Message -> Interaction,Related information concept link from Message to Interaction,Information Concept Link,,Message,,Message,18,,Interaction
+,Message -> Language,Related information concept link from Message to Language,Information Concept Link,,Message,,Message,19,,Language
+,Message -> Legislation,Related information concept link from Message to Legislation,Information Concept Link,,Message,,Message,20,,Legislation
+,Message -> License,Related information concept link from Message to License,Information Concept Link,,Message,,Message,21,,License
+,Message -> Location,Related information concept link from Message to Location,Information Concept Link,,Message,,Message,22,,Location
+,Message -> Market,Related information concept link from Message to Market,Information Concept Link,,Message,,Message,23,,Market
+,Message -> Message,Related information concept link from Message to Message,Information Concept Link,,Message,,Message,24,,Message
+,Message -> Natural Resource,Related information concept link from Message to Natural Resource,Information Concept Link,,Message,,Message,25,,Natural Resource
+,Message -> Partner,Related information concept link from Message to Partner,Information Concept Link,,Message,,Message,26,,Partner
+,Message -> Plan,Related information concept link from Message to Plan,Information Concept Link,,Message,,Message,27,,Plan
+,Message -> Policy,Related information concept link from Message to Policy,Information Concept Link,,Message,,Message,28,,Policy
+,Message -> Research,Related information concept link from Message to Research,Information Concept Link,,Message,,Message,29,,Research
+,Message -> Strategy,Related information concept link from Message to Strategy,Information Concept Link,,Message,,Message,30,,Strategy
+,Message -> Training Course,Related information concept link from Message to Training Course,Information Concept Link,,Message,,Message,31,,Training Course
+,Message -> Work Item,Related information concept link from Message to Work Item,Information Concept Link,,Message,,Message,32,,Work Item
+,Natural Resource,Category: Primary. Matter that can occur in nature.,Information Concept,,,,,,,
+,Renewable,Type for Natural Resource,Information Concept Type,,Natural Resource,,Natural Resource,1,,
+,Non-renewable,Type for Natural Resource,Information Concept Type,,Natural Resource,,Natural Resource,2,,
+,Organic,Type for Natural Resource,Information Concept Type,,Natural Resource,,Natural Resource,3,,
+,Inorganic,Type for Natural Resource,Information Concept Type,,Natural Resource,,Natural Resource,4,,
+,Metallic,Type for Natural Resource,Information Concept Type,,Natural Resource,,Natural Resource,5,,
+,Non-metallic,Type for Natural Resource,Information Concept Type,,Natural Resource,,Natural Resource,6,,
+,Potential,State for Natural Resource,Information Concept State,,Natural Resource,,Natural Resource,1,,
+,Sourced,State for Natural Resource,Information Concept State,,Natural Resource,,Natural Resource,2,,
+,Actual,State for Natural Resource,Information Concept State,,Natural Resource,,Natural Resource,3,,
+,Reserve,State for Natural Resource,Information Concept State,,Natural Resource,,Natural Resource,4,,
+,Depleted,State for Natural Resource,Information Concept State,,Natural Resource,,Natural Resource,5,,
+,Natural Resource -> Case,Related information concept link from Natural Resource to Case,Information Concept Link,,Natural Resource,,Natural Resource,1,,Case
+,Natural Resource -> Geographic Space,Related information concept link from Natural Resource to Geographic Space,Information Concept Link,,Natural Resource,,Natural Resource,2,,Geographic Space
+,Natural Resource -> Incident,Related information concept link from Natural Resource to Incident,Information Concept Link,,Natural Resource,,Natural Resource,3,,Incident
+,Natural Resource -> Initiative,Related information concept link from Natural Resource to Initiative,Information Concept Link,,Natural Resource,,Natural Resource,4,,Initiative
+,Natural Resource -> Legislation,Related information concept link from Natural Resource to Legislation,Information Concept Link,,Natural Resource,,Natural Resource,5,,Legislation
+,Natural Resource -> Location,Related information concept link from Natural Resource to Location,Information Concept Link,,Natural Resource,,Natural Resource,6,,Location
+,Natural Resource -> Operation,Related information concept link from Natural Resource to Operation,Information Concept Link,,Natural Resource,,Natural Resource,7,,Operation
+,Natural Resource -> Plan,Related information concept link from Natural Resource to Plan,Information Concept Link,,Natural Resource,,Natural Resource,8,,Plan
+,Natural Resource -> Policy,Related information concept link from Natural Resource to Policy,Information Concept Link,,Natural Resource,,Natural Resource,9,,Policy
+,Natural Resource -> Route,Related information concept link from Natural Resource to Route,Information Concept Link,,Natural Resource,,Natural Resource,10,,Route
+,Network,"Category: Primary. A set of connected arcs and nodes that may be associated with infrastructure, assets, locations, routes, and other business objects.",Information Concept,,,,,,,
+,Transportation,Type for Network,Information Concept Type,,Network,,Network,1,,
+,Telecommunication,Type for Network,Information Concept Type,,Network,,Network,2,,
+,Infrastructure,Type for Network,Information Concept Type,,Network,,Network,3,,
+,Utility,Type for Network,Information Concept Type,,Network,,Network,4,,
+,Household,Type for Network,Information Concept Type,,Network,,Network,5,,
+,Family,Type for Network,Information Concept Type,,Network,,Network,6,,
+,"""Social Service Benefit Unit""",Type for Network,Information Concept Type,,Network,,Network,7,,
+,"""Care Unit""",Type for Network,Information Concept Type,,Network,,Network,8,,
+,Proposed,State for Network,Information Concept State,,Network,,Network,1,,
+,Operational,State for Network,Information Concept State,,Network,,Network,2,,
+,Non-operational,State for Network,Information Concept State,,Network,,Network,3,,
+,Network -> Asset,Related information concept link from Network to Asset,Information Concept Link,,Network,,Network,1,,Asset
+,Network -> Geographic Space,Related information concept link from Network to Geographic Space,Information Concept Link,,Network,,Network,2,,Geographic Space
+,Network -> Location,Related information concept link from Network to Location,Information Concept Link,,Network,,Network,3,,Location
+,Network -> Network,Related information concept link from Network to Network,Information Concept Link,,Network,,Network,4,,Network
+,Network -> Plan,Related information concept link from Network to Plan,Information Concept Link,,Network,,Network,5,,Plan
+,Network -> Policy,Related information concept link from Network to Policy,Information Concept Link,,Network,,Network,6,,Policy
+,Network -> Strategy,Related information concept link from Network to Strategy,Information Concept Link,,Network,,Network,7,,Strategy
+,Network Arc,Category: Secondary. A connection or association between nodes in a network.,Information Concept,,,,,,,
+,Lane,Type for Network Arc,Information Concept Type,,Network Arc,,Network Arc,1,,
+,Waterway Channel,Type for Network Arc,Information Concept Type,,Network Arc,,Network Arc,2,,
+,Street,Type for Network Arc,Information Concept Type,,Network Arc,,Network Arc,3,,
+,Road,Type for Network Arc,Information Concept Type,,Network Arc,,Network Arc,4,,
+,Path,Type for Network Arc,Information Concept Type,,Network Arc,,Network Arc,5,,
+,Air Corridor,Type for Network Arc,Information Concept Type,,Network Arc,,Network Arc,6,,
+,Line,Type for Network Arc,Information Concept Type,,Network Arc,,Network Arc,7,,
+,Familial,Type for Network Arc,Information Concept Type,,Network Arc,,Network Arc,8,,
+,Legal custodian,Type for Network Arc,Information Concept Type,,Network Arc,,Network Arc,9,,
+,co-housed,Type for Network Arc,Information Concept Type,,Network Arc,,Network Arc,10,,
+,Proposed,State for Network Arc,Information Concept State,,Network Arc,,Network Arc,1,,
+,Planned,State for Network Arc,Information Concept State,,Network Arc,,Network Arc,2,,
+,Defined,State for Network Arc,Information Concept State,,Network Arc,,Network Arc,3,,
+,Active,State for Network Arc,Information Concept State,,Network Arc,,Network Arc,4,,
+,Inactive,State for Network Arc,Information Concept State,,Network Arc,,Network Arc,5,,
+,Retired,State for Network Arc,Information Concept State,,Network Arc,,Network Arc,6,,
+,Network Arc -> Network Node,Related information concept link from Network Arc to Network Node,Information Concept Link,,Network Arc,,Network Arc,1,,Network Node
+,Network Node,Category: Secondary. A connection point in a network.,Information Concept,,,,,,,
+,Transport Nodes - Stop,Type for Network Node,Information Concept Type,,Network Node,,Network Node,1,,
+,Terminus,Type for Network Node,Information Concept Type,,Network Node,,Network Node,2,,
+,JunctionShipping Nodes - Operation,Type for Network Node,Information Concept Type,,Network Node,,Network Node,3,,
+,Warehouse,Type for Network Node,Information Concept Type,,Network Node,,Network Node,4,,
+,Customer,Type for Network Node,Information Concept Type,,Network Node,,Network Node,5,,
+,Proposed,State for Network Node,Information Concept State,,Network Node,,Network Node,1,,
+,Planned,State for Network Node,Information Concept State,,Network Node,,Network Node,2,,
+,Defined,State for Network Node,Information Concept State,,Network Node,,Network Node,3,,
+,Active,State for Network Node,Information Concept State,,Network Node,,Network Node,4,,
+,Inactive,State for Network Node,Information Concept State,,Network Node,,Network Node,5,,
+,Retired,State for Network Node,Information Concept State,,Network Node,,Network Node,6,,
+,Network Node -> Plan,Related information concept link from Network Node to Plan,Information Concept Link,,Network Node,,Network Node,1,,Plan
+,Operation,"Category: Primary. An orchestration of work to achieve a specific objective constrained by time and location, which may include, for example, transportation center, monitoring station, law enforcement, or administrative shift cycles across government.",Information Concept,,,,,,,
+,Military,Type for Operation,Information Concept Type,,Operation,,Operation,1,,
+,Research,Type for Operation,Information Concept Type,,Operation,,Operation,2,,
+,Quarantine,Type for Operation,Information Concept Type,,Operation,,Operation,3,,
+,Border Control,Type for Operation,Information Concept Type,,Operation,,Operation,4,,
+,Rescue and Recovery,Type for Operation,Information Concept Type,,Operation,,Operation,5,,
+,Emergency Mobilization,Type for Operation,Information Concept Type,,Operation,,Operation,6,,
+,Election,Type for Operation,Information Concept Type,,Operation,,Operation,7,,
+,Proposed,State for Operation,Information Concept State,,Operation,,Operation,1,,
+,Active,State for Operation,Information Concept State,,Operation,,Operation,2,,
+,Paused,State for Operation,Information Concept State,,Operation,,Operation,3,,
+,Completed,State for Operation,Information Concept State,,Operation,,Operation,4,,
+,Cancelled,State for Operation,Information Concept State,,Operation,,Operation,5,,
+,Operation -> Brand,Related information concept link from Operation to Brand,Information Concept Link,,Operation,,Operation,1,,Brand
+,Operation -> Infrastructure,Related information concept link from Operation to Infrastructure,Information Concept Link,,Operation,,Operation,2,,Infrastructure
+,Operation -> Investment Portfolio,Related information concept link from Operation to Investment Portfolio,Information Concept Link,,Operation,,Operation,3,,Investment Portfolio
+,Operation -> Location,Related information concept link from Operation to Location,Information Concept Link,,Operation,,Operation,4,,Location
+,Operation -> Market,Related information concept link from Operation to Market,Information Concept Link,,Operation,,Operation,5,,Market
+,Operation -> Network,Related information concept link from Operation to Network,Information Concept Link,,Operation,,Operation,6,,Network
+,Operation -> Policy,Related information concept link from Operation to Policy,Information Concept Link,,Operation,,Operation,7,,Policy
+,Operation -> Public Sector Entity,Related information concept link from Operation to Public Sector Entity,Information Concept Link,,Operation,,Operation,8,,Public Sector Entity
+,Operation -> Strategy,Related information concept link from Operation to Strategy,Information Concept Link,,Operation,,Operation,9,,Strategy
+,Order,"Category: Primary. An instruction, by one party to another, to buy, sell, exchange, provide, or deliver goods or services.",Information Concept,,,,,,,
+,Purchase,Type for Order,Information Concept Type,,Order,,Order,1,,
+,Ship,Type for Order,Information Concept Type,,Order,,Order,2,,
+,Work,Type for Order,Information Concept Type,,Order,,Order,3,,
+,Customer,Type for Order,Information Concept Type,,Order,,Order,4,,
+,Pending,State for Order,Information Concept State,,Order,,Order,1,,
+,Open,State for Order,Information Concept State,,Order,,Order,2,,
+,Closed,State for Order,Information Concept State,,Order,,Order,3,,
+,Order -> Agreement,Related information concept link from Order to Agreement,Information Concept Link,,Order,,Order,1,,Agreement
+,Order -> Asset,Related information concept link from Order to Asset,Information Concept Link,,Order,,Order,2,,Asset
+,Order -> Channel,Related information concept link from Order to Channel,Information Concept Link,,Order,,Order,3,,Channel
+,Order -> Constituent,Related information concept link from Order to Constituent,Information Concept Link,,Order,,Order,4,,Constituent
+,Order -> Financial Instrument,Related information concept link from Order to Financial Instrument,Information Concept Link,,Order,,Order,5,,Financial Instrument
+,Order -> Human Resource,Related information concept link from Order to Human Resource,Information Concept Link,,Order,,Order,6,,Human Resource
+,Order -> Infrastructure,Related information concept link from Order to Infrastructure,Information Concept Link,,Order,,Order,7,,Infrastructure
+,Order -> License,Related information concept link from Order to License,Information Concept Link,,Order,,Order,8,,License
+,Order -> Order,Related information concept link from Order to Order,Information Concept Link,,Order,,Order,9,,Order
+,Order -> Partner,Related information concept link from Order to Partner,Information Concept Link,,Order,,Order,10,,Partner
+,Order -> Payment,Related information concept link from Order to Payment,Information Concept Link,,Order,,Order,11,,Payment
+,Order Item,Category: Secondary. An order element that refers to a specific good or service.,Information Concept,,,,,,,
+,Mandatory,Type for Order Item,Information Concept Type,,Order Item,,Order Item,1,,
+,Optional,Type for Order Item,Information Concept Type,,Order Item,,Order Item,2,,
+,Back-ordered,State for Order Item,Information Concept State,,Order Item,,Order Item,1,,
+,Completed,State for Order Item,Information Concept State,,Order Item,,Order Item,2,,
+,Invoiced,State for Order Item,Information Concept State,,Order Item,,Order Item,3,,
+,On-Hold,State for Order Item,Information Concept State,,Order Item,,Order Item,4,,
+,Paid,State for Order Item,Information Concept State,,Order Item,,Order Item,5,,
+,Received,State for Order Item,Information Concept State,,Order Item,,Order Item,6,,
+,Order Item -> Asset,Related information concept link from Order Item to Asset,Information Concept Link,,Order Item,,Order Item,1,,Asset
+,Order Item -> Government Service,Related information concept link from Order Item to Government Service,Information Concept Link,,Order Item,,Order Item,2,,Government Service
+,Order Item -> Work Item,Related information concept link from Order Item to Work Item,Information Concept Link,,Order Item,,Order Item,3,,Work Item
+,Partner,"Category: Primary. A legal entity that has, plans to have, or has had some degree of involvement with the organization.",Information Concept,,,,,,,
+,Supply,Type for Partner,Information Concept Type,,Partner,,Partner,1,,
+,Distribution,Type for Partner,Information Concept Type,,Partner,,Partner,2,,
+,Support,Type for Partner,Information Concept Type,,Partner,,Partner,3,,
+,Potential,State for Partner,Information Concept State,,Partner,,Partner,1,,
+,Actual,State for Partner,Information Concept State,,Partner,,Partner,2,,
+,Past,State for Partner,Information Concept State,,Partner,,Partner,3,,
+,Partner -> Biological Organism,Related information concept link from Partner to Biological Organism,Information Concept Link,,Partner,,Partner,1,,Biological Organism
+,Partner -> Channel,Related information concept link from Partner to Channel,Information Concept Link,,Partner,,Partner,2,,Channel
+,Partner -> Competency,Related information concept link from Partner to Competency,Information Concept Link,,Partner,,Partner,3,,Competency
+,Partner -> Energy,Related information concept link from Partner to Energy,Information Concept Link,,Partner,,Partner,4,,Energy
+,Partner -> Financial Forecast,Related information concept link from Partner to Financial Forecast,Information Concept Link,,Partner,,Partner,5,,Financial Forecast
+,Partner -> Financial Position,Related information concept link from Partner to Financial Position,Information Concept Link,,Partner,,Partner,6,,Financial Position
+,Partner -> Geographic Space,Related information concept link from Partner to Geographic Space,Information Concept Link,,Partner,,Partner,7,,Geographic Space
+,Partner -> Government Service,Related information concept link from Partner to Government Service,Information Concept Link,,Partner,,Partner,8,,Government Service
+,Partner -> Investment Portfolio,Related information concept link from Partner to Investment Portfolio,Information Concept Link,,Partner,,Partner,9,,Investment Portfolio
+,Partner -> Language,Related information concept link from Partner to Language,Information Concept Link,,Partner,,Partner,10,,Language
+,Partner -> Location,Related information concept link from Partner to Location,Information Concept Link,,Partner,,Partner,11,,Location
+,Partner -> Market,Related information concept link from Partner to Market,Information Concept Link,,Partner,,Partner,12,,Market
+,Partner -> Natural Resource,Related information concept link from Partner to Natural Resource,Information Concept Link,,Partner,,Partner,13,,Natural Resource
+,Partner -> Partner,Related information concept link from Partner to Partner,Information Concept Link,,Partner,,Partner,14,,Partner
+,Partner -> Policy,Related information concept link from Partner to Policy,Information Concept Link,,Partner,,Partner,15,,Policy
+,Partner -> Strategy,Related information concept link from Partner to Strategy,Information Concept Link,,Partner,,Partner,16,,Strategy
+,Plan,"Category: Primary. An organized, sequenced set of steps or instructions, which may include milestones, intended to achieve a result when completed.",Information Concept,,,,,,,
+,Strategic,Type for Plan,Information Concept Type,,Plan,,Plan,1,,
+,Tactical,Type for Plan,Information Concept Type,,Plan,,Plan,2,,
+,Operational,Type for Plan,Information Concept Type,,Plan,,Plan,3,,
+,Sales,Type for Plan,Information Concept Type,,Plan,,Plan,4,,
+,Financial,Type for Plan,Information Concept Type,,Plan,,Plan,5,,
+,In-Formulation,State for Plan,Information Concept State,,Plan,,Plan,1,,
+,Formulated,State for Plan,Information Concept State,,Plan,,Plan,2,,
+,Plan -> Asset,Related information concept link from Plan to Asset,Information Concept Link,,Plan,,Plan,1,,Asset
+,Plan -> Channel,Related information concept link from Plan to Channel,Information Concept Link,,Plan,,Plan,2,,Channel
+,Plan -> Financial Forecast,Related information concept link from Plan to Financial Forecast,Information Concept Link,,Plan,,Plan,3,,Financial Forecast
+,Plan -> Financial Position,Related information concept link from Plan to Financial Position,Information Concept Link,,Plan,,Plan,4,,Financial Position
+,Plan -> Initiative,Related information concept link from Plan to Initiative,Information Concept Link,,Plan,,Plan,5,,Initiative
+,Plan -> Location,Related information concept link from Plan to Location,Information Concept Link,,Plan,,Plan,6,,Location
+,Plan -> Objective,Related information concept link from Plan to Objective,Information Concept Link,,Plan,,Plan,7,,Objective
+,Plan -> Partner,Related information concept link from Plan to Partner,Information Concept Link,,Plan,,Plan,8,,Partner
+,Plan -> Plan,Related information concept link from Plan to Plan,Information Concept Link,,Plan,,Plan,9,,Plan
+,Plan -> Policy,Related information concept link from Plan to Policy,Information Concept Link,,Plan,,Plan,10,,Policy
+,Plan -> Research,Related information concept link from Plan to Research,Information Concept Link,,Plan,,Plan,11,,Research
+,Plan -> Strategy,Related information concept link from Plan to Strategy,Information Concept Link,,Plan,,Plan,12,,Strategy
+,Plan -> Work Item,Related information concept link from Plan to Work Item,Information Concept Link,,Plan,,Plan,13,,Work Item
+,Policy,"Category: Primary. A set of rules, procedures, regulations, and principles, or, a codified proposed intent.",Information Concept,,,,,,,
+,Formal,Type for Policy,Information Concept Type,,Policy,,Policy,1,,
+,Informal,Type for Policy,Information Concept Type,,Policy,,Policy,2,,
+,Temporary,Type for Policy,Information Concept Type,,Policy,,Policy,3,,
+,Permanent,Type for Policy,Information Concept Type,,Policy,,Policy,4,,
+,Draft,State for Policy,Information Concept State,,Policy,,Policy,1,,
+,Proposed,State for Policy,Information Concept State,,Policy,,Policy,2,,
+,Adopted,State for Policy,Information Concept State,,Policy,,Policy,3,,
+,Rescinded,State for Policy,Information Concept State,,Policy,,Policy,4,,
+,Policy -> Location,Related information concept link from Policy to Location,Information Concept Link,,Policy,,Policy,1,,Location
+,Policy -> Policy,Related information concept link from Policy to Policy,Information Concept Link,,Policy,,Policy,2,,Policy
+,Public Sector Entity,Category: Primary. A governmental body or collection of governmental bodies.,Information Concept,,,,,,,
+,For-Profit,Type for Public Sector Entity,Information Concept Type,,Public Sector Entity,,Public Sector Entity,1,,
+,Not-for-Profit,Type for Public Sector Entity,Information Concept Type,,Public Sector Entity,,Public Sector Entity,2,,
+,For-Benefit,Type for Public Sector Entity,Information Concept Type,,Public Sector Entity,,Public Sector Entity,3,,
+,Corporation,Type for Public Sector Entity,Information Concept Type,,Public Sector Entity,,Public Sector Entity,4,,
+,Partnership,Type for Public Sector Entity,Information Concept Type,,Public Sector Entity,,Public Sector Entity,5,,
+,Sole Proprietorship,Type for Public Sector Entity,Information Concept Type,,Public Sector Entity,,Public Sector Entity,6,,
+,Government Organizations,Type for Public Sector Entity,Information Concept Type,,Public Sector Entity,,Public Sector Entity,7,,
+,Extant,State for Public Sector Entity,Information Concept State,,Public Sector Entity,,Public Sector Entity,1,,
+,Non-Extant,State for Public Sector Entity,Information Concept State,,Public Sector Entity,,Public Sector Entity,2,,
+,Temporary,State for Public Sector Entity,Information Concept State,,Public Sector Entity,,Public Sector Entity,3,,
+,In-Formation,State for Public Sector Entity,Information Concept State,,Public Sector Entity,,Public Sector Entity,4,,
+,Public Sector Entity -> Financial Forecast,Related information concept link from Public Sector Entity to Financial Forecast,Information Concept Link,,Public Sector Entity,,Public Sector Entity,1,,Financial Forecast
+,Public Sector Entity -> Financial Position,Related information concept link from Public Sector Entity to Financial Position,Information Concept Link,,Public Sector Entity,,Public Sector Entity,2,,Financial Position
+,Public Sector Entity -> Investment Portfolio,Related information concept link from Public Sector Entity to Investment Portfolio,Information Concept Link,,Public Sector Entity,,Public Sector Entity,3,,Investment Portfolio
+,Public Sector Entity -> Job,Related information concept link from Public Sector Entity to Job,Information Concept Link,,Public Sector Entity,,Public Sector Entity,4,,Job
+,Public Sector Entity -> Policy,Related information concept link from Public Sector Entity to Policy,Information Concept Link,,Public Sector Entity,,Public Sector Entity,5,,Policy
+,Public Sector Entity -> Public Sector Entity,Related information concept link from Public Sector Entity to Public Sector Entity,Information Concept Link,,Public Sector Entity,,Public Sector Entity,6,,Public Sector Entity
+,Public Sector Entity -> Strategy,Related information concept link from Public Sector Entity to Strategy,Information Concept Link,,Public Sector Entity,,Public Sector Entity,7,,Strategy
+,Research,Category: Primary. A systematic investigation into materials and sources intended to establish facts and produce insights.,Information Concept,,,,,,,
+,Primary,Type for Research,Information Concept Type,,Research,,Research,1,,
+,Secondary,Type for Research,Information Concept Type,,Research,,Research,2,,
+,Qualitative,Type for Research,Information Concept Type,,Research,,Research,3,,
+,Quantitative,Type for Research,Information Concept Type,,Research,,Research,4,,
+,Planned,State for Research,Information Concept State,,Research,,Research,1,,
+,Active,State for Research,Information Concept State,,Research,,Research,2,,
+,Concluded,State for Research,Information Concept State,,Research,,Research,3,,
+,Research -> Asset,Related information concept link from Research to Asset,Information Concept Link,,Research,,Research,1,,Asset
+,Research -> Constituent,Related information concept link from Research to Constituent,Information Concept Link,,Research,,Research,2,,Constituent
+,Research -> Content,Related information concept link from Research to Content,Information Concept Link,,Research,,Research,3,,Content
+,Research -> Government Service,Related information concept link from Research to Government Service,Information Concept Link,,Research,,Research,4,,Government Service
+,Research -> Initiative,Related information concept link from Research to Initiative,Information Concept Link,,Research,,Research,5,,Initiative
+,Research -> Market,Related information concept link from Research to Market,Information Concept Link,,Research,,Research,6,,Market
+,Research -> Research,Related information concept link from Research to Research,Information Concept Link,,Research,,Research,7,,Research
+,Route,"Category: Primary. A way or course taken in getting from a starting point to a destination, which may include stops along the way.",Information Concept,,,,,,,
+,Fixed-route,Type for Route,Information Concept Type,,Route,,Route,1,,
+,Flexible Route,Type for Route,Information Concept Type,,Route,,Route,2,,
+,Radial Route,Type for Route,Information Concept Type,,Route,,Route,3,,
+,Diameter Route,Type for Route,Information Concept Type,,Route,,Route,4,,
+,Tangential Route,Type for Route,Information Concept Type,,Route,,Route,5,,
+,Sequential Route,Type for Route,Information Concept Type,,Route,,Route,6,,
+,Circular,Type for Route,Information Concept Type,,Route,,Route,7,,
+,Lacial,Type for Route,Information Concept Type,,Route,,Route,8,,
+,Route,Type for Route,Information Concept Type,,Route,,Route,9,,
+,Arcantial Route,Type for Route,Information Concept Type,,Route,,Route,10,,
+,Circumferential Route,Type for Route,Information Concept Type,,Route,,Route,11,,
+,Circumferential Peripheral Route,Type for Route,Information Concept Type,,Route,,Route,12,,
+,Linear,Type for Route,Information Concept Type,,Route,,Route,13,,
+,Feeder,Type for Route,Information Concept Type,,Route,,Route,14,,
+,Proposed,State for Route,Information Concept State,,Route,,Route,1,,
+,Planned,State for Route,Information Concept State,,Route,,Route,2,,
+,Executed,State for Route,Information Concept State,,Route,,Route,3,,
+,Route -> Asset,Related information concept link from Route to Asset,Information Concept Link,,Route,,Route,1,,Asset
+,Route -> Campaign,Related information concept link from Route to Campaign,Information Concept Link,,Route,,Route,2,,Campaign
+,Route -> Location,Related information concept link from Route to Location,Information Concept Link,,Route,,Route,3,,Location
+,Route -> Partner,Related information concept link from Route to Partner,Information Concept Link,,Route,,Route,4,,Partner
+,Route -> Plan,Related information concept link from Route to Plan,Information Concept Link,,Route,,Route,5,,Plan
+,Route -> Strategy,Related information concept link from Route to Strategy,Information Concept Link,,Route,,Route,6,,Strategy
+,Schedule,Category: Primary. An aggregation of schedule elements.,Information Concept,,,,,,,
+,Public,Type for Schedule,Information Concept Type,,Schedule,,Schedule,1,,
+,Private,Type for Schedule,Information Concept Type,,Schedule,,Schedule,2,,
+,In-Development,State for Schedule,Information Concept State,,Schedule,,Schedule,1,,
+,Developed,State for Schedule,Information Concept State,,Schedule,,Schedule,2,,
+,Schedule -> Agreement,Related information concept link from Schedule to Agreement,Information Concept Link,,Schedule,,Schedule,1,,Agreement
+,Schedule -> Agreement Term,Related information concept link from Schedule to Agreement Term,Information Concept Link,,Schedule,,Schedule,2,,Agreement Term
+,Schedule -> Asset,Related information concept link from Schedule to Asset,Information Concept Link,,Schedule,,Schedule,3,,Asset
+,Schedule -> Biological Organism,Related information concept link from Schedule to Biological Organism,Information Concept Link,,Schedule,,Schedule,4,,Biological Organism
+,Schedule -> Brand,Related information concept link from Schedule to Brand,Information Concept Link,,Schedule,,Schedule,5,,Brand
+,Schedule -> Campaign,Related information concept link from Schedule to Campaign,Information Concept Link,,Schedule,,Schedule,6,,Campaign
+,Schedule -> Channel,Related information concept link from Schedule to Channel,Information Concept Link,,Schedule,,Schedule,7,,Channel
+,Schedule -> Competency,Related information concept link from Schedule to Competency,Information Concept Link,,Schedule,,Schedule,8,,Competency
+,Schedule -> Constituent,Related information concept link from Schedule to Constituent,Information Concept Link,,Schedule,,Schedule,9,,Constituent
+,Schedule -> Content Impression,Related information concept link from Schedule to Content Impression,Information Concept Link,,Schedule,,Schedule,10,,Content Impression
+,Schedule -> Content,Related information concept link from Schedule to Content,Information Concept Link,,Schedule,,Schedule,11,,Content
+,Schedule -> Course of Action,Related information concept link from Schedule to Course of Action,Information Concept Link,,Schedule,,Schedule,12,,Course of Action
+,Schedule -> Currency,Related information concept link from Schedule to Currency,Information Concept Link,,Schedule,,Schedule,13,,Currency
+,Schedule -> Decision,Related information concept link from Schedule to Decision,Information Concept Link,,Schedule,,Schedule,14,,Decision
+,Schedule -> Dispute,Related information concept link from Schedule to Dispute,Information Concept Link,,Schedule,,Schedule,15,,Dispute
+,Schedule -> Financial Account,Related information concept link from Schedule to Financial Account,Information Concept Link,,Schedule,,Schedule,16,,Financial Account
+,Schedule -> Financial Transaction,Related information concept link from Schedule to Financial Transaction,Information Concept Link,,Schedule,,Schedule,17,,Financial Transaction
+,Schedule -> Goal,Related information concept link from Schedule to Goal,Information Concept Link,,Schedule,,Schedule,18,,Goal
+,Schedule -> Government Service,Related information concept link from Schedule to Government Service,Information Concept Link,,Schedule,,Schedule,19,,Government Service
+,Schedule -> Human Resource,Related information concept link from Schedule to Human Resource,Information Concept Link,,Schedule,,Schedule,20,,Human Resource
+,Schedule -> Incident,Related information concept link from Schedule to Incident,Information Concept Link,,Schedule,,Schedule,21,,Incident
+,Schedule -> Infrastructure,Related information concept link from Schedule to Infrastructure,Information Concept Link,,Schedule,,Schedule,22,,Infrastructure
+,Schedule -> Initiative,Related information concept link from Schedule to Initiative,Information Concept Link,,Schedule,,Schedule,23,,Initiative
+,Schedule -> Inquiry,Related information concept link from Schedule to Inquiry,Information Concept Link,,Schedule,,Schedule,24,,Inquiry
+,Schedule -> Intellectual Property Rights,Related information concept link from Schedule to Intellectual Property Rights,Information Concept Link,,Schedule,,Schedule,25,,Intellectual Property Rights
+,Schedule -> Interaction,Related information concept link from Schedule to Interaction,Information Concept Link,,Schedule,,Schedule,26,,Interaction
+,Schedule -> Job,Related information concept link from Schedule to Job,Information Concept Link,,Schedule,,Schedule,27,,Job
+,Schedule -> Language,Related information concept link from Schedule to Language,Information Concept Link,,Schedule,,Schedule,28,,Language
+,Schedule -> Legislation,Related information concept link from Schedule to Legislation,Information Concept Link,,Schedule,,Schedule,29,,Legislation
+,Schedule -> Location,Related information concept link from Schedule to Location,Information Concept Link,,Schedule,,Schedule,30,,Location
+,Schedule -> Message,Related information concept link from Schedule to Message,Information Concept Link,,Schedule,,Schedule,31,,Message
+,Schedule -> Monetary Amount,Related information concept link from Schedule to Monetary Amount,Information Concept Link,,Schedule,,Schedule,32,,Monetary Amount
+,Schedule -> Objective,Related information concept link from Schedule to Objective,Information Concept Link,,Schedule,,Schedule,33,,Objective
+,Schedule -> Order,Related information concept link from Schedule to Order,Information Concept Link,,Schedule,,Schedule,34,,Order
+,Schedule -> Partner,Related information concept link from Schedule to Partner,Information Concept Link,,Schedule,,Schedule,35,,Partner
+,Schedule -> Payment,Related information concept link from Schedule to Payment,Information Concept Link,,Schedule,,Schedule,36,,Payment
+,Schedule -> Plan,Related information concept link from Schedule to Plan,Information Concept Link,,Schedule,,Schedule,37,,Plan
+,Schedule -> Policy,Related information concept link from Schedule to Policy,Information Concept Link,,Schedule,,Schedule,38,,Policy
+,Schedule -> Research,Related information concept link from Schedule to Research,Information Concept Link,,Schedule,,Schedule,39,,Research
+,Schedule -> Schedule,Related information concept link from Schedule to Schedule,Information Concept Link,,Schedule,,Schedule,40,,Schedule
+,Schedule -> Strategy,Related information concept link from Schedule to Strategy,Information Concept Link,,Schedule,,Schedule,41,,Strategy
+,Schedule -> Submission,Related information concept link from Schedule to Submission,Information Concept Link,,Schedule,,Schedule,42,,Submission
+,Schedule -> Tax,Related information concept link from Schedule to Tax,Information Concept Link,,Schedule,,Schedule,43,,Tax
+,Schedule -> Time,Related information concept link from Schedule to Time,Information Concept Link,,Schedule,,Schedule,44,,Time
+,Schedule -> Training Course,Related information concept link from Schedule to Training Course,Information Concept Link,,Schedule,,Schedule,45,,Training Course
+,Schedule -> Vision,Related information concept link from Schedule to Vision,Information Concept Link,,Schedule,,Schedule,46,,Vision
+,Schedule -> Work,Related information concept link from Schedule to Work,Information Concept Link,,Schedule,,Schedule,47,,Work
+,Schedule -> Work Queue,Related information concept link from Schedule to Work Queue,Information Concept Link,,Schedule,,Schedule,48,,Work Queue
+,Schedule Element,"Category: Secondary. A line item that aligns time and one or more other objects, including work item, human resource, payment, event, or location.",Information Concept,,,,,,,
+,Mandatory,Type for Schedule Element,Information Concept Type,,Schedule Element,,Schedule Element,1,,
+,Optional,Type for Schedule Element,Information Concept Type,,Schedule Element,,Schedule Element,2,,
+,In-Development,State for Schedule Element,Information Concept State,,Schedule Element,,Schedule Element,1,,
+,Developed,State for Schedule Element,Information Concept State,,Schedule Element,,Schedule Element,2,,
+,Schedule Element -> Event,Related information concept link from Schedule Element to Event,Information Concept Link,,Schedule Element,,Schedule Element,1,,Event
+,Schedule Element -> Human Resource,Related information concept link from Schedule Element to Human Resource,Information Concept Link,,Schedule Element,,Schedule Element,2,,Human Resource
+,Schedule Element -> Location,Related information concept link from Schedule Element to Location,Information Concept Link,,Schedule Element,,Schedule Element,3,,Location
+,Schedule Element -> Payment,Related information concept link from Schedule Element to Payment,Information Concept Link,,Schedule Element,,Schedule Element,4,,Payment
+,Schedule Element -> Schedule Element,Related information concept link from Schedule Element to Schedule Element,Information Concept Link,,Schedule Element,,Schedule Element,5,,Schedule Element
+,Schedule Element -> Time,Related information concept link from Schedule Element to Time,Information Concept Link,,Schedule Element,,Schedule Element,6,,Time
+,Schedule Element -> Work Item,Related information concept link from Schedule Element to Work Item,Information Concept Link,,Schedule Element,,Schedule Element,7,,Work Item
+,Standard,"Category: Primary. A convention, specification, or measurement, confirmed by a recognized governance body.",Information Concept,,,,,,,
+,Material,Type for Standard,Information Concept Type,,Standard,,Standard,1,,
+,Government Service,Type for Standard,Information Concept Type,,Standard,,Standard,2,,
+,Practice,Type for Standard,Information Concept Type,,Standard,,Standard,3,,
+,Proposed,State for Standard,Information Concept State,,Standard,,Standard,1,,
+,Accepted,State for Standard,Information Concept State,,Standard,,Standard,2,,
+,Retired,State for Standard,Information Concept State,,Standard,,Standard,3,,
+,Standard -> Accreditation,Related information concept link from Standard to Accreditation,Information Concept Link,,Standard,,Standard,1,,Accreditation
+,Standard -> Agreement,Related information concept link from Standard to Agreement,Information Concept Link,,Standard,,Standard,2,,Agreement
+,Standard -> Agreement Term,Related information concept link from Standard to Agreement Term,Information Concept Link,,Standard,,Standard,3,,Agreement Term
+,Standard -> Biological Organism,Related information concept link from Standard to Biological Organism,Information Concept Link,,Standard,,Standard,4,,Biological Organism
+,Standard -> Brand,Related information concept link from Standard to Brand,Information Concept Link,,Standard,,Standard,5,,Brand
+,Standard -> Campaign,Related information concept link from Standard to Campaign,Information Concept Link,,Standard,,Standard,6,,Campaign
+,Standard -> Claim,Related information concept link from Standard to Claim,Information Concept Link,,Standard,,Standard,7,,Claim
+,Standard -> Competency,Related information concept link from Standard to Competency,Information Concept Link,,Standard,,Standard,8,,Competency
+,Standard -> Constituent,Related information concept link from Standard to Constituent,Information Concept Link,,Standard,,Standard,9,,Constituent
+,Standard -> Content,Related information concept link from Standard to Content,Information Concept Link,,Standard,,Standard,10,,Content
+,Standard -> Conveyor,Related information concept link from Standard to Conveyor,Information Concept Link,,Standard,,Standard,11,,Conveyor
+,Standard -> Energy,Related information concept link from Standard to Energy,Information Concept Link,,Standard,,Standard,12,,Energy
+,Standard -> Evidence,Related information concept link from Standard to Evidence,Information Concept Link,,Standard,,Standard,13,,Evidence
+,Standard -> Financial Account,Related information concept link from Standard to Financial Account,Information Concept Link,,Standard,,Standard,14,,Financial Account
+,Standard -> Financial Instrument,Related information concept link from Standard to Financial Instrument,Information Concept Link,,Standard,,Standard,15,,Financial Instrument
+,Standard -> Financial Transaction,Related information concept link from Standard to Financial Transaction,Information Concept Link,,Standard,,Standard,16,,Financial Transaction
+,Standard -> Geographic Space,Related information concept link from Standard to Geographic Space,Information Concept Link,,Standard,,Standard,17,,Geographic Space
+,Standard -> Government Service,Related information concept link from Standard to Government Service,Information Concept Link,,Standard,,Standard,18,,Government Service
+,Standard -> Health Condition,Related information concept link from Standard to Health Condition,Information Concept Link,,Standard,,Standard,19,,Health Condition
+,Standard -> Investment Portfolio,Related information concept link from Standard to Investment Portfolio,Information Concept Link,,Standard,,Standard,20,,Investment Portfolio
+,Standard -> Job,Related information concept link from Standard to Job,Information Concept Link,,Standard,,Standard,21,,Job
+,Standard -> Language,Related information concept link from Standard to Language,Information Concept Link,,Standard,,Standard,22,,Language
+,Standard -> Legislation,Related information concept link from Standard to Legislation,Information Concept Link,,Standard,,Standard,23,,Legislation
+,Standard -> License,Related information concept link from Standard to License,Information Concept Link,,Standard,,Standard,24,,License
+,Standard -> Location,Related information concept link from Standard to Location,Information Concept Link,,Standard,,Standard,25,,Location
+,Standard -> Natural Resource,Related information concept link from Standard to Natural Resource,Information Concept Link,,Standard,,Standard,26,,Natural Resource
+,Standard -> Operation,Related information concept link from Standard to Operation,Information Concept Link,,Standard,,Standard,27,,Operation
+,Standard -> Order,Related information concept link from Standard to Order,Information Concept Link,,Standard,,Standard,28,,Order
+,Standard -> Partner,Related information concept link from Standard to Partner,Information Concept Link,,Standard,,Standard,29,,Partner
+,Standard -> Payment,Related information concept link from Standard to Payment,Information Concept Link,,Standard,,Standard,30,,Payment
+,Standard -> Policy,Related information concept link from Standard to Policy,Information Concept Link,,Standard,,Standard,31,,Policy
+,Standard -> Research,Related information concept link from Standard to Research,Information Concept Link,,Standard,,Standard,32,,Research
+,Standard -> Route,Related information concept link from Standard to Route,Information Concept Link,,Standard,,Standard,33,,Route
+,Standard -> Standard,Related information concept link from Standard to Standard,Information Concept Link,,Standard,,Standard,34,,Standard
+,Standard -> Tax,Related information concept link from Standard to Tax,Information Concept Link,,Standard,,Standard,35,,Tax
+,Standard -> Time,Related information concept link from Standard to Time,Information Concept Link,,Standard,,Standard,36,,Time
+,Strategy,"Category: Primary. An integrated and aligned association of visions, goals, objectives, and courses of action that provides direction and guides activity.",Information Concept,,,,,,,
+,Cultural,Type for Strategy,Information Concept Type,,Strategy,,Strategy,1,,
+,Financial,Type for Strategy,Information Concept Type,,Strategy,,Strategy,2,,
+,Market,Type for Strategy,Information Concept Type,,Strategy,,Strategy,3,,
+,Operational,Type for Strategy,Information Concept Type,,Strategy,,Strategy,4,,
+,Organizational,Type for Strategy,Information Concept Type,,Strategy,,Strategy,5,,
+,Product,Type for Strategy,Information Concept Type,,Strategy,,Strategy,6,,
+,Service,Type for Strategy,Information Concept Type,,Strategy,,Strategy,7,,
+,Pending,State for Strategy,Information Concept State,,Strategy,,Strategy,1,,
+,Approved,State for Strategy,Information Concept State,,Strategy,,Strategy,2,,
+,Past,State for Strategy,Information Concept State,,Strategy,,Strategy,3,,
+,Strategy -> Finance,Related information concept link from Strategy to Finance,Information Concept Link,,Strategy,,Strategy,1,,Finance
+,Strategy -> Financial Forecast,Related information concept link from Strategy to Financial Forecast,Information Concept Link,,Strategy,,Strategy,2,,Financial Forecast
+,Strategy -> Financial Position,Related information concept link from Strategy to Financial Position,Information Concept Link,,Strategy,,Strategy,3,,Financial Position
+,Strategy -> Market,Related information concept link from Strategy to Market,Information Concept Link,,Strategy,,Strategy,4,,Market
+,Strategy -> Policy,Related information concept link from Strategy to Policy,Information Concept Link,,Strategy,,Strategy,5,,Policy
+,Strategy -> Research,Related information concept link from Strategy to Research,Information Concept Link,,Strategy,,Strategy,6,,Research
+,Strategy -> Strategy,Related information concept link from Strategy to Strategy,Information Concept Link,,Strategy,,Strategy,7,,Strategy
+,Course of Action,Category: Secondary. A set of activities to be taken to achieve an objective.,Information Concept,,,,,,,
+,Cultural,Type for Course of Action,Information Concept Type,,Course of Action,,Course of Action,1,,
+,Financial,Type for Course of Action,Information Concept Type,,Course of Action,,Course of Action,2,,
+,Market,Type for Course of Action,Information Concept Type,,Course of Action,,Course of Action,3,,
+,Operational,Type for Course of Action,Information Concept Type,,Course of Action,,Course of Action,4,,
+,Organizational,Type for Course of Action,Information Concept Type,,Course of Action,,Course of Action,5,,
+,Product,Type for Course of Action,Information Concept Type,,Course of Action,,Course of Action,6,,
+,Service,Type for Course of Action,Information Concept Type,,Course of Action,,Course of Action,7,,
+,Approved,State for Course of Action,Information Concept State,,Course of Action,,Course of Action,1,,
+,Past,State for Course of Action,Information Concept State,,Course of Action,,Course of Action,2,,
+,Pending,State for Course of Action,Information Concept State,,Course of Action,,Course of Action,3,,
+,Goal,Category: Secondary. An end toward which effort is or should be directed.,Information Concept,,,,,,,
+,Cultural,Type for Goal,Information Concept Type,,Goal,,Goal,1,,
+,Financial,Type for Goal,Information Concept Type,,Goal,,Goal,2,,
+,Market,Type for Goal,Information Concept Type,,Goal,,Goal,3,,
+,Operational,Type for Goal,Information Concept Type,,Goal,,Goal,4,,
+,Organizational,Type for Goal,Information Concept Type,,Goal,,Goal,5,,
+,Product,Type for Goal,Information Concept Type,,Goal,,Goal,6,,
+,Service,Type for Goal,Information Concept Type,,Goal,,Goal,7,,
+,Approved,State for Goal,Information Concept State,,Goal,,Goal,1,,
+,Past,State for Goal,Information Concept State,,Goal,,Goal,2,,
+,Pending,State for Goal,Information Concept State,,Goal,,Goal,3,,
+,Goal -> Objective,Related information concept link from Goal to Objective,Information Concept Link,,Goal,,Goal,1,,Objective
+,Objective,"Category: Secondary. A quantitative, measurable result that contributes to the realization of a goal.",Information Concept,,,,,,,
+,Cultural,Type for Objective,Information Concept Type,,Objective,,Objective,1,,
+,Financial,Type for Objective,Information Concept Type,,Objective,,Objective,2,,
+,Market,Type for Objective,Information Concept Type,,Objective,,Objective,3,,
+,Operational,Type for Objective,Information Concept Type,,Objective,,Objective,4,,
+,Organizational,Type for Objective,Information Concept Type,,Objective,,Objective,5,,
+,Product,Type for Objective,Information Concept Type,,Objective,,Objective,6,,
+,Service,Type for Objective,Information Concept Type,,Objective,,Objective,7,,
+,Approved,State for Objective,Information Concept State,,Objective,,Objective,1,,
+,Past,State for Objective,Information Concept State,,Objective,,Objective,2,,
+,Pending,State for Objective,Information Concept State,,Objective,,Objective,3,,
+,Objective -> Course of Action,Related information concept link from Objective to Course of Action,Information Concept Link,,Objective,,Objective,1,,Course of Action
+,Objective -> Objective,Related information concept link from Objective to Objective,Information Concept Link,,Objective,,Objective,2,,Objective
+,Vision,Category: Secondary. An imagined future state of being.,Information Concept,,,,,,,
+,Cultural,Type for Vision,Information Concept Type,,Vision,,Vision,1,,
+,Financial,Type for Vision,Information Concept Type,,Vision,,Vision,2,,
+,Market,Type for Vision,Information Concept Type,,Vision,,Vision,3,,
+,Operational,Type for Vision,Information Concept Type,,Vision,,Vision,4,,
+,Organizational,Type for Vision,Information Concept Type,,Vision,,Vision,5,,
+,Product,Type for Vision,Information Concept Type,,Vision,,Vision,6,,
+,Service,Type for Vision,Information Concept Type,,Vision,,Vision,7,,
+,Approved,State for Vision,Information Concept State,,Vision,,Vision,1,,
+,Past,State for Vision,Information Concept State,,Vision,,Vision,2,,
+,Pending,State for Vision,Information Concept State,,Vision,,Vision,3,,
+,Vision -> Goal,Related information concept link from Vision to Goal,Information Concept Link,,Vision,,Vision,1,,Goal
+,Submission,"Category: Primary. A container that is used to exchange one or more requests, inquiries, messages, notifications, content, or other objects between parties.",Information Concept,,,,,,,
+,Email,Type for Submission,Information Concept Type,,Submission,,Submission,1,,
+,Mail,Type for Submission,Information Concept Type,,Submission,,Submission,2,,
+,Online Form,Type for Submission,Information Concept Type,,Submission,,Submission,3,,
+,Phone,Type for Submission,Information Concept Type,,Submission,,Submission,4,,
+,Physical Form,Type for Submission,Information Concept Type,,Submission,,Submission,5,,
+,Incomplete,State for Submission,Information Concept State,,Submission,,Submission,1,,
+,Complete,State for Submission,Information Concept State,,Submission,,Submission,2,,
+,Submission -> Accreditation,Related information concept link from Submission to Accreditation,Information Concept Link,,Submission,,Submission,1,,Accreditation
+,Submission -> Agreement,Related information concept link from Submission to Agreement,Information Concept Link,,Submission,,Submission,2,,Agreement
+,Submission -> Biological Organism,Related information concept link from Submission to Biological Organism,Information Concept Link,,Submission,,Submission,3,,Biological Organism
+,Submission -> Channel,Related information concept link from Submission to Channel,Information Concept Link,,Submission,,Submission,4,,Channel
+,Submission -> Constituent,Related information concept link from Submission to Constituent,Information Concept Link,,Submission,,Submission,5,,Constituent
+,Submission -> Content,Related information concept link from Submission to Content,Information Concept Link,,Submission,,Submission,6,,Content
+,Submission -> Decision,Related information concept link from Submission to Decision,Information Concept Link,,Submission,,Submission,7,,Decision
+,Submission -> Dispute,Related information concept link from Submission to Dispute,Information Concept Link,,Submission,,Submission,8,,Dispute
+,Submission -> Event,Related information concept link from Submission to Event,Information Concept Link,,Submission,,Submission,9,,Event
+,Submission -> Evidence,Related information concept link from Submission to Evidence,Information Concept Link,,Submission,,Submission,10,,Evidence
+,Submission -> Geographic Space,Related information concept link from Submission to Geographic Space,Information Concept Link,,Submission,,Submission,11,,Geographic Space
+,Submission -> Government Service,Related information concept link from Submission to Government Service,Information Concept Link,,Submission,,Submission,12,,Government Service
+,Submission -> Inquiry,Related information concept link from Submission to Inquiry,Information Concept Link,,Submission,,Submission,13,,Inquiry
+,Submission -> Intellectual Property Rights,Related information concept link from Submission to Intellectual Property Rights,Information Concept Link,,Submission,,Submission,14,,Intellectual Property Rights
+,Submission -> Language,Related information concept link from Submission to Language,Information Concept Link,,Submission,,Submission,15,,Language
+,Submission -> Legislation,Related information concept link from Submission to Legislation,Information Concept Link,,Submission,,Submission,16,,Legislation
+,Submission -> License,Related information concept link from Submission to License,Information Concept Link,,Submission,,Submission,17,,License
+,Submission -> Location,Related information concept link from Submission to Location,Information Concept Link,,Submission,,Submission,18,,Location
+,Submission -> Material,Related information concept link from Submission to Material,Information Concept Link,,Submission,,Submission,19,,Material
+,Submission -> Message,Related information concept link from Submission to Message,Information Concept Link,,Submission,,Submission,20,,Message
+,Submission -> Monetary Amount,Related information concept link from Submission to Monetary Amount,Information Concept Link,,Submission,,Submission,21,,Monetary Amount
+,Submission -> Order,Related information concept link from Submission to Order,Information Concept Link,,Submission,,Submission,22,,Order
+,Submission -> Partner,Related information concept link from Submission to Partner,Information Concept Link,,Submission,,Submission,23,,Partner
+,Submission -> Payment,Related information concept link from Submission to Payment,Information Concept Link,,Submission,,Submission,24,,Payment
+,Submission -> Policy,Related information concept link from Submission to Policy,Information Concept Link,,Submission,,Submission,25,,Policy
+,Submission -> Public Sector Entity,Related information concept link from Submission to Public Sector Entity,Information Concept Link,,Submission,,Submission,26,,Public Sector Entity
+,Submission -> Submission,Related information concept link from Submission to Submission,Information Concept Link,,Submission,,Submission,27,,Submission
+,Submission -> Time,Related information concept link from Submission to Time,Information Concept Link,,Submission,,Submission,28,,Time
+,Submission -> Vote,Related information concept link from Submission to Vote,Information Concept Link,,Submission,,Submission,29,,Vote
+,Submission -> Work Item,Related information concept link from Submission to Work Item,Information Concept Link,,Submission,,Submission,30,,Work Item
+,Submission -> Work Queue,Related information concept link from Submission to Work Queue,Information Concept Link,,Submission,,Submission,31,,Work Queue
+,Time,"Category: Primary. A point or duration in the past, present, or future.",Information Concept,,,,,,,
+,Second,Type for Time,Information Concept Type,,Time,,Time,1,,
+,Minute,Type for Time,Information Concept Type,,Time,,Time,2,,
+,Hour,Type for Time,Information Concept Type,,Time,,Time,3,,
+,Day,Type for Time,Information Concept Type,,Time,,Time,4,,
+,Week,Type for Time,Information Concept Type,,Time,,Time,5,,
+,Month,Type for Time,Information Concept Type,,Time,,Time,6,,
+,Year,Type for Time,Information Concept Type,,Time,,Time,7,,
+,Decade,Type for Time,Information Concept Type,,Time,,Time,8,,
+,Century,Type for Time,Information Concept Type,,Time,,Time,9,,
+,Historical,State for Time,Information Concept State,,Time,,Time,1,,
+,Current,State for Time,Information Concept State,,Time,,Time,2,,
+,Projected,State for Time,Information Concept State,,Time,,Time,3,,
+,Time -> Information,Related information concept link from Time to Information,Information Concept Link,,Time,,Time,1,,Time
+,Time -> Time,Related information concept link from Time to Time,Information Concept Link,,Time,,Time,2,,Time
+,Training Course,"Category: Primary. A structured theoretical or practical subject matter in a consumable format, associated with a curriculum, workshop, or seminar.",Information Concept,,,,,,,
+,Curriculum,Type for Training Course,Information Concept Type,,Training Course,,Training Course,1,,
+,Seminar,Type for Training Course,Information Concept Type,,Training Course,,Training Course,2,,
+,Workshop,Type for Training Course,Information Concept Type,,Training Course,,Training Course,3,,
+,Preparatory,State for Training Course,Information Concept State,,Training Course,,Training Course,1,,
+,Ongoing,State for Training Course,Information Concept State,,Training Course,,Training Course,2,,
+,Completed,State for Training Course,Information Concept State,,Training Course,,Training Course,3,,
+,Training Course -> Constituent,Related information concept link from Training Course to Constituent,Information Concept Link,,Training Course,,Training Course,1,,Constituent
+,Training Course -> Content,Related information concept link from Training Course to Content,Information Concept Link,,Training Course,,Training Course,2,,Content
+,Training Course -> Government Service,Related information concept link from Training Course to Government Service,Information Concept Link,,Training Course,,Training Course,3,,Government Service
+,Training Course -> Human Resource,Related information concept link from Training Course to Human Resource,Information Concept Link,,Training Course,,Training Course,4,,Human Resource
+,Training Course -> Initiative,Related information concept link from Training Course to Initiative,Information Concept Link,,Training Course,,Training Course,5,,Initiative
+,Training Course -> Job,Related information concept link from Training Course to Job,Information Concept Link,,Training Course,,Training Course,6,,Job
+,Training Course -> Language,Related information concept link from Training Course to Language,Information Concept Link,,Training Course,,Training Course,7,,Language
+,Training Course -> Location,Related information concept link from Training Course to Location,Information Concept Link,,Training Course,,Training Course,8,,Location
+,Training Course -> Objective,Related information concept link from Training Course to Objective,Information Concept Link,,Training Course,,Training Course,9,,Objective
+,Training Course -> Partner,Related information concept link from Training Course to Partner,Information Concept Link,,Training Course,,Training Course,10,,Partner
+,Training Course -> Plan,Related information concept link from Training Course to Plan,Information Concept Link,,Training Course,,Training Course,11,,Plan
+,Training Course -> Policy,Related information concept link from Training Course to Policy,Information Concept Link,,Training Course,,Training Course,12,,Policy
+,Training Course -> Standard,Related information concept link from Training Course to Standard,Information Concept Link,,Training Course,,Training Course,13,,Standard
+,Trip,Category: Primary. A journey between a starting point location and one or more targeted locations until a final destination is reached.,Information Concept,,,,,,,
+,Business,Type for Trip,Information Concept Type,,Trip,,Trip,1,,
+,Domestic,Type for Trip,Information Concept Type,,Trip,,Trip,2,,
+,Leisure,Type for Trip,Information Concept Type,,Trip,,Trip,3,,
+,International,Type for Trip,Information Concept Type,,Trip,,Trip,4,,
+,One-way,Type for Trip,Information Concept Type,,Trip,,Trip,5,,
+,Personal. Roundtrip,Type for Trip,Information Concept Type,,Trip,,Trip,6,,
+,Historical,State for Trip,Information Concept State,,Trip,,Trip,1,,
+,In-Progress,State for Trip,Information Concept State,,Trip,,Trip,2,,
+,Planned,State for Trip,Information Concept State,,Trip,,Trip,3,,
+,Completed,State for Trip,Information Concept State,,Trip,,Trip,4,,
+,Trip -> Asset,Related information concept link from Trip to Asset,Information Concept Link,,Trip,,Trip,1,,Asset
+,Trip -> Campaign,Related information concept link from Trip to Campaign,Information Concept Link,,Trip,,Trip,2,,Campaign
+,Trip -> Constituent,Related information concept link from Trip to Constituent,Information Concept Link,,Trip,,Trip,3,,Constituent
+,Trip -> Location,Related information concept link from Trip to Location,Information Concept Link,,Trip,,Trip,4,,Location
+,Trip -> Partner,Related information concept link from Trip to Partner,Information Concept Link,,Trip,,Trip,5,,Partner
+,Trip -> Plan,Related information concept link from Trip to Plan,Information Concept Link,,Trip,,Trip,6,,Plan
+,Trip -> Route,Related information concept link from Trip to Route,Information Concept Link,,Trip,,Trip,7,,Route
+,Vote,"Category: Primary. A formal indication of choice such as for a candidate election, referendum, or proposition.",Information Concept,,,,,,,
+,Candidate Election,Type for Vote,Information Concept Type,,Vote,,Vote,1,,
+,Referendum,Type for Vote,Information Concept Type,,Vote,,Vote,2,,
+,Proposition,Type for Vote,Information Concept Type,,Vote,,Vote,3,,
+,Open,State for Vote,Information Concept State,,Vote,,Vote,1,,
+,Closed,State for Vote,Information Concept State,,Vote,,Vote,2,,
+,Counted,State for Vote,Information Concept State,,Vote,,Vote,3,,
+,Validated,State for Vote,Information Concept State,,Vote,,Vote,4,,
+,Vote -> Campaign,Related information concept link from Vote to Campaign,Information Concept Link,,Vote,,Vote,1,,Campaign
+,Vote -> Constituent,Related information concept link from Vote to Constituent,Information Concept Link,,Vote,,Vote,2,,Constituent
+,Vote -> Decision,Related information concept link from Vote to Decision,Information Concept Link,,Vote,,Vote,3,,Decision
+,Vote -> Interaction,Related information concept link from Vote to Interaction,Information Concept Link,,Vote,,Vote,4,,Interaction
+,Vote -> Job,Related information concept link from Vote to Job,Information Concept Link,,Vote,,Vote,5,,Job
+,Vote -> Legislation,Related information concept link from Vote to Legislation,Information Concept Link,,Vote,,Vote,6,,Legislation
+,Vote -> Location,Related information concept link from Vote to Location,Information Concept Link,,Vote,,Vote,7,,Location
+,Vote -> Message,Related information concept link from Vote to Message,Information Concept Link,,Vote,,Vote,8,,Message
+,Vote -> Operation,Related information concept link from Vote to Operation,Information Concept Link,,Vote,,Vote,9,,Operation
+,Vote -> Policy,Related information concept link from Vote to Policy,Information Concept Link,,Vote,,Vote,10,,Policy
+,Vote -> Standard,Related information concept link from Vote to Standard,Information Concept Link,,Vote,,Vote,11,,Standard
+,Vote -> Time,Related information concept link from Vote to Time,Information Concept Link,,Vote,,Vote,12,,Time
+,Vote -> Vote,Related information concept link from Vote to Vote,Information Concept Link,,Vote,,Vote,13,,Vote
+,Work,Category: Primary. Tasks and task queues.,Information Concept,,,,,,,
+,Work Item,"Category: Secondary. A defined, well-bounded task that may be assigned to a stakeholder or corresponding asset.",Information Concept,,,,,,,
+,Mental,Type for Work Item,Information Concept Type,,Work Item,,Work Item,1,,
+,Physical,Type for Work Item,Information Concept Type,,Work Item,,Work Item,2,,
+,Open,State for Work Item,Information Concept State,,Work Item,,Work Item,1,,
+,In-Progress,State for Work Item,Information Concept State,,Work Item,,Work Item,2,,
+,Completed,State for Work Item,Information Concept State,,Work Item,,Work Item,3,,
+,Work Item -> Channel,Related information concept link from Work Item to Channel,Information Concept Link,,Work Item,,Work Item,1,,Channel
+,Work Item -> Claim,Related information concept link from Work Item to Claim,Information Concept Link,,Work Item,,Work Item,2,,Claim
+,Work Item -> Competency,Related information concept link from Work Item to Competency,Information Concept Link,,Work Item,,Work Item,3,,Competency
+,Work Item -> Constituent,Related information concept link from Work Item to Constituent,Information Concept Link,,Work Item,,Work Item,4,,Constituent
+,Work Item -> Content,Related information concept link from Work Item to Content,Information Concept Link,,Work Item,,Work Item,5,,Content
+,Work Item -> Dispute,Related information concept link from Work Item to Dispute,Information Concept Link,,Work Item,,Work Item,6,,Dispute
+,Work Item -> Event,Related information concept link from Work Item to Event,Information Concept Link,,Work Item,,Work Item,7,,Event
+,Work Item -> Human Resource,Related information concept link from Work Item to Human Resource,Information Concept Link,,Work Item,,Work Item,8,,Human Resource
+,Work Item -> Incident,Related information concept link from Work Item to Incident,Information Concept Link,,Work Item,,Work Item,9,,Incident
+,Work Item -> Interaction,Related information concept link from Work Item to Interaction,Information Concept Link,,Work Item,,Work Item,10,,Interaction
+,Work Item -> Job,Related information concept link from Work Item to Job,Information Concept Link,,Work Item,,Work Item,11,,Job
+,Work Item -> Legislation,Related information concept link from Work Item to Legislation,Information Concept Link,,Work Item,,Work Item,12,,Legislation
+,Work Item -> License,Related information concept link from Work Item to License,Information Concept Link,,Work Item,,Work Item,13,,License
+,Work Item -> Policy,Related information concept link from Work Item to Policy,Information Concept Link,,Work Item,,Work Item,14,,Policy
+,Work Item -> Work Item,Related information concept link from Work Item to Work Item,Information Concept Link,,Work Item,,Work Item,15,,Work Item
+,Work Item -> Work Queue,Related information concept link from Work Item to Work Queue,Information Concept Link,,Work Item,,Work Item,16,,Work Queue
+,Work Queue,"Category: Secondary. A container to hold, sequence, filter, structure, and present a set of work items.",Information Concept,,,,,,,
+,Independent,Type for Work Queue,Information Concept Type,,Work Queue,,Work Queue,1,,
+,Dependent,Type for Work Queue,Information Concept Type,,Work Queue,,Work Queue,2,,
+,Open,State for Work Queue,Information Concept State,,Work Queue,,Work Queue,1,,
+,In-Progress,State for Work Queue,Information Concept State,,Work Queue,,Work Queue,2,,
+,Completed,State for Work Queue,Information Concept State,,Work Queue,,Work Queue,3,,
+,Work Queue -> Agreement,Related information concept link from Work Queue to Agreement,Information Concept Link,,Work Queue,,Work Queue,1,,Agreement
+,Work Queue -> Asset,Related information concept link from Work Queue to Asset,Information Concept Link,,Work Queue,,Work Queue,2,,Asset
+,Work Queue -> Human Resource,Related information concept link from Work Queue to Human Resource,Information Concept Link,,Work Queue,,Work Queue,3,,Human Resource
+,Work Queue -> Initiative,Related information concept link from Work Queue to Initiative,Information Concept Link,,Work Queue,,Work Queue,4,,Initiative
+,Work Queue -> Order,Related information concept link from Work Queue to Order,Information Concept Link,,Work Queue,,Work Queue,5,,Order
+,Work Queue -> Plan,Related information concept link from Work Queue to Plan,Information Concept Link,,Work Queue,,Work Queue,6,,Plan
+,Work Queue -> Policy,Related information concept link from Work Queue to Policy,Information Concept Link,,Work Queue,,Work Queue,7,,Policy
+,Work Queue -> Work Queue,Related information concept link from Work Queue to Work Queue,Information Concept Link,,Work Queue,,Work Queue,8,,Work Queue

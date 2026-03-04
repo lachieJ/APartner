@@ -60,6 +60,7 @@ describe('concept csvUtils', () => {
         description: 'Flow, stage',
         conceptTypeName: 'Value Stream',
         rootConceptId: null,
+        rootConceptName: null,
         partOfConceptId: null,
         partOfName: 'Treasury',
         partOrder: 2,
@@ -71,14 +72,15 @@ describe('concept csvUtils', () => {
 
   it('parses optional concept identifier columns', () => {
     const csv = [
-      'conceptId,name,conceptTypeName,rootConceptId,partOfConceptId,partOrder,referenceToConceptId',
-      'concept-1,Stage A,Value Stream,root-1,parent-1,2,ref-1',
+      'conceptId,name,conceptTypeName,rootConceptId,rootConceptName,partOfConceptId,partOrder,referenceToConceptId',
+      'concept-1,Stage A,Value Stream,root-1,Treasury,parent-1,2,ref-1',
     ].join('\n')
 
     const [row] = parseConceptImportCsv(csv)
 
     expect(row.conceptId).toBe('concept-1')
     expect(row.rootConceptId).toBe('root-1')
+    expect(row.rootConceptName).toBe('Treasury')
     expect(row.partOfConceptId).toBe('parent-1')
     expect(row.referenceToConceptId).toBe('ref-1')
   })
@@ -103,8 +105,8 @@ describe('concept csvUtils', () => {
 
     const csv = buildConceptsCsv([treasury, stageA], [enterpriseType, valueStreamType])
 
-    expect(csv).toContain('conceptId,name,description,conceptTypeName,rootConceptId,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName')
-    expect(csv).toContain('concept-stage-a,Stage A,,Value Stream,concept-stage-a,concept-treasury,Treasury,1,,')
+    expect(csv).toContain('conceptId,name,description,conceptTypeName,rootConceptId,rootConceptName,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName')
+    expect(csv).toContain('concept-stage-a,Stage A,,Value Stream,concept-stage-a,Stage A,concept-treasury,Treasury,1,,')
   })
 
   it('builds import error CSV including partOrder values', () => {
@@ -115,6 +117,7 @@ describe('concept csvUtils', () => {
         name: 'Stage B',
         conceptTypeName: 'Value Stream',
         rootConceptId: 'root-1',
+        rootConceptName: 'Treasury',
         partOfConceptId: 'parent-1',
         partOfName: 'Treasury',
         partOrder: 3,
@@ -124,7 +127,7 @@ describe('concept csvUtils', () => {
       },
     ])
 
-    expect(csv).toContain('rowNumber,conceptId,name,conceptTypeName,rootConceptId,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName,error')
-    expect(csv).toContain('4,concept-stage-b,Stage B,Value Stream,root-1,parent-1,Treasury,3,ref-1,,PartOf target not found.')
+    expect(csv).toContain('rowNumber,conceptId,name,conceptTypeName,rootConceptId,rootConceptName,partOfConceptId,partOfName,partOrder,referenceToConceptId,referenceToName,error')
+    expect(csv).toContain('4,concept-stage-b,Stage B,Value Stream,root-1,Treasury,parent-1,Treasury,3,ref-1,,PartOf target not found.')
   })
 })

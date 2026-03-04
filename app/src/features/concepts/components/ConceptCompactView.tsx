@@ -194,6 +194,26 @@ export function ConceptCompactView({
     [branchData, branchUi, branchDraftActions, branchActions],
   )
 
+  const isDecomposableRootType = Boolean(
+    selectedRootType && selectedRootType.part_of_concept_type_id === selectedRootType.id,
+  )
+
+  const visibleRootConcepts = useMemo(() => {
+    if (!selectedRootType) {
+      return []
+    }
+
+    if (selectedRootConcept) {
+      return [selectedRootConcept]
+    }
+
+    if (isDecomposableRootType) {
+      return rootConceptOptions
+    }
+
+    return []
+  }, [isDecomposableRootType, rootConceptOptions, selectedRootConcept, selectedRootType])
+
   return (
     <div className="maintainInlineForm">
       <ConceptCompactControls
@@ -218,7 +238,7 @@ export function ConceptCompactView({
         disableCopyConceptModel={disableCopyConceptModel}
       />
 
-      {selectedRootType && selectedRootConcept ? (
+      {selectedRootType && visibleRootConcepts.length > 0 ? (
         <ConceptCompactBranchProvider value={branchContract}>
           <ul className="treeList">
             <li className="treeNode">
@@ -226,11 +246,14 @@ export function ConceptCompactView({
                 <p>{selectedRootType.name}</p>
               </div>
               <ul className="treeList">
-                <ConceptCompactBranch
-                  concept={selectedRootConcept}
-                  visited={new Set()}
-                  currentDepth={0}
-                />
+                {visibleRootConcepts.map((rootConcept) => (
+                  <ConceptCompactBranch
+                    key={rootConcept.id}
+                    concept={rootConcept}
+                    visited={new Set()}
+                    currentDepth={0}
+                  />
+                ))}
               </ul>
             </li>
           </ul>
