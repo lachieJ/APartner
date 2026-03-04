@@ -495,19 +495,16 @@ export function ConceptValueStreamWindow({
 
               {stageConcepts.length === 0 ? <p className="hint">No stages exist for this Value Stream.</p> : null}
 
-              {stageConcepts.map((stageConcept, index) => {
+              {stageConcepts.map((stageConcept) => {
                 const siblingConcepts = selectedValueStream ? childrenByParentConceptId.get(selectedValueStream.id) ?? [] : []
                 const siblingIndex = siblingConcepts.findIndex((sibling) => sibling.id === stageConcept.id)
                 const canMoveUp = siblingIndex > 0
                 const canMoveDown = siblingIndex >= 0 && siblingIndex < siblingConcepts.length - 1
-                const stageOrder = stageConcept.part_order ?? index + 1
 
                 return (
                   <article key={stageConcept.id} className="valueStreamStageRow">
                     <div className="treeCompactRow valueStreamStageRowHeader">
-                      <p>
-                        {stageOrder}. {stageConcept.name}
-                      </p>
+                      <p>{stageConcept.name}</p>
                       {showEditControls ? (
                         <div className="actions">
                           <button
