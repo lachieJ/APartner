@@ -145,6 +145,15 @@ Copy model behavior:
 - Health checks SQL: [`../db/diagnostics/concept_type_health_checks.sql`](../db/diagnostics/concept_type_health_checks.sql)
 - Remediation SQL: [`../db/diagnostics/concept_type_remediation.sql`](../db/diagnostics/concept_type_remediation.sql)
 
+## Open source
+
+This project is open source under the Apache 2.0 license.
+
+- License: [`../LICENSE`](../LICENSE)
+- Contributing: [`../CONTRIBUTING.md`](../CONTRIBUTING.md)
+- Code of Conduct: [`../CODE_OF_CONDUCT.md`](../CODE_OF_CONDUCT.md)
+- Security policy: [`../SECURITY.md`](../SECURITY.md)
+
 ## Troubleshooting
 
 - Magic-link sign-in fails with network/auth errors:
