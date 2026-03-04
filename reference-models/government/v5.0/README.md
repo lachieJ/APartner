@@ -21,8 +21,8 @@ This package is the first generalized pilot for importing Business Architecture 
 
 ```bash
 /home/office/Dev/APartner/.venv/bin/python scripts/build_reference_model_package.py \
-	--source-xlsx "Government Reference Model v5.0.xlsx" \
-	--out-dir reference-models/government/v5.0
+	--source-xlsx "/home/office/Dev/APartner/Government Reference Model v5.0.xlsx" \
+	--out-dir /home/office/Dev/APartner/reference-models/government/v5.0
 ```
 
 The generator reads the workbook tabs for capability, value stream, information, and stakeholder maps and rewrites the package CSVs.
@@ -31,7 +31,7 @@ The generator reads the workbook tabs for capability, value stream, information,
 
 ```bash
 /home/office/Dev/APartner/.venv/bin/python scripts/validate_reference_model_package.py \
-	--package-dir reference-models/government/v5.0
+	--package-dir /home/office/Dev/APartner/reference-models/government/v5.0
 ```
 
 Use this before import to catch duplicate identities, ambiguous roots for `rootConceptName` resolution, invalid `PartOf`/`ReferenceTo` semantics, and unresolved in-package links.
@@ -40,7 +40,7 @@ For CI-quality gates, fail on warnings as well:
 
 ```bash
 /home/office/Dev/APartner/.venv/bin/python scripts/validate_reference_model_package.py \
-	--package-dir reference-models/government/v5.0 \
+	--package-dir /home/office/Dev/APartner/reference-models/government/v5.0 \
 	--strict
 ```
 
