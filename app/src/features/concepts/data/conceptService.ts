@@ -38,6 +38,15 @@ const friendlyConceptError = (raw: string, code?: string, details?: string, hint
   }
 
   if (code === '23503') {
+    if (
+      merged.includes('is still referenced') ||
+      merged.includes('still referenced from table') ||
+      merged.includes('concept_part_of_concept_id_fkey') ||
+      merged.includes('concept_reference_to_concept_id_fkey') ||
+      merged.includes('fk_concept_root_concept_id')
+    ) {
+      return 'Cannot delete this concept because other concepts still reference it via PartOf, ReferenceTo, or root-tree linkage. Remove those links first.'
+    }
     if (merged.includes('concept_type_id')) {
       return 'MetaModel type does not exist.'
     }
