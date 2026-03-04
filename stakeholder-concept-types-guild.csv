@@ -1,9 +1,0 @@
-name,description,partOfName,partOrder,referenceToName
-Enterprise,Top-level enterprise concept,,,
-Organisation,Organisation structure and actors,Enterprise,1,
-Stakeholder,Person or group with interest in outcomes,Organisation,1,
-Stakeholder Type,Classification of stakeholder role or nature,Stakeholder,1,
-Stakeholder Category,Grouping of stakeholders for analysis and communication,Stakeholder,2,
-Stakeholder Description,Narrative description of stakeholder concerns and influence,Stakeholder,3,
-Business Unit,Named organisational unit,Organisation,2,
-Stakeholder Business Unit,Business unit associated with a stakeholder,Stakeholder,4,Business Unit

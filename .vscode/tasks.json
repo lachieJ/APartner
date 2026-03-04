@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Delete Guild CSV Files",
+			"type": "shell",
+			"command": "rm",
+			"args": [
+				"organisation-concept-types-guild.csv",
+				"stakeholder-concept-types-guild.csv",
+				"organisation-stakeholder-concept-types-guild-merged.csv",
+				"organisation-stakeholder-concept-types-guild-merged-topological.csv",
+				"organisation-stakeholder-concept-types-guild-merged-topological-minimal-core.csv",
+				"all-tabs-concept-types-guild-merged-topological-minimal-core.csv",
+				"all-tabs-concept-types-guild-merged-topological-full.csv"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Delete Guild Reference Files",
+			"type": "shell",
+			"command": "rm",
+			"args": [
+				"reference-models/government/v5.0/package.json",
+				"reference-models/government/v5.0/README.md",
+				"grm_v5.txt"
+			],
+			"isBackground": false,
+			"group": "build"
+		}
+	]
+}
