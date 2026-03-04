@@ -410,3 +410,104 @@ details > summary::-webkit-details-marker {
   justify-content: space-between;
   gap: 8px;
 }
+
+.valueStreamTopPanels {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+@media (min-width: 980px) {
+  .valueStreamTopPanels {
+    grid-template-columns: minmax(260px, 1fr) minmax(320px, 2fr);
+  }
+}
+
+.valueStreamPanel {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px;
+  background: #f9fafb;
+}
+
+.valueStreamPanel h3,
+.valueStreamStagesSection h3 {
+  margin: 0 0 8px 0;
+}
+
+.valueStreamPanelList,
+.valueStreamStageDetailList {
+  margin-top: 0;
+}
+
+.valueStreamStagesSection {
+  margin-top: 10px;
+}
+
+.valueStreamStagesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.valueStreamStagesScroller {
+  margin-top: 6px;
+  max-height: 68vh;
+  overflow-y: auto;
+  padding-right: 2px;
+  display: grid;
+  gap: 8px;
+}
+
+.valueStreamStagesStickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: #f9fafb;
+}
+
+.valueStreamStagesStickyHeader p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.valueStreamStageRow {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 6px;
+  background: #ffffff;
+  display: grid;
+  gap: 6px;
+}
+
+.valueStreamStageRowHeader {
+  min-height: 34px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.valueStreamStageDetailGrid {
+  margin-top: 0;
+  padding-left: 12px;
+  display: grid;
+  gap: 4px;
+}
+
+.valueStreamStageDetailGrid .treeNode {
+  margin-top: 2px;
+}
+
+.valueStreamStageDetailGrid .treeCompactRow {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}

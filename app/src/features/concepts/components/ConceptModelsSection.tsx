@@ -5,6 +5,7 @@ import { ConceptModelViewControlsStatus } from './ConceptModelViewControlsStatus
 import { ConceptCompactView } from './ConceptCompactView'
 import { ConceptIssuesPanel } from './ConceptIssuesPanel'
 import { ConceptTreeView } from './ConceptTreeView'
+import { ConceptValueStreamWindow } from './ConceptValueStreamWindow'
 import { useConceptModelViewState } from '../hooks/useConceptModelViewState'
 import { useConceptRemediationActions } from '../hooks/useConceptRemediationActions'
 
@@ -146,6 +147,21 @@ export function ConceptModelsSection({
           onNormalizeSiblingOrders={onNormalizeConceptSiblingOrders}
           disableNormalizeSiblingOrders={loading || normalizingSiblingOrders}
           disableCopyConceptModel={loading || normalizingSiblingOrders || Boolean(movingConceptId)}
+        />
+      ) : null}
+
+      {viewMode === 'value-stream' ? (
+        <ConceptValueStreamWindow
+          concepts={displayedConcepts}
+          conceptTypes={conceptTypes}
+          conceptTypeById={conceptTypeById}
+          conceptById={conceptById}
+          onCreateConcept={onCreateConcept}
+          onUpdateConcept={onUpdateConcept}
+          onDeleteConcept={onDeleteConcept}
+          movingConceptId={movingConceptId}
+          onMoveConceptWithinParent={onMoveConceptWithinParent}
+          onNormalizeSiblingOrders={onNormalizeConceptSiblingOrders}
         />
       ) : null}
     </section>
