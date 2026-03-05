@@ -44,7 +44,7 @@ export function ConceptTypeForm({
 }: ConceptTypeFormProps) {
   return (
     <section className="card">
-      <h2>{editingId ? 'Edit MetaModel Type' : 'Create MetaModel Type'}</h2>
+      <h2>{editingId ? 'Edit Concept Type' : 'Create Concept Type'}</h2>
       <form onSubmit={onSubmit} className="formGrid">
         <label>
           Name
@@ -54,7 +54,7 @@ export function ConceptTypeForm({
               setName(event.target.value)
               clearFieldError('name')
             }}
-            placeholder="Enter metamodel type name"
+            placeholder="Enter concept type name"
             required
           />
           {formErrors.name ? <span className="fileError">{formErrors.name}</span> : null}
@@ -133,7 +133,7 @@ export function ConceptTypeForm({
         </label>
 
         <div className="actions">
-          <button type="submit">{editingId ? 'Save MetaModel Type' : 'Create MetaModel Type'}</button>
+          <button type="submit">{editingId ? 'Save Concept Type' : 'Create Concept Type'}</button>
           {editingId ? (
             <button type="button" onClick={onCancel}>
               Cancel

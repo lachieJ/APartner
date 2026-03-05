@@ -1,0 +1,53 @@
+.conceptModelPanel {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .tabButton {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar .tabButton.active {
+  font-weight: bold;
+  color: #007acc;
+}
+
+.content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.message {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.message.ok {
+  background-color: #e6ffed;
+  color: #2d7a46;
+}
+
+.message.error {
+  background-color: #ffe6e6;
+  color: #a33a3a;
+}

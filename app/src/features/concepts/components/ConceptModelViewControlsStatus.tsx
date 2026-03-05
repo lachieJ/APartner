@@ -28,7 +28,6 @@ export function ConceptModelViewControlsStatus({
             <option value="flat">Flat list</option>
             <option value="tree">Tree by PartOf</option>
             <option value="compact">Compact tree</option>
-            <option value="value-stream">Value Stream maintenance</option>
           </select>
         </label>
         <div className="actions">

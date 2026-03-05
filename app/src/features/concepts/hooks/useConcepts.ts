@@ -290,6 +290,22 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     }
   }
 
+  const searchConcepts = useCallback(
+    (searchTerm: string, type?: string) => {
+      const normalizedSearchTerm = searchTerm.trim().toLowerCase()
+      return concepts.filter((concept) => {
+        const matchesSearchTerm =
+          concept.name.toLowerCase().includes(normalizedSearchTerm) ||
+          concept.description?.toLowerCase().includes(normalizedSearchTerm)
+
+        const matchesType = type ? concept.concept_type_id === type : true
+
+        return matchesSearchTerm && matchesType
+      })
+    },
+    [concepts],
+  )
+
   return {
     concepts,
     conceptOptions,
@@ -329,5 +345,7 @@ export function useConcepts({ isAuthenticated }: UseConceptsParams) {
     moveConceptWithinParent,
     normalizeConceptSiblingOrders,
     resetForm,
+    populateFromConcept,
+    searchConcepts,
   }
 }

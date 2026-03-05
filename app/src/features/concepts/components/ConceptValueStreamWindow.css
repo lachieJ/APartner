@@ -1,0 +1,26 @@
+.sidePanel {
+  width: 300px;
+  background-color: #f9f9f9;
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.stages {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stage {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
